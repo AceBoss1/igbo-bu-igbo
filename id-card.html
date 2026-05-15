@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Member ID Card — Emmanuel Adams | Igbo Bu Igbo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --red: #9B1C1C; --red-light: #C0392B; --red-dark: #6B0F0F;
+      --gold: #C9901A; --gold-light: #F0B429; --gold-mid: #D4A017;
+      --dark: #1A0A00; --dark2: #2C1A0A; --cream: #FDF8F0;
+      --white: #FFFFFF; --text-mid: #5C3D1E; --text-muted: #8B6347;
+    }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--cream);
+      min-height: 100vh; padding: 32px 16px;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* PAGE HEADER */
+    .page-header {
+      max-width: 900px; margin: 0 auto 32px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .header-brand { display: flex; align-items: center; gap: 10px; }
+    .header-logo {
+      width: 44px; height: 44px; border-radius: 8px;
+      object-fit: contain; background: var(--red); padding: 2px;
+    }
+    .header-title { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--dark); }
+    .header-sub { font-size: 11px; color: var(--text-muted); }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-muted); font-size: 13px; font-weight: 500;
+      padding: 8px 16px; border-radius: 6px;
+      border: 1.5px solid rgba(155,28,28,0.2);
+      transition: all 0.2s;
+    }
+    .back-btn:hover { color: var(--red); border-color: var(--red); }
+
+    /* VERIFY SEARCH */
+    .verify-bar {
+      max-width: 900px; margin: 0 auto 40px;
+      background: var(--white); border-radius: 12px; padding: 20px 24px;
+      border: 1px solid rgba(155,28,28,0.1);
+      box-shadow: 0 2px 16px rgba(155,28,28,0.06);
+    }
+    .verify-bar h3 {
+      font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .verify-row { display: flex; gap: 10px; flex-wrap: wrap; }
+    .verify-input {
+      flex: 1; min-width: 200px; border: 1.5px solid rgba(0,0,0,0.12); border-radius: 7px;
+      padding: 11px 14px; font-size: 13px; font-family: 'DM Sans', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .verify-input:focus { border-color: var(--red); }
+    .verify-btn {
+      background: var(--red); color: var(--white); font-size: 13px; font-weight: 600;
+      padding: 11px 22px; border-radius: 7px; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 7px; transition: background 0.2s;
+    }
+    .verify-btn:hover { background: var(--red-dark); }
+    .verify-types { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .vtype {
+      font-size: 11px; color: var(--red); background: rgba(155,28,28,0.07);
+      padding: 4px 12px; border-radius: 4px; cursor: pointer;
+      font-weight: 500; transition: background 0.2s;
+    }
+    .vtype:hover { background: rgba(155,28,28,0.14); }
+    .verified-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(34,197,94,0.1); color: #16a34a;
+      font-size: 12px; font-weight: 600; padding: 5px 14px;
+      border-radius: 20px; border: 1px solid rgba(34,197,94,0.25);
+      margin-left: auto;
+    }
+
+    /* CARD SECTION */
+    .card-section {
+      max-width: 900px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      align-items: start;
+    }
+
+    /* THE ID CARD */
+    #id-card-capture {
+      background: var(--dark); border-radius: 18px;
+      overflow: hidden; position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* CARD TOP STRIPE */
+    .card-stripe {
+      height: 7px;
+      background: linear-gradient(90deg, var(--red-dark), var(--red), var(--gold-mid), var(--gold-light));
+    }
+
+    /* CARD HEADER */
+    .card-header {
+      background: var(--red-dark); padding: 14px 18px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: 1px solid rgba(201,144,26,0.3);
+      position: relative; overflow: hidden;
+    }
+    .card-header-pattern {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(201,144,26,0.07) 0, rgba(201,144,26,0.07) 1px, transparent 0, transparent 50%);
+      background-size: 12px 12px;
+    }
+    .card-header-logo {
+      width: 42px; height: 42px; border-radius: 7px; object-fit: contain;
+      background: rgba(255,255,255,0.95); padding: 2px;
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .card-header-logo-fallback {
+      width: 42px; height: 42px; border-radius: 7px;
+      background: rgba(255,255,255,0.95); display: none;
+      align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 10px;
+      font-weight: 900; color: var(--red); text-align: center; line-height: 1.2;
+      position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .card-header-text { position: relative; z-index: 1; }
+    .card-org-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 14px; font-weight: 700; color: var(--gold-light); line-height: 1.1;
+    }
+    .card-org-full {
+      font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 2px;
+      text-transform: uppercase; letter-spacing: 0.4px;
+    }
+    .card-type-badge {
+      margin-left: auto; background: var(--gold);
+      color: var(--white); font-size: 9px; font-weight: 700;
+      padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;
+      text-transform: uppercase; position: relative; z-index: 1; flex-shrink: 0;
+    }
+
+    /* CARD BODY */
+    .card-body {
+      padding: 18px; position: relative;
+    }
+    .card-body-pattern {
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(135deg, rgba(201,144,26,0.04) 0, rgba(201,144,26,0.04) 1px, transparent 0, transparent 50%);
+      background-size: 18px 18px;
+    }
+    .card-body-inner { position: relative; z-index: 1; }
+    .card-main-row { display: flex; gap: 14px; margin-bottom: 14px; }
+
+    /* PHOTO */
+    .card-photo-wrap { flex-shrink: 0; }
+    .card-photo {
+      width: 88px; height: 105px; border-radius: 8px;
+      background: rgba(255,255,255,0.08); overflow: hidden;
+      border: 2px solid rgba(201,144,26,0.4);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.2); font-size: 32px;
+    }
+    .card-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .card-photo-label {
+      text-align: center; margin-top: 5px;
+      font-size: 8px; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    /* MEMBER DETAILS */
+    .card-details { flex: 1; padding-top: 2px; }
+    .card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; font-weight: 700; color: var(--white); line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .card-position {
+      font-size: 11px; color: var(--gold-light); font-weight: 600;
+      margin-bottom: 12px; line-height: 1.4;
+    }
+    .card-fields { display: flex; flex-direction: column; gap: 6px; }
+    .card-field { display: flex; gap: 6px; }
+    .card-field-label { font-size: 9px; color: rgba(255,255,255,0.35); text-transform: uppercase; letter-spacing: 0.4px; min-width: 46px; padding-top: 1px; }
+    .card-field-value { font-size: 11px; color: rgba(255,255,255,0.85); font-weight: 500; }
+    .card-field-value.id-val {
+      font-family: 'Share Tech Mono', monospace;
+      color: var(--gold-light); font-size: 12px;
+    }
+    .card-field-value.active-badge {
+      background: rgba(34,197,94,0.15); color: #4ade80;
+      border: 1px solid rgba(34,197,94,0.3); font-size: 9px; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px; text-transform: uppercase;
+    }
+
+    /* CARD DIVIDER */
+    .card-divider {
+      height: 1px; background: rgba(201,144,26,0.2);
+      margin: 12px 0;
+    }
+
+    /* QR ROW */
+    .card-qr-row { display: flex; align-items: flex-end; gap: 14px; }
+    .card-qr-wrap {
+      width: 72px; height: 72px; border-radius: 6px;
+      background: var(--white); padding: 4px;
+      border: 1px solid rgba(201,144,26,0.3); flex-shrink: 0;
+      overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    #qr-code canvas, #qr-code img { width: 64px !important; height: 64px !important; }
+    .card-qr-info { flex: 1; }
+    .card-qr-text { font-size: 8px; color: rgba(255,255,255,0.3); line-height: 1.5; margin-bottom: 6px; }
+    .card-seal {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(155,28,28,0.6), rgba(107,15,15,0.8));
+      border: 1.5px solid rgba(201,144,26,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: rgba(201,144,26,0.8);
+    }
+
+    /* CARD FOOTER */
+    .card-footer {
+      background: rgba(0,0,0,0.3); padding: 9px 18px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(201,144,26,0.15);
+    }
+    .card-footer-text { font-size: 8px; color: rgba(255,255,255,0.25); }
+    .card-footer-url { font-size: 8px; color: rgba(201,144,26,0.5); }
+    .card-bottom-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold-mid), var(--red), var(--red-dark));
+    }
+
+    /* RIGHT PANEL */
+    .right-panel { display: flex; flex-direction: column; gap: 20px; }
+
+    .panel-box {
+      background: var(--white); border-radius: 12px; padding: 22px;
+      border: 1px solid rgba(155,28,28,0.1);
+      box-shadow: 0 2px 16px rgba(155,28,28,0.05);
+    }
+    .panel-box h3 {
+      font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* STATUS */
+    .status-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .status-label { font-size: 13px; color: var(--text-muted); }
+    .status-active {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(34,197,94,0.1); color: #16a34a;
+      font-size: 12px; font-weight: 600; padding: 4px 12px;
+      border-radius: 10px; border: 1px solid rgba(34,197,94,0.2);
+    }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; animation: blink 1.5s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .info-rows { display: flex; flex-direction: column; gap: 10px; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid rgba(155,28,28,0.06); }
+    .info-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-key { font-size: 12px; color: var(--text-muted); }
+    .info-val { font-size: 12px; font-weight: 600; color: var(--dark); text-align: right; max-width: 60%; }
+    .info-val.mono { font-family: 'Share Tech Mono', monospace; color: var(--red); }
+
+    /* DOWNLOAD BUTTONS */
+    .dl-grid { display: flex; flex-direction: column; gap: 10px; }
+    .dl-btn {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; border-radius: 8px; cursor: pointer;
+      border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600;
+      transition: all 0.2s; text-align: left; width: 100%;
+    }
+    .dl-btn-primary { background: var(--red); color: var(--white); }
+    .dl-btn-primary:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .dl-btn-secondary { background: var(--cream); color: var(--dark); border: 1.5px solid rgba(155,28,28,0.2); }
+    .dl-btn-secondary:hover { border-color: var(--red); background: rgba(155,28,28,0.05); }
+    .dl-btn-print { background: var(--dark); color: var(--white); }
+    .dl-btn-print:hover { background: var(--dark2); }
+    .dl-btn i { font-size: 16px; min-width: 20px; }
+    .dl-btn-text { flex: 1; }
+    .dl-btn-title { font-size: 13px; font-weight: 600; display: block; }
+    .dl-btn-desc { font-size: 10px; opacity: 0.65; display: block; margin-top: 1px; }
+    #dl-status { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 6px; min-height: 18px; }
+
+    /* SHARE */
+    .share-row { display: flex; gap: 10px; }
+    .share-btn {
+      flex: 1; padding: 10px; border-radius: 7px; border: 1.5px solid rgba(155,28,28,0.15);
+      background: var(--cream); cursor: pointer; font-size: 13px; color: var(--text-mid);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.2s; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    }
+    .share-btn:hover { background: rgba(155,28,28,0.07); border-color: var(--red); color: var(--red); }
+
+    /* NOTICE */
+    .notice {
+      background: rgba(201,144,26,0.08); border: 1px solid rgba(201,144,26,0.25);
+      border-radius: 8px; padding: 12px 14px; font-size: 12px;
+      color: var(--text-mid); line-height: 1.6;
+    }
+    .notice i { color: var(--gold); margin-right: 4px; }
+
+    @media (max-width: 720px) {
+      .card-section { grid-template-columns: 1fr; }
+      #id-card-capture { max-width: 380px; margin: 0 auto; }
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .page-header, .verify-bar, .right-panel, .back-btn { display: none !important; }
+      .card-section { grid-template-columns: 1fr; display: block; }
+      #id-card-capture { box-shadow: none; max-width: 380px; margin: 40px auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="header-brand">
+      <img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="header-logo"
+           onerror="this.style.opacity='0';" />
+      <div>
+        <div class="header-title">Member Verification &amp; ID Card</div>
+        <div class="header-sub">Igbo Bu Igbo Unity &amp; Cultural Preservation Initiative</div>
+      </div>
+    </div>
+    <a href="index.html" class="back-btn">
+      <i class="fa fa-arrow-left"></i> Back to Homepage
+    </a>
+  </div>
+
+  <!-- VERIFY BAR -->
+  <div class="verify-bar">
+    <h3>
+      <i class="fa fa-shield-halved" style="color: var(--red);"></i>
+      Member Verification Portal
+      <span class="verified-badge"><span class="status-dot"></span> Verified Member</span>
+    </h3>
+    <div class="verify-row">
+      <input type="text" class="verify-input" value="FCT/01/0001" placeholder="Enter Membership ID or Phone Number" />
+      <input type="text" class="verify-input" placeholder="Or enter phone / email" />
+      <button class="verify-btn" onclick="showVerified()">
+        <i class="fa fa-magnifying-glass"></i> Verify Member
+      </button>
+    </div>
+    <div class="verify-types">
+      <span class="vtype">By Membership ID</span>
+      <span class="vtype">By Phone Number</span>
+      <span class="vtype">By Email Address</span>
+      <span class="vtype"><i class="fa fa-qrcode"></i> Scan QR Code</span>
+    </div>
+  </div>
+
+  <!-- CARD + DETAILS -->
+  <div class="card-section">
+
+    <!-- THE DIGITAL ID CARD -->
+    <div>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px; display:flex; align-items:center; gap:6px;">
+        <i class="fa fa-id-card" style="color:var(--red);"></i>
+        Official Digital Membership Card
+      </p>
+      <div id="id-card-capture">
+        <!-- TOP STRIPE -->
+        <div class="card-stripe"></div>
+        <!-- CARD HEADER -->
+        <div class="card-header">
+          <div class="card-header-pattern"></div>
+          <img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="card-header-logo"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="card-header-logo-fallback">IBI</div>
+          <div class="card-header-text">
+            <div class="card-org-name">IGBO BU IGBO</div>
+            <div class="card-org-full">Unity &amp; Cultural Preservation Initiative</div>
+          </div>
+          <div class="card-type-badge">Official Member</div>
+        </div>
+        <!-- CARD BODY -->
+        <div class="card-body">
+          <div class="card-body-pattern"></div>
+          <div class="card-body-inner">
+            <div class="card-main-row">
+              <!-- PHOTO -->
+              <div class="card-photo-wrap">
+                <div class="card-photo">
+                  <img src="photoadams.jpg" alt="Emmanuel Adams"
+                       onerror="this.parentElement.innerHTML='<i class=\'fa fa-user\' style=\'font-size:36px;color:rgba(255,255,255,0.2);\'></i>';" />
+                </div>
+                <div class="card-photo-label">Passport Photo</div>
+              </div>
+              <!-- DETAILS -->
+              <div class="card-details">
+                <div class="card-name">Emmanuel Adams</div>
+                <div class="card-position">Vice President — FCT Abuja Chapter</div>
+                <div class="card-fields">
+                  <div class="card-field">
+                    <span class="card-field-label">Reg. ID</span>
+                    <span class="card-field-value id-val">FCT/01/0001</span>
+                  </div>
+                  <div class="card-field">
+                    <span class="card-field-label">Chapter</span>
+                    <span class="card-field-value">FCT Abuja Chapter</span>
+                  </div>
+                  <div class="card-field">
+                    <span class="card-field-label">Category</span>
+                    <span class="card-field-value">Executive Member</span>
+                  </div>
+                  <div class="card-field">
+                    <span class="card-field-label">Issued</span>
+                    <span class="card-field-value">Jan 2026</span>
+                  </div>
+                  <div class="card-field">
+                    <span class="card-field-label">Expires</span>
+                    <span class="card-field-value">Dec 2026</span>
+                  </div>
+                  <div class="card-field">
+                    <span class="card-field-label">Status</span>
+                    <span class="card-field-value active-badge">● ACTIVE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-divider"></div>
+            <!-- QR ROW -->
+            <div class="card-qr-row">
+              <div class="card-qr-wrap">
+                <div id="qr-code"></div>
+              </div>
+ 	<div class="card-qr-info">
+                <div class="card-qr-text">
+                  This is an official digital membership card of the <strong style="color:rgba(255,255,255,0.5);">Igbo Bu Igbo Unity and Cultural Preservation Initiative.</strong>  
+		<br> If the membership status is verified please give the bearer every neccesary attention and assistance deserving.
+		<br> Scan QR code to verify this member's authenticity at <strong style="color:rgba(255,255,255,0.5);">igbobuigbo.org.ng/verify</strong> <br> Any attempt to duplicate or falsify this card is prohibited and punishable under applicable laws.
+                </div>
+                
+
+<div style="font-size:9px;color:rgba(201,144,26,0.6);font-family:'Share Tech Mono',monospace;">
+                  ID: FCT/01/0001
+                </div>
+              </div>
+              <div class="card-seal">
+                <i class="fa fa-feather-pointed"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- CARD FOOTER -->
+        <div class="card-footer">
+          <span class="card-footer-text">This card is the property of Igbo Bu Igbo Initiative. Misuse is prohibited.</span>
+          <span class="card-footer-url">igbobuigbo.org.ng</span>
+        </div>
+        <div class="card-bottom-stripe"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+
+      <!-- MEMBER STATUS -->
+      <div class="panel-box">
+        <h3><i class="fa fa-circle-check" style="color:#22c55e;"></i> Verification Result</h3>
+        <div class="status-row">
+          <span class="status-label">Membership Status</span>
+          <span class="status-active"><span class="status-dot"></span> Active & Verified</span>
+        </div>
+        <div class="info-rows">
+          <div class="info-row">
+            <span class="info-key">Full Name</span>
+            <span class="info-val">Emmanuel Adams</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Membership ID</span>
+            <span class="info-val mono">FCT/01/0001</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Position</span>
+            <span class="info-val">Vice President</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Chapter</span>
+            <span class="info-val">FCT Abuja Chapter</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Member Category</span>
+            <span class="info-val">Executive Member</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Registration Date</span>
+            <span class="info-val">January 15, 2026</span>
+          </div>
+          <div class="info-row">
+            <span class="info-key">Card Expiry</span>
+            <span class="info-val">December 31, 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOWNLOAD -->
+      <div class="panel-box">
+        <h3><i class="fa fa-download" style="color:var(--red);"></i> Download &amp; Share</h3>
+        <div class="dl-grid">
+          <button class="dl-btn dl-btn-primary" onclick="downloadPNG()">
+            <i class="fa fa-image"></i>
+            <span class="dl-btn-text">
+              <span class="dl-btn-title">Download as PNG Image</span>
+              <span class="dl-btn-desc">High-quality card image for sharing</span>
+            </span>
+          </button>
+          <button class="dl-btn dl-btn-secondary" onclick="downloadPDF()">
+            <i class="fa fa-file-pdf"></i>
+            <span class="dl-btn-text">
+              <span class="dl-btn-title">Download as PDF</span>
+              <span class="dl-btn-desc">Printable document format</span>
+            </span>
+          </button>
+          <button class="dl-btn dl-btn-print" onclick="window.print()">
+            <i class="fa fa-print"></i>
+            <span class="dl-btn-text">
+              <span class="dl-btn-title">Print Card</span>
+              <span class="dl-btn-desc">Send to printer directly</span>
+            </span>
+          </button>
+        </div>
+        <div id="dl-status"></div>
+        <div class="share-row" style="margin-top:12px;">
+          <button class="share-btn" onclick="copyLink()"><i class="fa fa-link"></i> Copy Link</button>
+          <button class="share-btn" onclick="shareWhatsApp()"><i class="fa fa-brands fa-whatsapp" style="color:#25D366;"></i> WhatsApp</button>
+        </div>
+      </div>
+
+      <!-- NOTICE -->
+      <div class="notice">
+        <i class="fa fa-triangle-exclamation"></i>
+        <strong>Important:</strong> This is an official digital membership card of the Igbo Bu Igbo Unity and Cultural Preservation Initiative. To verify authenticity, scan the QR code or visit <strong>igbobuigbo.org.ng/verify</strong>. Any attempt to duplicate or falsify this card is prohibited and punishable under applicable laws.
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Generate QR Code
+    window.addEventListener('DOMContentLoaded', function() {
+      const verifyURL = 'https://igbobuigbo.org.ng/verify?id=FCT/01/0001&name=Emmanuel+Adams&chapter=FCT+Abuja';
+      try {
+        new QRCode(document.getElementById('qr-code'), {
+          text: verifyURL,
+          width: 64,
+          height: 64,
+          colorDark: '#1A0A00',
+          colorLight: '#FFFFFF',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      } catch(e) {
+        document.getElementById('qr-code').innerHTML = '<div style="width:64px;height:64px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;color:#999;text-align:center;">QR Code</div>';
+      }
+    });
+
+    // Download PNG
+    function downloadPNG() {
+      const status = document.getElementById('dl-status');
+      status.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Generating image...';
+      const card = document.getElementById('id-card-capture');
+      html2canvas(card, {
+        scale: 3,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
+        logging: false
+      }).then(function(canvas) {
+        const link = document.createElement('a');
+        link.download = 'Igbo-Bu-Igbo-ID-Emmanuel-Adams-FCT01-0001.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        status.innerHTML = '<i class="fa fa-circle-check" style="color:#22c55e;"></i> Image downloaded successfully!';
+        setTimeout(() => { status.innerHTML = ''; }, 3000);
+      }).catch(function(err) {
+        status.innerHTML = '<i class="fa fa-circle-xmark" style="color:#ef4444;"></i> Download failed. Try Print instead.';
+      });
+    }
+
+    // Download PDF (using print to PDF approach)
+    function downloadPDF() {
+      const status = document.getElementById('dl-status');
+      status.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Preparing PDF...';
+      html2canvas(document.getElementById('id-card-capture'), {
+        scale: 3, useCORS: true, allowTaint: true, backgroundColor: null
+      }).then(function(canvas) {
+        // Create a printable HTML page with the card image
+        const imgData = canvas.toDataURL('image/png');
+        const w = window.open('', '_blank');
+        w.document.write(`<!DOCTYPE html><html><head><title>ID Card - Emmanuel Adams</title>
+          <style>body{margin:0;background:#f0f0f0;display:flex;justify-content:center;padding:40px;}
+          img{max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,0.2);}</style></head>
+          <body><img src="${imgData}" onload="window.print();" /></body></html>`);
+        w.document.close();
+        status.innerHTML = '<i class="fa fa-circle-check" style="color:#22c55e;"></i> PDF dialog opened!';
+        setTimeout(() => { status.innerHTML = ''; }, 3000);
+      }).catch(function() {
+        window.print();
+        status.innerHTML = '';
+      });
+    }
+
+    function copyLink() {
+      const url = window.location.href;
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Verification link copied to clipboard!');
+      }).catch(() => {
+        prompt('Copy this link:', url);
+      });
+    }
+
+    function shareWhatsApp() {
+      const text = encodeURIComponent('Verify Igbo Bu Igbo member: Emmanuel Adams (FCT/01/0001) — ' + window.location.href);
+      window.open('https://wa.me/?text=' + text, '_blank');
+    }
+
+    function showVerified() {
+      alert('✅ Member Verified!\n\nName: Emmanuel Adams\nID: FCT/01/0001\nChapter: FCT Abuja\nStatus: ACTIVE');
+    }
+  </script>
+</body>
+</html>
