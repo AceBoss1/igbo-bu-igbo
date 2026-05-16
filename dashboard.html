@@ -10,826 +10,1041 @@
   <style>
     *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
     :root{
-      --red:#9B1C1C;--red-light:#C0392B;--red-dark:#6B0F0F;
-      --gold:#C9901A;--gold-light:#F0B429;
+      --red:#9B1C1C;--red-l:#C0392B;--red-d:#6B0F0F;
+      --gold:#C9901A;--gold-l:#F0B429;
       --dark:#1A0A00;--dark2:#2C1A0A;
       --cream:#FDF8F0;--cream2:#F5EDD8;--white:#FFFFFF;
-      --text-dark:#1A0A00;--text-mid:#5C3D1E;--text-muted:#8B6347;
-      --green:#16a34a;--green-bg:rgba(34,197,94,0.1);
-      --orange:#ea580c;--orange-bg:rgba(234,88,12,0.1);
-      --blue:#1d4ed8;--blue-bg:rgba(29,78,216,0.08);
-      --sidebar-w:240px;
+      --td:#1A0A00;--tm:#5C3D1E;--tu:#8B6347;
+      --green:#16a34a;--gbg:rgba(34,197,94,0.1);
+      --orange:#ea580c;--obg:rgba(234,88,12,0.1);
+      --blue:#1d4ed8;--bbg:rgba(29,78,216,0.08);
+      --sw:240px;
     }
     html{scroll-behavior:smooth;}
-    body{font-family:'DM Sans',sans-serif;color:var(--text-dark);background:var(--cream);line-height:1.6;min-height:100vh;display:flex;flex-direction:column;}
+    body{font-family:'DM Sans',sans-serif;color:var(--td);background:var(--cream);min-height:100vh;display:flex;flex-direction:column;}
     a{text-decoration:none;color:inherit;}
     input,select,textarea,button{font-family:'DM Sans',sans-serif;}
+    img{max-width:100%;display:block;}
 
     /* ── TOP NAV ── */
-    .top-nav{background:var(--red-dark);border-bottom:2px solid var(--gold);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
-    .top-nav-brand{display:flex;align-items:center;gap:10px;}
-    .top-nav-logo{width:38px;height:38px;border-radius:6px;object-fit:contain;background:#fff;padding:2px;}
-    .top-nav-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--gold-light);}
-    .top-nav-name small{display:block;font-family:'DM Sans',sans-serif;font-size:10px;color:rgba(255,255,255,0.55);font-weight:400;}
-    .top-nav-right{display:flex;align-items:center;gap:12px;}
-    .notif-btn{background:rgba(255,255,255,0.1);border:none;color:var(--gold-light);width:34px;height:34px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;}
-    .notif-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--gold-light);border:1.5px solid var(--red-dark);}
-    .user-pill{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border-radius:20px;padding:5px 12px 5px 5px;cursor:pointer;}
-    .user-avatar{width:28px;height:28px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--white);}
-    .user-pill-name{font-size:12px;color:rgba(255,255,255,0.85);font-weight:500;}
+    .tnav{background:var(--red-d);border-bottom:2px solid var(--gold);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+    .tnav-brand{display:flex;align-items:center;gap:10px;}
+    .tnav-logo{width:38px;height:38px;border-radius:6px;object-fit:contain;background:#fff;padding:2px;}
+    .tnav-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--gold-l);}
+    .tnav-name small{display:block;font-family:'DM Sans',sans-serif;font-size:10px;color:rgba(255,255,255,0.5);font-weight:400;}
+    .tnav-right{display:flex;align-items:center;gap:10px;}
+    .notif{background:rgba(255,255,255,0.1);border:none;color:var(--gold-l);width:33px;height:33px;border-radius:7px;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;}
+    .ndot{position:absolute;top:6px;right:6px;width:7px;height:7px;border-radius:50%;background:var(--gold-l);border:1.5px solid var(--red-d);}
+    .upill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,0.1);border-radius:20px;padding:4px 11px 4px 4px;cursor:pointer;}
+    .uav{width:27px;height:27px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;}
+    .upill-n{font-size:12px;color:rgba(255,255,255,0.85);font-weight:500;}
     .back-site{color:rgba(255,255,255,0.6);font-size:12px;display:flex;align-items:center;gap:5px;transition:color 0.2s;}
-    .back-site:hover{color:var(--gold-light);}
+    .back-site:hover{color:var(--gold-l);}
+    .mob-ham{display:none;background:transparent;border:none;color:var(--gold-l);font-size:20px;cursor:pointer;padding:4px;}
 
     /* ── LAYOUT ── */
-    .dash-layout{display:flex;flex:1;}
+    .layout{display:flex;flex:1;}
 
     /* ── SIDEBAR ── */
-    .sidebar{width:var(--sidebar-w);background:var(--dark);flex-shrink:0;display:flex;flex-direction:column;padding:20px 0;min-height:calc(100vh - 58px);position:sticky;top:58px;}
-    .member-card-mini{padding:16px 20px 20px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:12px;}
-    .mcm-photo{width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,0.1);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(201,144,26,0.4);overflow:hidden;}
-    .mcm-photo img{width:100%;height:100%;object-fit:cover;}
-    .mcm-photo i{color:rgba(255,255,255,0.3);font-size:24px;}
-    .mcm-name{font-size:13px;font-weight:600;color:var(--white);text-align:center;}
-    .mcm-id{font-size:10px;color:var(--gold-light);font-family:'Share Tech Mono',monospace;text-align:center;margin-top:3px;}
-    .mcm-badge{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:6px;}
-    .active-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;}
-    .mcm-status{font-size:10px;color:#4ade80;font-weight:600;}
-    .sidebar-nav{padding:0 10px;flex:1;}
-    .nav-group-label{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:12px 10px 6px;}
-    .nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.2s;margin-bottom:2px;border:none;background:transparent;width:100%;text-align:left;}
-    .nav-item:hover{background:rgba(255,255,255,0.07);color:var(--white);}
-    .nav-item.active{background:rgba(155,28,28,0.35);color:var(--white);border-left:3px solid var(--gold);}
-    .nav-item i{width:18px;font-size:14px;flex-shrink:0;}
-    .nav-item .badge-count{margin-left:auto;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;}
-    .sidebar-footer{padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);}
-    .logout-btn{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.4);font-size:12px;cursor:pointer;transition:color 0.2s;}
-    .logout-btn:hover{color:var(--red-light);}
+    .sb{width:var(--sw);background:var(--dark);flex-shrink:0;display:flex;flex-direction:column;padding:16px 0;min-height:calc(100vh - 58px);position:sticky;top:58px;overflow-y:auto;}
+    .sb-mini{padding:14px 18px 18px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:10px;text-align:center;}
+    .sbp{width:58px;height:58px;border-radius:50%;margin:0 auto 10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(201,144,26,0.4);overflow:hidden;}
+    .sbp img{width:100%;height:100%;object-fit:cover;}
+    .sbp i{color:rgba(255,255,255,0.3);font-size:24px;}
+    .sb-name{font-size:13px;font-weight:600;color:var(--white);}
+    .sb-id{font-size:10px;color:var(--gold-l);font-family:'Share Tech Mono',monospace;margin:3px 0;}
+    .sb-st{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#4ade80;font-weight:600;}
+    .sdot{width:6px;height:6px;border-radius:50%;background:#22c55e;}
+    .sb-nav{padding:0 8px;flex:1;}
+    .sg-lbl{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;padding:12px 10px 5px;}
+    .ni{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:7px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.2s;margin-bottom:1px;border:none;background:transparent;width:100%;text-align:left;}
+    .ni:hover{background:rgba(255,255,255,0.07);color:var(--white);}
+    .ni.act{background:rgba(155,28,28,0.35);color:var(--white);border-left:3px solid var(--gold);}
+    .ni i{width:16px;font-size:13px;flex-shrink:0;}
+    .nbadge{margin-left:auto;background:var(--red);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;}
+    .nb-gold{background:var(--gold);}
+    .sb-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,0.08);}
+    .log-out{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,0.4);font-size:12px;cursor:pointer;transition:color 0.2s;}
+    .log-out:hover{color:var(--red-l);}
 
-    /* ── MAIN CONTENT ── */
-    .main-content{flex:1;padding:28px;max-width:calc(100% - var(--sidebar-w));overflow-x:hidden;}
+    /* ── MAIN ── */
+    .main{flex:1;padding:26px;max-width:calc(100% - var(--sw));overflow-x:hidden;}
     .view{display:none;}
-    .view.active{display:block;}
-    .page-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--text-dark);margin-bottom:4px;}
-    .page-sub{font-size:13px;color:var(--text-muted);margin-bottom:28px;}
+    .view.act{display:block;}
+    .pg-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--td);margin-bottom:4px;}
+    .pg-sub{font-size:13px;color:var(--tu);margin-bottom:24px;}
 
-    /* ── CARDS / PANELS ── */
-    .card{background:var(--white);border-radius:12px;padding:22px;border:1px solid rgba(155,28,28,0.08);margin-bottom:20px;}
-    .card-title{font-size:14px;font-weight:600;color:var(--text-dark);display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+    /* ── CARDS ── */
+    .card{background:var(--white);border-radius:12px;padding:20px;border:1px solid rgba(155,28,28,0.08);margin-bottom:18px;}
+    .card-title{font-size:14px;font-weight:600;color:var(--td);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
     .card-title i{color:var(--red);}
-    .stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px;}
-    .stat-card{background:var(--white);border-radius:10px;padding:16px;border:1px solid rgba(155,28,28,0.08);display:flex;align-items:center;gap:14px;}
-    .stat-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-    .si-red{background:rgba(155,28,28,0.1);color:var(--red);}
-    .si-gold{background:rgba(201,144,26,0.12);color:var(--gold);}
-    .si-green{background:var(--green-bg);color:var(--green);}
-    .si-dark{background:rgba(26,10,0,0.08);color:var(--text-mid);}
-    .stat-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--text-dark);line-height:1;}
-    .stat-lbl{font-size:11px;color:var(--text-muted);margin-top:2px;}
 
-    /* ── PROFILE VIEW ── */
-    .profile-grid{display:grid;grid-template-columns:280px 1fr;gap:20px;}
-    .profile-card-img{background:var(--dark);border-radius:12px;padding:28px;text-align:center;border:1px solid rgba(201,144,26,0.2);}
-    .prof-photo{width:100px;height:100px;border-radius:50%;margin:0 auto 14px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;border:3px solid rgba(201,144,26,0.4);overflow:hidden;}
-    .prof-photo img{width:100%;height:100%;object-fit:cover;}
-    .prof-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--white);font-weight:700;}
-    .prof-id{font-size:11px;color:var(--gold-light);font-family:'Share Tech Mono',monospace;margin:4px 0;}
-    .prof-pos{font-size:12px;color:rgba(255,255,255,0.55);}
-    .prof-chapter{display:inline-block;margin-top:10px;background:rgba(155,28,28,0.4);color:#fff;font-size:10px;font-weight:600;padding:4px 12px;border-radius:10px;border:1px solid rgba(240,180,41,0.3);}
-    .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-    .field-item{padding:10px 0;border-bottom:1px solid rgba(155,28,28,0.06);}
-    .field-item:last-child{border-bottom:none;}
-    .field-lbl{font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);margin-bottom:3px;}
-    .field-val{font-size:13px;font-weight:500;color:var(--text-dark);}
-    .field-val.mono{font-family:'Share Tech Mono',monospace;color:var(--red);}
-    .edit-btn{background:var(--red);color:#fff;border:none;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;margin-top:14px;transition:background 0.2s;}
-    .edit-btn:hover{background:var(--red-dark);}
+    /* ── STAT BOXES ── */
+    .stats-r{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:14px;margin-bottom:22px;}
+    .sbox{background:var(--white);border-radius:10px;padding:14px;border:1px solid rgba(155,28,28,0.08);display:flex;align-items:center;gap:12px;}
+    .si{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+    .si-r{background:rgba(155,28,28,0.1);color:var(--red);}
+    .si-g{background:var(--gold-l) + '20';background:rgba(201,144,26,0.12);color:var(--gold);}
+    .si-gr{background:var(--gbg);color:var(--green);}
+    .si-b{background:var(--bbg);color:var(--blue);}
+    .si-d{background:rgba(26,10,0,0.08);color:var(--tm);}
+    .sv{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--td);line-height:1;}
+    .sl{font-size:10px;color:var(--tu);margin-top:2px;}
 
-    /* ── TRANSFER APPLICATION ── */
-    .form-section{margin-bottom:28px;}
-    .form-section-title{font-size:13px;font-weight:600;color:var(--text-dark);padding:10px 0;border-bottom:2px solid rgba(155,28,28,0.1);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-    .form-section-title .step-circle{width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
-    .form-row.single{grid-template-columns:1fr;}
-    .form-group{display:flex;flex-direction:column;gap:6px;}
-    .form-label{font-size:12px;font-weight:600;color:var(--text-dark);}
-    .form-label .req{color:var(--red);}
-    .form-input,.form-select,.form-textarea{border:1.5px solid rgba(0,0,0,0.12);border-radius:7px;padding:10px 13px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--text-dark);background:var(--white);transition:border-color 0.2s;outline:none;width:100%;}
-    .form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--red);}
-    .form-input:disabled,.form-input[readonly]{background:var(--cream);color:var(--text-muted);cursor:not-allowed;}
-    .form-textarea{resize:vertical;min-height:80px;}
-    .form-hint{font-size:11px;color:var(--text-muted);margin-top:3px;}
-    .info-box{background:var(--blue-bg);border:1px solid rgba(29,78,216,0.2);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--blue);display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;}
-    .warn-box{background:var(--orange-bg);border:1px solid rgba(234,88,12,0.2);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--orange);display:flex;gap:8px;align-items:flex-start;margin-bottom:16px;}
-    .upload-zone{border:2px dashed rgba(155,28,28,0.25);border-radius:8px;padding:20px;text-align:center;cursor:pointer;transition:border-color 0.2s;background:var(--cream);position:relative;}
-    .upload-zone:hover{border-color:var(--red);}
-    .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-    .upload-zone i{font-size:24px;color:var(--text-muted);margin-bottom:6px;display:block;}
-    .upload-zone p{font-size:12px;color:var(--text-muted);}
-    .upload-zone strong{font-size:13px;color:var(--text-dark);}
-    .declaration-row{display:flex;gap:10px;align-items:flex-start;padding:14px;background:rgba(155,28,28,0.04);border-radius:8px;border:1px solid rgba(155,28,28,0.1);}
-    .declaration-row input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);flex-shrink:0;margin-top:2px;cursor:pointer;}
-    .declaration-row label{font-size:12px;color:var(--text-mid);line-height:1.6;cursor:pointer;}
-    .submit-row{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap;}
-    .btn-submit{background:var(--red);color:#fff;border:none;padding:13px 32px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all 0.2s;}
-    .btn-submit:hover{background:var(--red-dark);transform:translateY(-1px);}
-    .btn-submit:disabled{background:rgba(155,28,28,0.3);cursor:not-allowed;transform:none;}
-    .btn-cancel{background:transparent;color:var(--text-muted);border:1.5px solid rgba(0,0,0,0.12);padding:13px 24px;border-radius:8px;font-size:14px;cursor:pointer;transition:all 0.2s;}
-    .btn-cancel:hover{border-color:var(--red);color:var(--red);}
+    /* ── FORM ELEMENTS ── */
+    .fr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+    .fr.s1{grid-template-columns:1fr;}
+    .fg{display:flex;flex-direction:column;gap:5px;}
+    .fl{font-size:12px;font-weight:600;color:var(--td);}
+    .fl .req{color:var(--red);}
+    .fi,.fs,.fta{border:1.5px solid rgba(0,0,0,0.12);border-radius:7px;padding:10px 12px;font-size:13px;color:var(--td);background:var(--white);transition:border-color 0.2s;outline:none;width:100%;}
+    .fi:focus,.fs:focus,.fta:focus{border-color:var(--red);}
+    .fi:disabled,.fi[readonly]{background:var(--cream);color:var(--tu);}
+    .fta{resize:vertical;min-height:75px;}
+    .fhint{font-size:11px;color:var(--tu);}
+    .ibox{background:var(--bbg);border:1px solid rgba(29,78,216,0.2);border-radius:8px;padding:11px 13px;font-size:12px;color:var(--blue);display:flex;gap:8px;margin-bottom:14px;line-height:1.5;}
+    .wbox{background:var(--obg);border:1px solid rgba(234,88,12,0.2);border-radius:8px;padding:11px 13px;font-size:12px;color:var(--orange);display:flex;gap:8px;margin-bottom:14px;line-height:1.5;}
+    .gbox{background:var(--gbg);border:1px solid rgba(34,197,94,0.2);border-radius:8px;padding:11px 13px;font-size:12px;color:var(--green);display:flex;gap:8px;margin-bottom:14px;line-height:1.5;}
+    .sect-h{font-size:13px;font-weight:600;color:var(--td);padding:9px 0;border-bottom:2px solid rgba(155,28,28,0.1);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+    .step-c{width:22px;height:22px;border-radius:50%;background:var(--red);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .decl-row{display:flex;gap:9px;align-items:flex-start;padding:12px;background:rgba(155,28,28,0.04);border-radius:8px;border:1px solid rgba(155,28,28,0.1);margin-bottom:10px;}
+    .decl-row input{width:15px;height:15px;accent-color:var(--red);flex-shrink:0;margin-top:2px;cursor:pointer;}
+    .decl-row label{font-size:12px;color:var(--tm);line-height:1.6;cursor:pointer;}
+    .btn-sub{background:var(--red);color:#fff;border:none;padding:12px 28px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all 0.2s;}
+    .btn-sub:hover{background:var(--red-d);transform:translateY(-1px);}
+    .btn-sub:disabled{background:rgba(155,28,28,0.3);cursor:not-allowed;transform:none;}
+    .btn-out{background:transparent;color:var(--tu);border:1.5px solid rgba(0,0,0,0.12);padding:12px 22px;border-radius:7px;font-size:13px;cursor:pointer;transition:all 0.2s;}
+    .btn-out:hover{border-color:var(--red);color:var(--red);}
+    .btn-gold{background:var(--gold);color:#fff;border:none;padding:12px 24px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:background 0.2s;}
+    .btn-gold:hover{background:var(--gold-l);}
+    .submit-row{display:flex;gap:12px;align-items:center;margin-top:18px;flex-wrap:wrap;}
 
-    /* ── SUCCESS BANNER ── */
-    .success-banner{background:var(--green-bg);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:20px 24px;display:none;align-items:flex-start;gap:14px;margin-bottom:20px;}
-    .success-banner.show{display:flex;}
-    .success-icon{width:40px;height:40px;border-radius:50%;background:#22c55e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
-    .success-title{font-size:14px;font-weight:600;color:var(--green);}
-    .success-ref{font-family:'Share Tech Mono',monospace;font-size:13px;color:var(--text-mid);margin-top:4px;}
-    .success-note{font-size:12px;color:var(--text-muted);margin-top:6px;}
+    /* ── STATUS PILLS ── */
+    .pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:8px;}
+    .p-pend{background:var(--obg);color:var(--orange);}
+    .p-live{background:var(--gbg);color:var(--green);}
+    .p-close{background:rgba(155,28,28,0.1);color:var(--red);}
+    .p-app{background:var(--gbg);color:var(--green);}
+    .p-rej{background:rgba(155,28,28,0.1);color:var(--red);}
+    .p-proc{background:var(--bbg);color:var(--blue);}
+    .p-end{background:rgba(0,0,0,0.06);color:var(--tm);}
 
-    /* ── TRANSFER HISTORY / STATUS ── */
-    .transfer-table{width:100%;border-collapse:collapse;}
-    .transfer-table th{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);font-weight:600;padding:10px 14px;text-align:left;border-bottom:2px solid rgba(155,28,28,0.1);}
-    .transfer-table td{padding:13px 14px;font-size:13px;color:var(--text-dark);border-bottom:1px solid rgba(155,28,28,0.05);}
-    .transfer-table tr:last-child td{border-bottom:none;}
-    .transfer-table tr:hover td{background:var(--cream);}
-    .status-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;}
-    .status-pending{background:rgba(234,88,12,0.1);color:var(--orange);}
-    .status-approved{background:var(--green-bg);color:var(--green);}
-    .status-rejected{background:rgba(155,28,28,0.1);color:var(--red);}
-    .status-processing{background:var(--blue-bg);color:var(--blue);}
-    .timeline{display:flex;flex-direction:column;gap:0;}
-    .tl-item{display:flex;gap:14px;position:relative;}
-    .tl-item:not(:last-child)::before{content:'';position:absolute;left:15px;top:30px;bottom:0;width:2px;background:rgba(155,28,28,0.1);}
-    .tl-dot{width:32px;height:32px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;}
-    .tl-dot.done{background:var(--green-bg);color:var(--green);border:2px solid rgba(34,197,94,0.3);}
-    .tl-dot.current{background:rgba(234,88,12,0.1);color:var(--orange);border:2px solid rgba(234,88,12,0.3);}
-    .tl-dot.pending{background:rgba(0,0,0,0.04);color:var(--text-muted);border:2px solid rgba(0,0,0,0.08);}
-    .tl-body{padding-bottom:20px;}
-    .tl-title{font-size:13px;font-weight:600;color:var(--text-dark);}
-    .tl-date{font-size:11px;color:var(--text-muted);margin-top:2px;}
-    .tl-desc{font-size:12px;color:var(--text-mid);margin-top:4px;line-height:1.5;}
+    /* ── TABLE ── */
+    .tbl{width:100%;border-collapse:collapse;}
+    .tbl th{font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);font-weight:600;padding:9px 13px;text-align:left;border-bottom:2px solid rgba(155,28,28,0.1);}
+    .tbl td{padding:12px 13px;font-size:13px;color:var(--td);border-bottom:1px solid rgba(155,28,28,0.05);}
+    .tbl tr:last-child td{border-bottom:none;}
+    .tbl tr:hover td{background:var(--cream);}
 
     /* ── EMPTY STATE ── */
-    .empty-state{text-align:center;padding:40px 20px;}
-    .empty-icon{font-size:48px;color:rgba(155,28,28,0.15);margin-bottom:16px;}
-    .empty-title{font-size:15px;font-weight:600;color:var(--text-dark);margin-bottom:6px;}
-    .empty-desc{font-size:13px;color:var(--text-muted);}
+    .empty{text-align:center;padding:36px 20px;}
+    .empty i{font-size:44px;color:rgba(155,28,28,0.15);margin-bottom:14px;display:block;}
+    .empty h4{font-size:15px;font-weight:600;color:var(--td);margin-bottom:5px;}
+    .empty p{font-size:13px;color:var(--tu);}
+
+    /* ── SUCCESS BANNER ── */
+    .succ{background:var(--gbg);border:1px solid rgba(34,197,94,0.3);border-radius:10px;padding:18px 22px;display:none;align-items:flex-start;gap:12px;margin-bottom:18px;}
+    .succ.show{display:flex;}
+    .succ-ico{width:38px;height:38px;border-radius:50%;background:#22c55e;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+    .succ-t{font-size:14px;font-weight:600;color:var(--green);}
+    .succ-ref{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--tm);margin-top:3px;}
+    .succ-n{font-size:12px;color:var(--tu);margin-top:5px;}
+
+    /* ── WALLET ── */
+    .wallet-hero{background:var(--dark);border-radius:14px;padding:28px;position:relative;overflow:hidden;margin-bottom:20px;}
+    .wallet-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(201,144,26,0.05) 0,rgba(201,144,26,0.05) 1px,transparent 0,transparent 50%);background-size:16px 16px;pointer-events:none;}
+    .wallet-inner{position:relative;z-index:1;}
+    .wallet-bal-lbl{font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+    .wallet-bal{font-family:'Playfair Display',serif;font-size:38px;font-weight:700;color:var(--white);line-height:1;}
+    .wallet-bal span{font-size:22px;color:var(--gold-l);}
+    .wallet-id{font-size:11px;color:rgba(255,255,255,0.4);font-family:'Share Tech Mono',monospace;margin-top:6px;}
+    .wallet-btns{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+    .wb-btn{display:flex;flex-direction:column;align-items:center;gap:4px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 16px;cursor:pointer;transition:all 0.2s;min-width:70px;color:var(--white);}
+    .wb-btn:hover{background:rgba(201,144,26,0.2);border-color:rgba(201,144,26,0.4);}
+    .wb-btn i{font-size:18px;color:var(--gold-l);}
+    .wb-btn span{font-size:11px;color:rgba(255,255,255,0.7);font-weight:500;}
+    .wallet-actions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:20px;}
+    .wa-card{background:var(--white);border-radius:12px;padding:18px;border:1px solid rgba(155,28,28,0.08);}
+    .wa-card h4{font-size:13px;font-weight:600;color:var(--td);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .wa-card h4 i{color:var(--red);}
+    .ajo-card{background:linear-gradient(135deg,rgba(155,28,28,0.06),rgba(201,144,26,0.06));border:1px solid rgba(201,144,26,0.2);}
+    .ajo-item{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(155,28,28,0.06);}
+    .ajo-item:last-child{border-bottom:none;}
+    .ajo-name{font-size:13px;font-weight:500;color:var(--td);}
+    .ajo-meta{font-size:11px;color:var(--tu);}
+    .ajo-amount{font-size:13px;font-weight:600;color:var(--red);font-family:'Share Tech Mono',monospace;}
+
+    /* ── VOTING ── */
+    .election-card{background:var(--white);border-radius:12px;border:1px solid rgba(155,28,28,0.1);overflow:hidden;margin-bottom:16px;}
+    .ec-head{padding:16px 18px;border-bottom:1px solid rgba(155,28,28,0.08);display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap;}
+    .ec-title{font-size:14px;font-weight:600;color:var(--td);}
+    .ec-meta{font-size:12px;color:var(--tu);margin-top:3px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+    .ec-body{padding:16px 18px;}
+    .candidate-row{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(155,28,28,0.05);}
+    .candidate-row:last-child{border-bottom:none;}
+    .c-av{width:38px;height:38px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--red);font-family:'Playfair Display',serif;flex-shrink:0;border:1.5px solid rgba(155,28,28,0.15);}
+    .c-name{font-size:13px;font-weight:600;color:var(--td);flex:1;}
+    .c-pos{font-size:11px;color:var(--tu);}
+    .c-bar-wrap{flex:2;background:var(--cream);border-radius:5px;height:7px;overflow:hidden;}
+    .c-bar{height:100%;border-radius:5px;background:var(--red);transition:width 0.6s ease;}
+    .c-pct{font-size:11px;font-weight:600;color:var(--td);min-width:32px;text-align:right;}
+    .vote-btn{border:1.5px solid var(--red);color:var(--red);background:transparent;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;flex-shrink:0;}
+    .vote-btn:hover,.vote-btn.voted{background:var(--red);color:#fff;border-color:var(--red);}
+    .vote-btn.voted{cursor:default;}
+    .apply-btn{border:1.5px solid var(--gold);color:var(--gold);background:transparent;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+    .apply-btn:hover{background:var(--gold);color:#fff;}
+    .progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--tu);margin-bottom:4px;}
+
+    /* ── GRANTS ── */
+    .grant-card{background:var(--white);border-radius:12px;border:1px solid rgba(155,28,28,0.1);overflow:hidden;display:flex;flex-direction:column;}
+    .gc-top{background:var(--dark);padding:18px;position:relative;}
+    .gc-cat{display:inline-block;background:rgba(201,144,26,0.2);color:var(--gold-l);font-size:9px;font-weight:700;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;}
+    .gc-title{font-size:14px;font-weight:600;color:var(--white);line-height:1.3;}
+    .gc-amount{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold-l);font-weight:700;margin-top:8px;}
+    .gc-body{padding:14px 16px;flex:1;}
+    .gc-desc{font-size:12px;color:var(--tu);line-height:1.6;margin-bottom:12px;}
+    .gc-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--tu);margin-bottom:5px;}
+    .gc-row i{color:var(--red);font-size:11px;width:14px;}
+    .gc-foot{padding:12px 16px;border-top:1px solid rgba(155,28,28,0.08);display:flex;align-items:center;justify-content:space-between;}
+    .gc-deadline{font-size:11px;color:var(--orange);font-weight:600;}
+    .grants-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
+
+    /* ── TIMELINE ── */
+    .tl{display:flex;flex-direction:column;gap:0;}
+    .tli{display:flex;gap:12px;position:relative;}
+    .tli:not(:last-child)::before{content:'';position:absolute;left:14px;top:28px;bottom:0;width:2px;background:rgba(155,28,28,0.08);}
+    .tl-dot{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;}
+    .tl-dot.done{background:var(--gbg);color:var(--green);border:1.5px solid rgba(34,197,94,0.3);}
+    .tl-dot.cur{background:var(--obg);color:var(--orange);border:1.5px solid rgba(234,88,12,0.3);}
+    .tl-dot.pend{background:rgba(0,0,0,0.04);color:var(--tu);border:1.5px solid rgba(0,0,0,0.1);}
+    .tl-body{padding-bottom:18px;}
+    .tl-t{font-size:13px;font-weight:600;color:var(--td);}
+    .tl-d{font-size:11px;color:var(--tu);margin-top:2px;}
+    .tl-n{font-size:12px;color:var(--tm);margin-top:3px;line-height:1.5;}
+
+    /* ── UPLOAD ZONE ── */
+    .upzone{border:2px dashed rgba(155,28,28,0.2);border-radius:8px;padding:18px;text-align:center;cursor:pointer;transition:border-color 0.2s;background:var(--cream);position:relative;}
+    .upzone:hover{border-color:var(--red);}
+    .upzone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+    .upzone i{font-size:22px;color:var(--tu);margin-bottom:5px;display:block;}
+    .upzone p{font-size:12px;color:var(--tu);}
 
     /* ── MOBILE ── */
-    .mob-menu-toggle{display:none;background:transparent;border:none;color:var(--gold-light);font-size:20px;cursor:pointer;padding:4px;}
     @media(max-width:900px){
-      .sidebar{display:none;position:fixed;top:58px;left:0;bottom:0;z-index:150;width:240px;}
-      .sidebar.mob-open{display:flex;}
-      .main-content{max-width:100%;padding:20px 16px;}
-      .mob-menu-toggle{display:block;}
-      .profile-grid,.form-row{grid-template-columns:1fr;}
-      .field-grid{grid-template-columns:1fr;}
-      .stats-row{grid-template-columns:repeat(2,1fr);}
-    }
-    @media(max-width:500px){
-      .stats-row{grid-template-columns:1fr;}
+      .sb{display:none;position:fixed;top:58px;left:0;bottom:0;z-index:150;width:240px;overflow-y:auto;}
+      .sb.mob{display:flex;}
+      .main{max-width:100%;padding:18px 14px;}
+      .mob-ham{display:block;}
+      .fr,.stats-r{grid-template-columns:1fr;}
+      .wallet-btns{gap:8px;}
+      .grants-grid{grid-template-columns:1fr;}
     }
   </style>
 </head>
 <body>
 
 <!-- TOP NAV -->
-<nav class="top-nav">
-  <div class="top-nav-brand">
-    <button class="mob-menu-toggle" onclick="toggleSidebar()"><i class="fa fa-bars"></i></button>
-    <img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="top-nav-logo" onerror="this.style.opacity='0'"/>
-    <div class="top-nav-name">IGBO BU IGBO<small>Member Dashboard</small></div>
+<nav class="tnav">
+  <div class="tnav-brand">
+    <button class="mob-ham" onclick="toggleSB()"><i class="fa fa-bars"></i></button>
+    <img src="igbo_bu_igbo_logo.jpg" class="tnav-logo" alt="Logo" onerror="this.style.opacity='0'"/>
+    <div class="tnav-name">IGBO BU IGBO<small>Member Dashboard</small></div>
   </div>
-  <div class="top-nav-right">
-    <a href="index.html" class="back-site"><i class="fa fa-arrow-left"></i> Back to Website</a>
-    <button class="notif-btn"><i class="fa fa-bell"></i><span class="notif-dot"></span></button>
-    <div class="user-pill">
-      <div class="user-avatar">EA</div>
-      <span class="user-pill-name">Emmanuel A.</span>
-    </div>
+  <div class="tnav-right">
+    <a href="index.html" class="back-site"><i class="fa fa-arrow-left"></i> Website</a>
+    <button class="notif"><i class="fa fa-bell"></i><span class="ndot"></span></button>
+    <div class="upill"><div class="uav">EA</div><span class="upill-n">Emmanuel A.</span></div>
   </div>
 </nav>
 
-<div class="dash-layout">
+<div class="layout">
 
 <!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <div class="member-card-mini">
-    <div class="mcm-photo">
+<aside class="sb" id="sb">
+  <div class="sb-mini">
+    <div class="sbp">
       <img src="photoadams.jpg" alt="Emmanuel Adams" onerror="this.parentElement.innerHTML='<i class=\'fa fa-user\'></i>'"/>
     </div>
-    <div class="mcm-name">Emmanuel Adams</div>
-    <div class="mcm-id">FCT/01/0001</div>
-    <div class="mcm-badge"><span class="active-dot"></span><span class="mcm-status">Active Member</span></div>
+    <div class="sb-name">Emmanuel Adams</div>
+    <div class="sb-id">FCT/01/0001</div>
+    <div class="sb-st"><span class="sdot"></span>Active Member</div>
   </div>
+  <div class="sb-nav">
+    <div class="sg-lbl">Main</div>
+    <button class="ni act" onclick="sv('overview')"><i class="fa fa-gauge"></i>Overview</button>
+    <button class="ni" onclick="sv('profile')"><i class="fa fa-user-circle"></i>My Profile</button>
+    <button class="ni" onclick="sv('idcard')"><i class="fa fa-id-card"></i>ID Card</button>
 
-  <div class="sidebar-nav">
-    <div class="nav-group-label">Main</div>
-    <button class="nav-item active" onclick="showView('overview')">
-      <i class="fa fa-gauge"></i> Overview
-    </button>
-    <button class="nav-item" onclick="showView('profile')">
-      <i class="fa fa-user-circle"></i> My Profile
-    </button>
-    <button class="nav-item" onclick="showView('idcard')">
-      <i class="fa fa-id-card"></i> ID Card
-    </button>
-    <button class="nav-item" onclick="showView('payments')">
-      <i class="fa fa-receipt"></i> Payments
-    </button>
+    <div class="sg-lbl">Finance</div>
+    <button class="ni" onclick="sv('wallet')"><i class="fa fa-wallet"></i>My Wallet<span class="nbadge nb-gold">NEW</span></button>
+    <button class="ni" onclick="sv('payments')"><i class="fa fa-receipt"></i>Payments</button>
 
-    <div class="nav-group-label">Chapter Services</div>
-    <button class="nav-item" onclick="showView('transfer')" id="navTransfer">
-      <i class="fa fa-right-left"></i> Apply for Transfer
-    </button>
-    <button class="nav-item" onclick="showView('transfer-history')" id="navTransferHist">
-      <i class="fa fa-clock-rotate-left"></i> Transfer History
-      <span class="badge-count" id="pendingCount" style="display:none;">1</span>
-    </button>
+    <div class="sg-lbl">Governance</div>
+    <button class="ni" onclick="sv('voting')"><i class="fa fa-ballot-check"></i>Elections &amp; Voting<span class="nbadge">2</span></button>
+    <button class="ni" onclick="sv('candidacy')"><i class="fa fa-person-chalkboard"></i>Apply for Position</button>
 
-    <div class="nav-group-label">More</div>
-    <button class="nav-item" onclick="showView('events')">
-      <i class="fa fa-calendar-days"></i> Events
-    </button>
-    <button class="nav-item" onclick="showView('notifications')">
-      <i class="fa fa-bell"></i> Notifications
-    </button>
-    <button class="nav-item" onclick="showView('settings')">
-      <i class="fa fa-gear"></i> Settings
-    </button>
+    <div class="sg-lbl">Opportunities</div>
+    <button class="ni" onclick="sv('grants')"><i class="fa fa-graduation-cap"></i>Grants &amp; Scholarships<span class="nbadge nb-gold">3</span></button>
+
+    <div class="sg-lbl">Chapter Services</div>
+    <button class="ni" onclick="sv('transfer')"><i class="fa fa-right-left"></i>Apply for Transfer</button>
+    <button class="ni" onclick="sv('transfer-history')"><i class="fa fa-clock-rotate-left"></i>Transfer History</button>
+
+    <div class="sg-lbl">More</div>
+    <button class="ni" onclick="sv('events')"><i class="fa fa-calendar-days"></i>Events</button>
+    <button class="ni" onclick="sv('notifications')"><i class="fa fa-bell"></i>Notifications</button>
+    <button class="ni" onclick="sv('settings')"><i class="fa fa-gear"></i>Settings</button>
   </div>
-
-  <div class="sidebar-footer">
-    <div class="logout-btn"><i class="fa fa-right-from-bracket"></i> Log Out</div>
-  </div>
+  <div class="sb-foot"><div class="log-out"><i class="fa fa-right-from-bracket"></i>Log Out</div></div>
 </aside>
 
-<!-- MAIN CONTENT -->
-<main class="main-content">
+<main class="main">
 
-  <!-- ══ OVERVIEW ══ -->
-  <div class="view active" id="view-overview">
-    <div class="page-title">Welcome back, Emmanuel 👋</div>
-    <div class="page-sub">Here's a summary of your membership status.</div>
-
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="stat-icon si-green"><i class="fa fa-circle-check"></i></div>
-        <div><div class="stat-val">Active</div><div class="stat-lbl">Membership Status</div></div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon si-red"><i class="fa fa-location-dot"></i></div>
-        <div><div class="stat-val">FCT</div><div class="stat-lbl">Current Chapter</div></div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon si-gold"><i class="fa fa-calendar-check"></i></div>
-        <div><div class="stat-val">2026</div><div class="stat-lbl">Dues Paid Until</div></div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-icon si-dark"><i class="fa fa-users"></i></div>
-        <div><div class="stat-val">4,821</div><div class="stat-lbl">Total Members</div></div>
-      </div>
-    </div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
-      <div class="card">
-        <div class="card-title"><i class="fa fa-info-circle"></i> Membership Details</div>
-        <div class="field-item"><div class="field-lbl">Full Name</div><div class="field-val">Emmanuel Adams</div></div>
-        <div class="field-item"><div class="field-lbl">Membership ID</div><div class="field-val mono">FCT/01/0001</div></div>
-        <div class="field-item"><div class="field-lbl">Position</div><div class="field-val">Vice President — FCT Abuja</div></div>
-        <div class="field-item"><div class="field-lbl">Chapter</div><div class="field-val">FCT Abuja Chapter</div></div>
-        <div class="field-item"><div class="field-lbl">Registered</div><div class="field-val">January 15, 2026</div></div>
-      </div>
-      <div class="card">
-        <div class="card-title"><i class="fa fa-bell"></i> Recent Notifications</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid rgba(155,28,28,0.06);">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;"></div>
-            <div><div style="font-size:13px;font-weight:500;">National Convention — June 14, Abuja</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Registration deadline: June 7, 2026</div></div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:12px;border-bottom:1px solid rgba(155,28,28,0.06);">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px;"></div>
-            <div><div style="font-size:13px;font-weight:500;">Abia General Meeting — June 7, Aba</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Three Star Hotel, 1:00 PM</div></div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:flex-start;">
-            <div style="width:8px;height:8px;border-radius:50%;background:var(--text-muted);flex-shrink:0;margin-top:5px;"></div>
-            <div><div style="font-size:13px;font-weight:500;">Annual dues receipt available</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Download from Payments section</div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card" style="background:var(--dark);border-color:rgba(201,144,26,0.2);">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
-        <div>
-          <div style="font-family:'Playfair Display',serif;font-size:18px;color:var(--white);margin-bottom:4px;">Need to move to a new chapter?</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.55);">Apply for a chapter or region transfer — takes 5 minutes.</div>
-        </div>
-        <button onclick="showView('transfer')" style="background:var(--gold);color:#fff;border:none;padding:11px 22px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;"><i class="fa fa-right-left"></i> Apply for Transfer</button>
-      </div>
-    </div>
+<!-- ══ OVERVIEW ══ -->
+<div class="view act" id="view-overview">
+  <div class="pg-title">Welcome back, Emmanuel 👋</div>
+  <div class="pg-sub">Your membership dashboard — manage your chapter, finances, votes and opportunities.</div>
+  <div class="stats-r">
+    <div class="sbox"><div class="si si-gr"><i class="fa fa-circle-check"></i></div><div><div class="sv">Active</div><div class="sl">Membership Status</div></div></div>
+    <div class="sbox"><div class="si si-r"><i class="fa fa-location-dot"></i></div><div><div class="sv">FCT</div><div class="sl">Current Chapter</div></div></div>
+    <div class="sbox"><div class="si si-g"><i class="fa fa-wallet"></i></div><div><div class="sv">₦12,500</div><div class="sl">Wallet Balance</div></div></div>
+    <div class="sbox"><div class="si si-b"><i class="fa fa-ballot-check"></i></div><div><div class="sv">2</div><div class="sl">Live Elections</div></div></div>
+    <div class="sbox"><div class="si si-d"><i class="fa fa-graduation-cap"></i></div><div><div class="sv">3</div><div class="sl">Open Grants</div></div></div>
   </div>
-
-  <!-- ══ PROFILE ══ -->
-  <div class="view" id="view-profile">
-    <div class="page-title">My Profile</div>
-    <div class="page-sub">View and manage your membership information.</div>
-    <div class="profile-grid">
-      <div class="profile-card-img">
-        <div class="prof-photo">
-          <img src="photoadams.jpg" alt="Emmanuel Adams" onerror="this.parentElement.innerHTML='<i class=\'fa fa-user\' style=\'font-size:36px;color:rgba(255,255,255,0.2);\'></i>'"/>
-        </div>
-        <div class="prof-name">Emmanuel Adams</div>
-        <div class="prof-id">FCT/01/0001</div>
-        <div class="prof-pos">Vice President</div>
-        <span class="prof-chapter">FCT Abuja Chapter</span>
-        <div style="margin-top:14px;">
-          <button class="edit-btn" style="width:100%;justify-content:center;"><i class="fa fa-camera"></i> Change Photo</button>
-        </div>
-      </div>
-      <div class="card" style="margin-bottom:0;">
-        <div class="card-title"><i class="fa fa-user"></i> Personal Information</div>
-        <div class="field-grid">
-          <div class="field-item"><div class="field-lbl">First Name</div><div class="field-val">Emmanuel</div></div>
-          <div class="field-item"><div class="field-lbl">Last Name</div><div class="field-val">Adams</div></div>
-          <div class="field-item"><div class="field-lbl">Gender</div><div class="field-val">Male</div></div>
-          <div class="field-item"><div class="field-lbl">Date of Birth</div><div class="field-val">—</div></div>
-          <div class="field-item"><div class="field-lbl">Phone Number</div><div class="field-val">+234 — — — — —</div></div>
-          <div class="field-item"><div class="field-lbl">Email Address</div><div class="field-val">e.adams@email.com</div></div>
-          <div class="field-item"><div class="field-lbl">Occupation</div><div class="field-val">—</div></div>
-          <div class="field-item"><div class="field-lbl">State of Origin</div><div class="field-val">—</div></div>
-        </div>
-        <div style="margin-top:10px;border-top:1px solid rgba(155,28,28,0.08);padding-top:16px;">
-          <div class="card-title" style="margin-bottom:12px;"><i class="fa fa-id-badge"></i> Membership Details</div>
-          <div class="field-grid">
-            <div class="field-item"><div class="field-lbl">Membership ID</div><div class="field-val mono">FCT/01/0001</div></div>
-            <div class="field-item"><div class="field-lbl">Position</div><div class="field-val">Vice President</div></div>
-            <div class="field-item"><div class="field-lbl">Chapter</div><div class="field-val">FCT Abuja Chapter</div></div>
-            <div class="field-item"><div class="field-lbl">Region</div><div class="field-val">Non-Igbo Speaking States</div></div>
-            <div class="field-item"><div class="field-lbl">Registered</div><div class="field-val">Jan 15, 2026</div></div>
-            <div class="field-item"><div class="field-lbl">Status</div><div class="field-val" style="color:var(--green);font-weight:600;">✓ Active</div></div>
-          </div>
-        </div>
-        <button class="edit-btn"><i class="fa fa-pen"></i> Edit Profile</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ ID CARD ══ -->
-  <div class="view" id="view-idcard">
-    <div class="page-title">My ID Card</div>
-    <div class="page-sub">Download or print your official digital membership card.</div>
-    <div style="text-align:center;padding:20px 0;">
-      <a href="id-card.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-size:14px;font-weight:600;padding:13px 28px;border-radius:7px;transition:background 0.2s;" onmouseover="this.style.background='#6B0F0F'" onmouseout="this.style.background='#9B1C1C'">
-        <i class="fa fa-id-card"></i> Open Full ID Card Page
-      </a>
-    </div>
-  </div>
-
-  <!-- ══ PAYMENTS ══ -->
-  <div class="view" id="view-payments">
-    <div class="page-title">Payment History</div>
-    <div class="page-sub">Track your dues, registration fees, and receipts.</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
     <div class="card">
-      <table class="transfer-table">
-        <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th><th>Receipt</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Jan 15, 2026</td>
-            <td>Registration Fee — Executive Member</td>
-            <td style="font-family:'Share Tech Mono',monospace;">₦15,000</td>
-            <td><span class="status-pill status-approved"><i class="fa fa-check"></i> Paid</span></td>
-            <td><a href="coming-soon.html" style="color:var(--red);font-size:12px;font-weight:600;">Download</a></td>
-          </tr>
-          <tr>
-            <td>Jan 20, 2026</td>
-            <td>Annual Dues — 2026</td>
-            <td style="font-family:'Share Tech Mono',monospace;">₦5,000</td>
-            <td><span class="status-pill status-approved"><i class="fa fa-check"></i> Paid</span></td>
-            <td><a href="coming-soon.html" style="color:var(--red);font-size:12px;font-weight:600;">Download</a></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="card-title"><i class="fa fa-info-circle"></i>Membership Details</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="display:flex;justify-content:space-between;font-size:13px;border-bottom:1px solid rgba(155,28,28,0.05);padding-bottom:8px;"><span style="color:var(--tu);">Membership ID</span><span style="font-family:'Share Tech Mono',monospace;color:var(--red);">FCT/01/0001</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;border-bottom:1px solid rgba(155,28,28,0.05);padding-bottom:8px;"><span style="color:var(--tu);">Position</span><span style="font-weight:600;">Vice President</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;border-bottom:1px solid rgba(155,28,28,0.05);padding-bottom:8px;"><span style="color:var(--tu);">Chapter</span><span style="font-weight:600;">FCT Abuja</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--tu);">Dues Valid Until</span><span style="font-weight:600;color:var(--green);">Dec 2026</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="fa fa-bell"></i>Notifications</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(155,28,28,0.05);">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px;"></div>
+          <div><div style="font-size:13px;font-weight:500;">National Convention — June 14, Abuja</div><div style="font-size:11px;color:var(--tu);margin-top:2px;">Register before June 7</div></div>
+        </div>
+        <div style="display:flex;gap:9px;padding-bottom:10px;border-bottom:1px solid rgba(155,28,28,0.05);">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:4px;"></div>
+          <div><div style="font-size:13px;font-weight:500;">2 Elections open for voting</div><div style="font-size:11px;color:var(--tu);margin-top:2px;">Cast your vote before closing</div></div>
+        </div>
+        <div style="display:flex;gap:9px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:4px;"></div>
+          <div><div style="font-size:13px;font-weight:500;">Scholarship application open</div><div style="font-size:11px;color:var(--tu);margin-top:2px;">Deadline: July 31, 2026</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="background:var(--dark);border-color:rgba(201,144,26,0.2);">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:16px;color:var(--white);margin-bottom:3px;">Quick Actions</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.5);">Common tasks at a glance</div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button onclick="sv('wallet')" class="btn-gold"><i class="fa fa-wallet"></i>My Wallet</button>
+        <button onclick="sv('voting')" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);padding:11px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><i class="fa fa-ballot-check"></i>Vote Now</button>
+        <button onclick="sv('grants')" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);padding:11px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><i class="fa fa-graduation-cap"></i>Grants</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROFILE ══ -->
+<div class="view" id="view-profile">
+  <div class="pg-title">My Profile</div>
+  <div class="pg-sub">View and update your membership information.</div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid rgba(155,28,28,0.08);">
+      <div style="width:72px;height:72px;border-radius:50%;background:rgba(155,28,28,0.1);display:flex;align-items:center;justify-content:center;border:2px solid rgba(155,28,28,0.2);overflow:hidden;flex-shrink:0;">
+        <img src="photoadams.jpg" alt="" onerror="this.parentElement.innerHTML='<i class=\'fa fa-user\' style=\'font-size:28px;color:var(--tu);\'></i>'"/>
+      </div>
+      <div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;">Emmanuel Adams</div><div style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--red);">FCT/01/0001</div><div style="font-size:12px;color:var(--tu);margin-top:3px;">Vice President — FCT Abuja Chapter</div></div>
+      <button class="btn-gold" style="margin-left:auto;"><i class="fa fa-pen"></i>Edit Profile</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Full Name</div><div style="font-size:13px;font-weight:500;">Emmanuel Adams</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Membership ID</div><div style="font-size:13px;font-family:'Share Tech Mono',monospace;color:var(--red);">FCT/01/0001</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Position</div><div style="font-size:13px;font-weight:500;">Vice President</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Chapter</div><div style="font-size:13px;font-weight:500;">FCT Abuja Chapter</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Region</div><div style="font-size:13px;font-weight:500;">Non-Igbo Speaking States</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Status</div><div style="font-size:13px;font-weight:600;color:var(--green);">✓ Active</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Registered</div><div style="font-size:13px;font-weight:500;">January 15, 2026</div></div>
+      <div><div style="font-size:10px;text-transform:uppercase;letter-spacing:0.5px;color:var(--tu);margin-bottom:3px;">Dues Valid</div><div style="font-size:13px;font-weight:500;color:var(--green);">December 31, 2026</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ID CARD ══ -->
+<div class="view" id="view-idcard">
+  <div class="pg-title">My ID Card</div>
+  <div class="pg-sub">Official digital membership card — download or print.</div>
+  <div style="text-align:center;padding:30px 0;">
+    <a href="id-card.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;font-size:14px;font-weight:600;padding:14px 30px;border-radius:8px;">
+      <i class="fa fa-id-card"></i> Open Full ID Card &amp; Download
+    </a>
+  </div>
+</div>
+
+<!-- ══ WALLET ══ -->
+<div class="view" id="view-wallet">
+  <div class="pg-title">My Wallet</div>
+  <div class="pg-sub">Manage your funds, contributions, Ajo/Isusu, and transfers.</div>
+
+  <!-- BALANCE HERO -->
+  <div class="wallet-hero">
+    <div class="wallet-pattern"></div>
+    <div class="wallet-inner">
+      <div class="wallet-bal-lbl">Available Balance</div>
+      <div class="wallet-bal"><span>₦</span>12,500<span style="font-size:16px;color:rgba(255,255,255,0.4);margin-left:8px;">.00</span></div>
+      <div class="wallet-id">Wallet ID: IBI-WAL-FCT01-0001</div>
+      <div class="wallet-btns">
+        <div class="wb-btn" onclick="openModal('deposit')"><i class="fa fa-circle-plus"></i><span>Deposit</span></div>
+        <div class="wb-btn" onclick="openModal('transfer')"><i class="fa fa-paper-plane"></i><span>Transfer</span></div>
+        <div class="wb-btn" onclick="openModal('pay-dues')"><i class="fa fa-receipt"></i><span>Pay Dues</span></div>
+        <div class="wb-btn" onclick="openModal('donate')"><i class="fa fa-heart"></i><span>Donate</span></div>
+        <div class="wb-btn" onclick="sv('wallet-history')"><i class="fa fa-clock-rotate-left"></i><span>History</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════
-       CHAPTER / REGION TRANSFER APPLICATION
-  ══════════════════════════════════════════════════ -->
-  <div class="view" id="view-transfer">
-    <div class="page-title">Chapter / Region Transfer Application</div>
-    <div class="page-sub">Apply to move your membership from your current chapter to another chapter or region within Igbo Bu Igbo.</div>
+  <!-- QUICK PAY DUES -->
+  <div class="ibox"><i class="fa fa-circle-info" style="flex-shrink:0;margin-top:1px;"></i><div>Your 2026 annual dues are <strong>paid</strong>. Next due: January 2027 — ₦5,000. You can pre-pay anytime from your wallet.</div></div>
 
-    <!-- Success Banner (shown after submission) -->
-    <div class="success-banner" id="successBanner">
-      <div class="success-icon"><i class="fa fa-check"></i></div>
+  <div class="wallet-actions-grid">
+    <!-- AJO / ISUSU -->
+    <div class="wa-card ajo-card">
+      <h4><i class="fa fa-coins"></i>My Ajo / Isusu Groups</h4>
+      <div class="ajo-item">
+        <div><div class="ajo-name">FCT Abuja Ajo Group A</div><div class="ajo-meta">₦5,000/month · Your turn: Month 4</div></div>
+        <span class="ajo-amount">₦5,000</span>
+      </div>
+      <div class="ajo-item">
+        <div><div class="ajo-name">National Executives Isusu</div><div class="ajo-meta">₦10,000/month · Active</div></div>
+        <span class="ajo-amount">₦10,000</span>
+      </div>
+      <button class="btn-sub" style="margin-top:12px;font-size:12px;padding:9px 16px;"><i class="fa fa-plus"></i>Join an Ajo Group</button>
+    </div>
+
+    <!-- FOOD CONTRIBUTIONS -->
+    <div class="wa-card">
+      <h4><i class="fa fa-utensils"></i>Food Contributions</h4>
+      <div class="ajo-item">
+        <div><div class="ajo-name">National Convention Feeding</div><div class="ajo-meta">Target: ₦500,000 · Due: June 10</div></div>
+        <span class="pill p-live">Open</span>
+      </div>
+      <div class="ajo-item">
+        <div><div class="ajo-name">Abia Meeting Food Fund</div><div class="ajo-meta">Target: ₦50,000 · Due: June 5</div></div>
+        <span class="pill p-pend">Soon</span>
+      </div>
+      <button class="btn-sub" style="margin-top:12px;font-size:12px;padding:9px 16px;background:var(--gold);" onclick="openModal('food-contrib')"><i class="fa fa-heart"></i>Contribute to Food Fund</button>
+    </div>
+
+    <!-- FINES & LEVIES -->
+    <div class="wa-card">
+      <h4><i class="fa fa-gavel"></i>Fines, Levies &amp; Dues</h4>
+      <div class="ajo-item">
+        <div><div class="ajo-name">Annual Dues 2026</div><div class="ajo-meta">Due: January 2027</div></div>
+        <span class="pill p-app"><i class="fa fa-check"></i>Paid</span>
+      </div>
+      <div class="ajo-item">
+        <div><div class="ajo-name">Convention Levy 2026</div><div class="ajo-meta">₦2,000 · Due: June 7</div></div>
+        <span class="pill p-pend">Pending</span>
+      </div>
+      <button class="btn-sub" style="margin-top:12px;font-size:12px;padding:9px 16px;" onclick="openModal('pay-levy')"><i class="fa fa-receipt"></i>Pay Outstanding Levy</button>
+    </div>
+
+    <!-- TRANSFER TO MEMBER -->
+    <div class="wa-card">
+      <h4><i class="fa fa-paper-plane"></i>Transfer to Member</h4>
+      <div class="fg" style="margin-bottom:10px;">
+        <label class="fl">Recipient Membership ID</label>
+        <input type="text" class="fi" placeholder="e.g. ABI/01/0023"/>
+      </div>
+      <div class="fg" style="margin-bottom:10px;">
+        <label class="fl">Amount (₦)</label>
+        <input type="number" class="fi" placeholder="e.g. 5000" min="100"/>
+      </div>
+      <div class="fg" style="margin-bottom:12px;">
+        <label class="fl">Note (optional)</label>
+        <input type="text" class="fi" placeholder="e.g. Welfare contribution"/>
+      </div>
+      <button class="btn-sub" style="font-size:12px;padding:9px 16px;" onclick="doTransfer()"><i class="fa fa-paper-plane"></i>Send Funds</button>
+    </div>
+  </div>
+
+  <!-- RECENT TRANSACTIONS -->
+  <div class="card">
+    <div class="card-title"><i class="fa fa-clock-rotate-left"></i>Recent Transactions</div>
+    <table class="tbl">
+      <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Type</th><th>Balance</th></tr></thead>
+      <tbody>
+        <tr><td>Jan 20, 2026</td><td>Annual Dues 2026</td><td style="color:var(--red);font-family:'Share Tech Mono',monospace;">-₦5,000</td><td><span class="pill p-close">Debit</span></td><td style="font-family:'Share Tech Mono',monospace;">₦12,500</td></tr>
+        <tr><td>Jan 18, 2026</td><td>Wallet Top-Up</td><td style="color:var(--green);font-family:'Share Tech Mono',monospace;">+₦17,500</td><td><span class="pill p-app">Credit</span></td><td style="font-family:'Share Tech Mono',monospace;">₦17,500</td></tr>
+        <tr><td>Jan 15, 2026</td><td>Registration Fee</td><td style="color:var(--red);font-family:'Share Tech Mono',monospace;">-₦15,000</td><td><span class="pill p-close">Debit</span></td><td style="font-family:'Share Tech Mono',monospace;">₦0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ PAYMENTS ══ -->
+<div class="view" id="view-payments">
+  <div class="pg-title">Payment History</div>
+  <div class="pg-sub">All your dues, receipts, and transactions.</div>
+  <div class="card">
+    <table class="tbl">
+      <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th><th>Receipt</th></tr></thead>
+      <tbody>
+        <tr><td>Jan 20, 2026</td><td>Annual Dues 2026</td><td style="font-family:'Share Tech Mono',monospace;">₦5,000</td><td><span class="pill p-app"><i class="fa fa-check"></i>Paid</span></td><td><a href="coming-soon.html" style="color:var(--red);font-size:12px;font-weight:600;">Download</a></td></tr>
+        <tr><td>Jan 15, 2026</td><td>Registration Fee — Executive</td><td style="font-family:'Share Tech Mono',monospace;">₦15,000</td><td><span class="pill p-app"><i class="fa fa-check"></i>Paid</span></td><td><a href="coming-soon.html" style="color:var(--red);font-size:12px;font-weight:600;">Download</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ ELECTIONS & VOTING ══ -->
+<div class="view" id="view-voting">
+  <div class="pg-title">Elections &amp; Voting</div>
+  <div class="pg-sub">Cast your vote in open elections or view results. All votes are secret and recorded on the blockchain for transparency.</div>
+
+  <div class="ibox"><i class="fa fa-shield-halved" style="flex-shrink:0;margin-top:1px;"></i><div>Your vote is <strong>anonymous and encrypted</strong>. Results are publicly visible after the election closes. Each member can vote once per election. You must be an Active member to participate.</div></div>
+
+  <!-- ELECTION FILTER TABS -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+    <button onclick="filterElections('all',this)" style="background:var(--red);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">All Elections</button>
+    <button onclick="filterElections('global',this)" style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Global</button>
+    <button onclick="filterElections('regional',this)" style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Regional</button>
+    <button onclick="filterElections('chapter',this)" style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Chapter</button>
+    <button onclick="filterElections('zone',this)" style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Zone</button>
+    <button onclick="filterElections('decision',this)" style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Decisions</button>
+  </div>
+
+  <!-- LIVE ELECTIONS -->
+  <div class="election-card">
+    <div class="ec-head">
       <div>
-        <div class="success-title">Transfer Application Submitted Successfully!</div>
-        <div class="success-ref">Reference: <span id="successRef">IBI-TRF-0000</span></div>
-        <div class="success-note">Your application is now under review. You will be notified via email and SMS within 5–10 working days. Track the status in Transfer History.</div>
+        <span class="pill p-live" style="margin-bottom:5px;display:inline-flex;"><i class="fa fa-circle" style="font-size:7px;"></i>Live — Voting Open</span>
+        <div class="ec-title">National President Election 2026</div>
+        <div class="ec-meta">
+          <span><i class="fa fa-globe"></i> Global Election</span>
+          <span><i class="fa fa-users"></i> All Members Eligible</span>
+          <span><i class="fa fa-clock"></i> Closes: June 30, 2026</span>
+        </div>
+      </div>
+      <span class="pill p-live">2,341 Votes Cast</span>
+    </div>
+    <div class="ec-body">
+      <div class="progress-label"><span>Voting Progress</span><span>2,341 / 4,821 members voted</span></div>
+      <div style="background:var(--cream);border-radius:5px;height:8px;overflow:hidden;margin-bottom:18px;"><div style="width:48%;height:100%;background:linear-gradient(90deg,var(--red),var(--gold));border-radius:5px;"></div></div>
+      <div style="font-size:12px;font-weight:600;color:var(--tu);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;">Candidates</div>
+      <div class="candidate-row">
+        <div class="c-av">CK</div>
+        <div style="flex:2;"><div class="c-name">Candidate Kelechi — Anambra Chapter</div><div class="c-pos">Contesting for: National President</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:62%;"></div></div>
+        <div class="c-pct">62%</div>
+        <button class="vote-btn" onclick="castVote(this)">Vote</button>
+      </div>
+      <div class="candidate-row">
+        <div class="c-av">UE</div>
+        <div style="flex:2;"><div class="c-name">Candidate Uche — Imo Chapter</div><div class="c-pos">Contesting for: National President</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:38%;"></div></div>
+        <div class="c-pct">38%</div>
+        <button class="vote-btn" onclick="castVote(this)">Vote</button>
       </div>
     </div>
+  </div>
 
-    <div class="info-box">
-      <i class="fa fa-circle-info" style="flex-shrink:0;margin-top:1px;"></i>
-      <div>A chapter transfer moves your membership record to a new state chapter or diaspora chapter. Your membership ID and history are fully preserved. Processing takes <strong>5–10 working days</strong>. You can only have one pending transfer at a time.</div>
+  <div class="election-card">
+    <div class="ec-head">
+      <div>
+        <span class="pill p-live" style="margin-bottom:5px;display:inline-flex;"><i class="fa fa-circle" style="font-size:7px;"></i>Live — Decision Vote</span>
+        <div class="ec-title">Should Igbo Bu Igbo establish a Permanent Secretariat Building? (Community Decision)</div>
+        <div class="ec-meta">
+          <span><i class="fa fa-globe"></i> National Decision</span>
+          <span><i class="fa fa-clock"></i> Closes: June 15, 2026</span>
+        </div>
+      </div>
+      <span class="pill p-live">1,892 Votes</span>
     </div>
+    <div class="ec-body">
+      <div class="candidate-row">
+        <div class="c-av" style="background:var(--gbg);color:var(--green);font-size:18px;border-color:rgba(34,197,94,0.3);">✓</div>
+        <div style="flex:2;"><div class="c-name">Yes — Approve the Permanent Secretariat Project</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:78%;background:var(--green);"></div></div>
+        <div class="c-pct">78%</div>
+        <button class="vote-btn" onclick="castVote(this)">Vote</button>
+      </div>
+      <div class="candidate-row">
+        <div class="c-av" style="background:rgba(155,28,28,0.1);color:var(--red);font-size:18px;border-color:rgba(155,28,28,0.2);">✗</div>
+        <div style="flex:2;"><div class="c-name">No — Do Not Approve at This Time</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:22%;background:var(--tu);"></div></div>
+        <div class="c-pct">22%</div>
+        <button class="vote-btn" onclick="castVote(this)">Vote</button>
+      </div>
+    </div>
+  </div>
 
-    <form id="transferForm" onsubmit="submitTransfer(event)">
+  <!-- CLOSED / PAST -->
+  <div class="election-card" style="opacity:0.7;">
+    <div class="ec-head">
+      <div>
+        <span class="pill p-end" style="margin-bottom:5px;display:inline-flex;">Closed — Results Final</span>
+        <div class="ec-title">FCT Abuja Chapter Vice President Election (Jan 2026)</div>
+        <div class="ec-meta"><span><i class="fa fa-location-dot"></i> Chapter Election</span><span><i class="fa fa-users"></i> FCT Members Only</span></div>
+      </div>
+      <span class="pill p-app"><i class="fa fa-trophy"></i>Winner Declared</span>
+    </div>
+    <div class="ec-body">
+      <div class="candidate-row">
+        <div class="c-av" style="background:rgba(201,144,26,0.15);color:var(--gold);border-color:rgba(201,144,26,0.3);">EA</div>
+        <div style="flex:2;"><div class="c-name">Emmanuel Adams — <strong style="color:var(--green);">WINNER</strong></div><div class="c-pos">FCT Vice President — 73% of vote</div></div>
+        <div class="c-bar-wrap"><div class="c-bar" style="width:73%;background:var(--gold);"></div></div>
+        <div class="c-pct">73%</div>
+        <button class="vote-btn voted" disabled>Elected</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <!-- STEP 1: CURRENT MEMBERSHIP -->
-      <div class="form-section">
-        <div class="form-section-title"><span class="step-circle">1</span> Current Membership Details</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Membership ID</label>
-            <input type="text" class="form-input" value="FCT/01/0001" readonly/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Full Name</label>
-            <input type="text" class="form-input" value="Emmanuel Adams" readonly/>
-          </div>
+<!-- ══ APPLY FOR POSITION (CANDIDACY) ══ -->
+<div class="view" id="view-candidacy">
+  <div class="pg-title">Apply for a Position</div>
+  <div class="pg-sub">Contest for an elected or appointed position at global, national, regional, chapter, or zone level.</div>
+
+  <div class="succ" id="candSucc"><div class="succ-ico"><i class="fa fa-check"></i></div><div><div class="succ-t">Candidacy Application Submitted!</div><div class="succ-ref" id="candRef">Ref: —</div><div class="succ-n">Your application is under review. You will be notified within 7 working days if you qualify to be listed on the ballot.</div></div></div>
+
+  <div class="ibox"><i class="fa fa-circle-info" style="flex-shrink:0;margin-top:1px;"></i><div>Eligibility: Active member for at least 6 months · Annual dues paid · No disciplinary record · 2 endorsing members required. Candidacy is subject to the IBI Electoral Committee review.</div></div>
+
+  <div class="card">
+    <form onsubmit="submitCandidacy(event)">
+      <div class="sect-h"><span class="step-c">1</span>Position Details</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Election Level <span class="req">*</span></label>
+          <select class="fs" id="elLevel" required onchange="updatePositions()">
+            <option value="">— Select level —</option>
+            <option>Global / Worldwide</option>
+            <option>National</option>
+            <option>Regional</option>
+            <option>Chapter</option>
+            <option>Zonal</option>
+          </select>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Current Region</label>
-            <input type="text" class="form-input" value="Non-Igbo Speaking States in Nigeria" readonly/>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Current Chapter</label>
-            <input type="text" class="form-input" value="FCT Abuja Chapter" readonly/>
-          </div>
+        <div class="fg"><label class="fl">Position Contesting For <span class="req">*</span></label>
+          <select class="fs" id="elPosition" required>
+            <option value="">— Select level first —</option>
+          </select>
         </div>
       </div>
-
-      <!-- STEP 2: TRANSFER DESTINATION -->
-      <div class="form-section">
-        <div class="form-section-title"><span class="step-circle">2</span> Transfer Destination</div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Transfer To — Region <span class="req">*</span></label>
-            <select class="form-select" id="destRegion" onchange="updateDestChapters()" required>
-              <option value="">— Select destination region —</option>
-              <option value="igbo-speaking">1. Igbo Speaking States in Nigeria</option>
-              <option value="non-igbo">2. Non-Igbo Speaking States in Nigeria</option>
-              <option value="diaspora">3. Igbo's in Diaspora</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Transfer To — Chapter <span class="req">*</span></label>
-            <select class="form-select" id="destChapter" required disabled>
-              <option value="">— Select region first —</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Requested Effective Date <span class="req">*</span></label>
-            <input type="date" class="form-input" id="effectiveDate" required min="" />
-            <span class="form-hint">Earliest: 10 working days from today. Final date subject to admin approval.</span>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Primary Reason for Transfer <span class="req">*</span></label>
-            <select class="form-select" id="transferReason" required>
-              <option value="">— Select reason —</option>
-              <option value="relocation">Permanent Relocation</option>
-              <option value="work">Work / Employment Transfer</option>
-              <option value="studies">Academic / Studies</option>
-              <option value="family">Family Reasons</option>
-              <option value="personal">Personal Preference</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Your Membership ID</label><input type="text" class="fi" value="FCT/01/0001" readonly/></div>
+        <div class="fg"><label class="fl">Full Name</label><input type="text" class="fi" value="Emmanuel Adams" readonly/></div>
       </div>
 
-      <!-- STEP 3: DETAILS & DOCS -->
-      <div class="form-section">
-        <div class="form-section-title"><span class="step-circle">3</span> Additional Information &amp; Documents</div>
-        <div class="form-row single">
-          <div class="form-group">
-            <label class="form-label">Full Details / Explanation <span class="req">*</span></label>
-            <textarea class="form-textarea" id="transferDetails" required placeholder="Briefly explain the reason for this transfer request. Include any relevant dates or circumstances (minimum 30 characters)." style="min-height:100px;"></textarea>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Supporting Document <span class="req">*</span></label>
-            <div class="upload-zone" id="uploadZone">
-              <input type="file" accept=".pdf,.jpg,.jpeg,.png" id="docUpload" onchange="updateUploadLabel(this)"/>
-              <i class="fa fa-cloud-arrow-up"></i>
-              <strong id="uploadLabel">Click to upload or drag &amp; drop</strong>
-              <p>Proof of relocation, employment letter, school admission, or utility bill</p>
-              <p style="font-size:10px;margin-top:4px;">PDF, JPG, PNG — Max 5 MB</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">New Address (if relocating)</label>
-            <textarea class="form-textarea" id="newAddress" placeholder="Enter your full new residential address..." style="min-height:80px;"></textarea>
-            <span class="form-hint">Required for relocation-based transfers.</span>
-          </div>
-        </div>
-        <div class="warn-box">
-          <i class="fa fa-triangle-exclamation" style="flex-shrink:0;margin-top:1px;"></i>
-          <div>Submitting a false transfer application is a violation of the Igbo Bu Igbo membership code of conduct and may result in suspension or revocation of membership.</div>
+      <div class="sect-h"><span class="step-c">2</span>Manifesto &amp; Supporting Documents</div>
+      <div class="fr s1">
+        <div class="fg"><label class="fl">Campaign Manifesto / Vision Statement <span class="req">*</span></label>
+          <textarea class="fta" style="min-height:110px;" required placeholder="Describe your vision for the organisation and what you intend to do in this position (minimum 100 characters)..."></textarea>
         </div>
       </div>
-
-      <!-- STEP 4: DECLARATION -->
-      <div class="form-section">
-        <div class="form-section-title"><span class="step-circle">4</span> Declaration &amp; Consent</div>
-        <div class="declaration-row">
-          <input type="checkbox" id="decl1" required/>
-          <label for="decl1">I, Emmanuel Adams (FCT/01/0001), hereby apply for a transfer of my Igbo Bu Igbo membership from the <strong>FCT Abuja Chapter</strong> to the chapter selected above. I confirm that all information provided in this application is accurate and truthful to the best of my knowledge.</label>
-        </div>
-        <div class="declaration-row" style="margin-top:10px;">
-          <input type="checkbox" id="decl2" required/>
-          <label for="decl2">I understand that this transfer is subject to administrative review and approval by the National Secretariat. I consent to Igbo Bu Igbo processing my personal data for the purpose of reviewing this application.</label>
-        </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Endorsing Member 1 — ID</label><input type="text" class="fi" placeholder="e.g. ABI/01/0010"/></div>
+        <div class="fg"><label class="fl">Endorsing Member 2 — ID</label><input type="text" class="fi" placeholder="e.g. IMO/02/0034"/></div>
+      </div>
+      <div class="fg" style="margin-bottom:14px;"><label class="fl">Upload Supporting Documents (CV, certificates, etc.)</label>
+        <div class="upzone"><input type="file" multiple accept=".pdf,.jpg,.png"/><i class="fa fa-cloud-arrow-up"></i><p>PDF, JPG, PNG — Max 5 MB each</p></div>
       </div>
 
+      <div class="sect-h"><span class="step-c">3</span>Declaration</div>
+      <div class="decl-row"><input type="checkbox" required id="cdecl1"/><label for="cdecl1">I confirm that all information provided is accurate. I understand that submitting false information will disqualify my candidacy and may result in membership sanctions.</label></div>
+      <div class="decl-row"><input type="checkbox" required id="cdecl2"/><label for="cdecl2">I accept the Igbo Bu Igbo Electoral Code and commit to respecting the outcome of the democratic process.</label></div>
       <div class="submit-row">
-        <button type="submit" class="btn-submit" id="submitBtn">
-          <i class="fa fa-paper-plane"></i> Submit Transfer Application
-        </button>
-        <button type="button" class="btn-cancel" onclick="resetForm()">Clear Form</button>
+        <button type="submit" class="btn-sub"><i class="fa fa-paper-plane"></i>Submit Candidacy Application</button>
+        <button type="button" class="btn-out" onclick="this.closest('form').reset()">Clear</button>
       </div>
     </form>
   </div>
+</div>
 
-  <!-- ══ TRANSFER HISTORY ══ -->
-  <div class="view" id="view-transfer-history">
-    <div class="page-title">Transfer History &amp; Status</div>
-    <div class="page-sub">Track the status of all your chapter transfer applications.</div>
+<!-- ══ GRANTS & SCHOLARSHIPS ══ -->
+<div class="view" id="view-grants">
+  <div class="pg-title">Grants &amp; Scholarships</div>
+  <div class="pg-sub">Browse available funding opportunities for Igbo Bu Igbo members and dependants.</div>
 
-    <!-- Active Application Status -->
-    <div class="card" id="activeTransferCard" style="border-color:rgba(234,88,12,0.25);display:none;">
-      <div class="card-title" style="color:var(--orange);">
-        <i class="fa fa-clock-rotate-left"></i> Active Transfer Application
+  <div class="gbox"><i class="fa fa-graduation-cap" style="flex-shrink:0;margin-top:1px;"></i><div>Grants and scholarships are available to active members in good standing. Ensure your annual dues are paid before applying. All applications are reviewed by the Welfare &amp; Education Committee.</div></div>
+
+  <!-- FILTERS -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+    <button style="background:var(--red);color:#fff;border:none;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">All</button>
+    <button style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Scholarships</button>
+    <button style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Business Grants</button>
+    <button style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Welfare</button>
+    <button style="background:var(--white);color:var(--tm);border:1.5px solid rgba(155,28,28,0.15);padding:7px 16px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;">Emergency</button>
+  </div>
+
+  <div class="grants-grid">
+    <div class="grant-card">
+      <div class="gc-top">
+        <div class="gc-cat">Scholarship</div>
+        <div class="gc-title">Igbo Bu Igbo Annual University Scholarship 2026</div>
+        <div class="gc-amount">₦200,000</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
-        <div>
-          <div class="field-item"><div class="field-lbl">Reference No.</div><div class="field-val mono" id="histRef">—</div></div>
-          <div class="field-item"><div class="field-lbl">From Chapter</div><div class="field-val">FCT Abuja Chapter</div></div>
-          <div class="field-item"><div class="field-lbl">To Chapter</div><div class="field-val" id="histTo">—</div></div>
-          <div class="field-item"><div class="field-lbl">Applied On</div><div class="field-val" id="histDate">—</div></div>
-          <div class="field-item"><div class="field-lbl">Reason</div><div class="field-val" id="histReason">—</div></div>
-        </div>
-        <div>
-          <div style="font-size:12px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px;">Application Progress</div>
-          <div class="timeline">
-            <div class="tl-item">
-              <div class="tl-dot done"><i class="fa fa-check"></i></div>
-              <div class="tl-body"><div class="tl-title">Application Submitted</div><div class="tl-date" id="tlDate1">—</div><div class="tl-desc">Your application was received by the system.</div></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot current"><i class="fa fa-clock"></i></div>
-              <div class="tl-body"><div class="tl-title">Under Review</div><div class="tl-date">In progress</div><div class="tl-desc">National Secretariat is reviewing your application and supporting documents.</div></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot pending"><i class="fa fa-building"></i></div>
-              <div class="tl-body"><div class="tl-title">Chapter Coordinator Confirmation</div><div class="tl-date">Pending</div><div class="tl-desc">Both old and new chapter coordinators will be notified to confirm.</div></div>
-            </div>
-            <div class="tl-item">
-              <div class="tl-dot pending"><i class="fa fa-circle-check"></i></div>
-              <div class="tl-body"><div class="tl-title">Final Approval &amp; ID Update</div><div class="tl-date">Pending</div><div class="tl-desc">Upon approval, your Membership ID and chapter will be updated and a new ID card issued.</div></div>
-            </div>
-          </div>
-        </div>
+      <div class="gc-body">
+        <div class="gc-desc">Open to children of active IBI members admitted into any Nigerian university for the 2026/2027 academic session. Supports tuition, accommodation, and study materials.</div>
+        <div class="gc-row"><i class="fa fa-user-graduate"></i>Undergraduate students (100L–400L)</div>
+        <div class="gc-row"><i class="fa fa-check-circle"></i>Active member parent/guardian required</div>
+        <div class="gc-row"><i class="fa fa-file-alt"></i>JAMB result + admission letter required</div>
+        <div class="gc-row"><i class="fa fa-users"></i>10 scholarships available nationwide</div>
+      </div>
+      <div class="gc-foot">
+        <span class="gc-deadline"><i class="fa fa-clock"></i> Deadline: July 31, 2026</span>
+        <button class="btn-sub" style="font-size:12px;padding:8px 16px;" onclick="sv('grant-apply')"><i class="fa fa-file-pen"></i>Apply</button>
       </div>
     </div>
 
-    <!-- Past Applications Table -->
-    <div class="card">
-      <div class="card-title"><i class="fa fa-table-list"></i> All Transfer Applications</div>
-      <div id="historyContainer">
-        <div class="empty-state">
-          <div class="empty-icon"><i class="fa fa-right-left"></i></div>
-          <div class="empty-title">No Transfer Applications Yet</div>
-          <div class="empty-desc">When you apply for a chapter transfer, it will appear here with full status tracking.</div>
-          <button onclick="showView('transfer')" style="margin-top:14px;background:var(--red);color:#fff;border:none;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><i class="fa fa-plus"></i> Apply for Transfer</button>
-        </div>
+    <div class="grant-card">
+      <div class="gc-top" style="background:var(--dark2);">
+        <div class="gc-cat" style="background:rgba(155,28,28,0.3);">Business Grant</div>
+        <div class="gc-title">Igbo Bu Igbo SME Empowerment Grant 2026</div>
+        <div class="gc-amount">₦500,000</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-desc">Interest-free business grant for registered small businesses owned by active IBI members. Supports trade, agriculture, manufacturing, and services.</div>
+        <div class="gc-row"><i class="fa fa-store"></i>Registered Nigerian business (CAC)</div>
+        <div class="gc-row"><i class="fa fa-calendar-check"></i>Member for at least 1 year</div>
+        <div class="gc-row"><i class="fa fa-file-alt"></i>Business plan required</div>
+        <div class="gc-row"><i class="fa fa-users"></i>5 grants available this cycle</div>
+      </div>
+      <div class="gc-foot">
+        <span class="gc-deadline"><i class="fa fa-clock"></i> Deadline: August 15, 2026</span>
+        <button class="btn-sub" style="font-size:12px;padding:8px 16px;" onclick="sv('grant-apply')"><i class="fa fa-file-pen"></i>Apply</button>
+      </div>
+    </div>
+
+    <div class="grant-card">
+      <div class="gc-top" style="background:#16a34a;">
+        <div class="gc-cat" style="background:rgba(0,0,0,0.2);">Welfare Support</div>
+        <div class="gc-title">Member Emergency Welfare Fund</div>
+        <div class="gc-amount">Up to ₦100,000</div>
+      </div>
+      <div class="gc-body">
+        <div class="gc-desc">Emergency welfare support for members or immediate family facing medical emergencies, bereavement, natural disaster, or acute financial hardship.</div>
+        <div class="gc-row"><i class="fa fa-heart-pulse"></i>Medical emergencies covered</div>
+        <div class="gc-row"><i class="fa fa-home"></i>Disaster support available</div>
+        <div class="gc-row"><i class="fa fa-file-medical"></i>Medical/incident report required</div>
+        <div class="gc-row"><i class="fa fa-bolt"></i>Fast-track: 48-hour review</div>
+      </div>
+      <div class="gc-foot">
+        <span class="gc-deadline" style="color:var(--green);"><i class="fa fa-circle"></i> Rolling — Always Open</span>
+        <button class="btn-sub" style="font-size:12px;padding:8px 16px;background:var(--green);" onclick="sv('grant-apply')"><i class="fa fa-file-pen"></i>Apply</button>
       </div>
     </div>
   </div>
 
-  <!-- ══ EVENTS ══ -->
-  <div class="view" id="view-events">
-    <div class="page-title">Events</div>
-    <div class="page-sub">Upcoming events you can register for.</div>
-    <div class="card">
-      <div class="empty-state">
-        <div class="empty-icon"><i class="fa fa-calendar-days"></i></div>
-        <div class="empty-title">Events Portal Coming Soon</div>
-        <div class="empty-desc">Full event registration and ticketing will be available here.</div>
-        <a href="index.html#events" style="display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:var(--red);color:#fff;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:600;"><i class="fa fa-arrow-right"></i> View Events on Homepage</a>
-      </div>
-    </div>
+  <!-- MY APPLICATIONS -->
+  <div class="card" style="margin-top:8px;">
+    <div class="card-title"><i class="fa fa-clock-rotate-left"></i>My Grant Applications</div>
+    <div class="empty"><i class="fa fa-inbox"></i><h4>No Applications Yet</h4><p>Apply for any open grant or scholarship above.</p></div>
   </div>
+</div>
 
-  <!-- ══ NOTIFICATIONS ══ -->
-  <div class="view" id="view-notifications">
-    <div class="page-title">Notifications</div>
-    <div class="page-sub">Messages and alerts from the National Secretariat.</div>
-    <div class="card">
-      <div style="display:flex;flex-direction:column;gap:0;">
-        <div style="display:flex;gap:12px;padding:14px 0;border-bottom:1px solid rgba(155,28,28,0.06);">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px;"></div>
-          <div><div style="font-size:13px;font-weight:600;">2026 National Convention — Register Now</div><div style="font-size:12px;color:var(--text-muted);margin-top:3px;">The 2026 National Convention holds on June 14 at the International Conference Centre, Abuja. Early registration closes June 7.</div><div style="font-size:11px;color:var(--text-muted);margin-top:5px;"><i class="fa fa-clock"></i> May 1, 2026</div></div>
+<!-- ══ GRANT APPLICATION FORM ══ -->
+<div class="view" id="view-grant-apply">
+  <div class="pg-title">Grant / Scholarship Application</div>
+  <div class="pg-sub">Complete the form below to apply. All fields marked * are required.</div>
+  <div class="card">
+    <form onsubmit="submitGrant(event)">
+      <div class="sect-h"><span class="step-c">1</span>Grant / Scholarship Details</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Grant / Scholarship Type <span class="req">*</span></label>
+          <select class="fs" required>
+            <option value="">— Select —</option>
+            <option>Annual University Scholarship 2026</option>
+            <option>SME Empowerment Grant 2026</option>
+            <option>Member Emergency Welfare Fund</option>
+          </select>
         </div>
-        <div style="display:flex;gap:12px;padding:14px 0;">
-          <div style="width:10px;height:10px;border-radius:50%;background:var(--text-muted);flex-shrink:0;margin-top:5px;"></div>
-          <div><div style="font-size:13px;font-weight:600;">Welcome to the Igbo Bu Igbo Member Portal</div><div style="font-size:12px;color:var(--text-muted);margin-top:3px;">Your membership was successfully activated. Download your digital ID card from the ID Card section.</div><div style="font-size:11px;color:var(--text-muted);margin-top:5px;"><i class="fa fa-clock"></i> Jan 15, 2026</div></div>
+        <div class="fg"><label class="fl">Beneficiary <span class="req">*</span></label>
+          <select class="fs" required>
+            <option>Myself</option>
+            <option>My Child / Dependant</option>
+            <option>My Spouse</option>
+          </select>
         </div>
       </div>
-    </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Membership ID</label><input type="text" class="fi" value="FCT/01/0001" readonly/></div>
+        <div class="fg"><label class="fl">Full Name (Beneficiary)</label><input type="text" class="fi" placeholder="Full legal name"/></div>
+      </div>
+      <div class="sect-h"><span class="step-c">2</span>Application Details</div>
+      <div class="fr s1"><div class="fg"><label class="fl">Purpose / Need Statement <span class="req">*</span></label>
+        <textarea class="fta" style="min-height:100px;" required placeholder="Clearly explain why you need this grant/scholarship and how it will be used..."></textarea>
+      </div></div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Amount Requested (₦) <span class="req">*</span></label><input type="number" class="fi" required placeholder="e.g. 200000" min="1000"/></div>
+        <div class="fg"><label class="fl">Bank Account Number</label><input type="text" class="fi" placeholder="10-digit account number"/></div>
+      </div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Bank Name</label><input type="text" class="fi" placeholder="e.g. GTBank, Access Bank"/></div>
+        <div class="fg"><label class="fl">Account Name</label><input type="text" class="fi" placeholder="Account holder's name"/></div>
+      </div>
+      <div class="sect-h"><span class="step-c">3</span>Supporting Documents</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Primary Document <span class="req">*</span></label>
+          <div class="upzone"><input type="file" accept=".pdf,.jpg,.png"/><i class="fa fa-cloud-arrow-up"></i><p>Admission letter, CAC cert, medical report, etc.</p></div>
+        </div>
+        <div class="fg"><label class="fl">Additional Document (optional)</label>
+          <div class="upzone"><input type="file" accept=".pdf,.jpg,.png"/><i class="fa fa-cloud-arrow-up"></i><p>Bank statement, reference letter, etc.</p></div>
+        </div>
+      </div>
+      <div class="decl-row"><input type="checkbox" required id="gdecl"/><label for="gdecl">I confirm that all information is accurate and I understand that false applications result in disqualification and possible membership sanctions.</label></div>
+      <div class="submit-row">
+        <button type="submit" class="btn-sub"><i class="fa fa-paper-plane"></i>Submit Application</button>
+        <button type="button" class="btn-out" onclick="sv('grants')"><i class="fa fa-arrow-left"></i>Back to Grants</button>
+      </div>
+    </form>
   </div>
+</div>
 
-  <!-- ══ SETTINGS ══ -->
-  <div class="view" id="view-settings">
-    <div class="page-title">Account Settings</div>
-    <div class="page-sub">Manage your password, notifications, and preferences.</div>
-    <div class="card">
-      <div class="card-title"><i class="fa fa-lock"></i> Change Password</div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Current Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
-        <div class="form-group"><label class="form-label">New Password</label><input type="password" class="form-input" placeholder="••••••••"/></div>
+<!-- ══ TRANSFER APPLICATION ══ -->
+<div class="view" id="view-transfer">
+  <div class="pg-title">Chapter / Region Transfer Application</div>
+  <div class="pg-sub">Apply to move your membership to another chapter or region.</div>
+  <div class="succ" id="tSucc"><div class="succ-ico"><i class="fa fa-check"></i></div><div><div class="succ-t">Transfer Application Submitted!</div><div class="succ-ref" id="tRef">Ref: —</div><div class="succ-n">Under review — 5 to 10 working days. Track in Transfer History.</div></div></div>
+  <div class="ibox"><i class="fa fa-circle-info" style="flex-shrink:0;"></i><div>Your membership ID and full history are preserved during transfer. Processing takes 5–10 working days. Only one pending transfer at a time.</div></div>
+  <div class="card">
+    <form onsubmit="submitTransfer(event)">
+      <div class="sect-h"><span class="step-c">1</span>Current Membership</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Membership ID</label><input type="text" class="fi" value="FCT/01/0001" readonly/></div>
+        <div class="fg"><label class="fl">Current Chapter</label><input type="text" class="fi" value="FCT Abuja Chapter" readonly/></div>
       </div>
-      <button class="edit-btn"><i class="fa fa-save"></i> Update Password</button>
-    </div>
-    <div class="card">
-      <div class="card-title"><i class="fa fa-bell"></i> Notification Preferences</div>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--red);"> <span style="font-size:13px;">Email notifications for events &amp; announcements</span></label>
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" checked style="accent-color:var(--red);"> <span style="font-size:13px;">SMS alerts for payment receipts</span></label>
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer;"><input type="checkbox" style="accent-color:var(--red);"> <span style="font-size:13px;">WhatsApp notifications for chapter meetings</span></label>
+      <div class="sect-h"><span class="step-c">2</span>Transfer Destination</div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Destination Region <span class="req">*</span></label>
+          <select class="fs" id="dReg" onchange="updateChaps()" required>
+            <option value="">— Select region —</option>
+            <option value="ig">1. Igbo Speaking States in Nigeria</option>
+            <option value="ni">2. Non-Igbo Speaking States in Nigeria</option>
+            <option value="di">3. Igbo's in Diaspora</option>
+          </select>
+        </div>
+        <div class="fg"><label class="fl">Destination Chapter <span class="req">*</span></label>
+          <select class="fs" id="dChap" required disabled><option value="">— Select region first —</option></select>
+        </div>
       </div>
-      <button class="edit-btn" style="margin-top:14px;"><i class="fa fa-save"></i> Save Preferences</button>
+      <div class="fr">
+        <div class="fg"><label class="fl">Effective Date <span class="req">*</span></label><input type="date" class="fi" id="eDate" required/></div>
+        <div class="fg"><label class="fl">Reason <span class="req">*</span></label>
+          <select class="fs" required>
+            <option value="">— Select —</option>
+            <option>Permanent Relocation</option><option>Work / Employment</option>
+            <option>Academic / Studies</option><option>Family Reasons</option>
+            <option>Personal Preference</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="sect-h"><span class="step-c">3</span>Details &amp; Documents</div>
+      <div class="fr s1"><div class="fg"><label class="fl">Full Explanation <span class="req">*</span></label><textarea class="fta" required placeholder="Explain your transfer reason in detail (min. 30 characters)..."></textarea></div></div>
+      <div class="fr">
+        <div class="fg"><label class="fl">Supporting Document <span class="req">*</span></label>
+          <div class="upzone"><input type="file" accept=".pdf,.jpg,.png" id="tDoc" onchange="document.getElementById('tDocLbl').textContent=this.files[0]?.name||'Click to upload'"/><i class="fa fa-cloud-arrow-up"></i><p id="tDocLbl">Proof of relocation, employment letter, etc.</p></div>
+        </div>
+        <div class="fg"><label class="fl">New Address (if relocating)</label><textarea class="fta" placeholder="Full new address..."></textarea></div>
+      </div>
+      <div class="wbox"><i class="fa fa-triangle-exclamation" style="flex-shrink:0;"></i><div>False transfer applications may result in suspension or revocation of membership.</div></div>
+      <div class="decl-row"><input type="checkbox" required id="tdecl1"/><label for="tdecl1">I confirm all information is accurate. I accept that this transfer is subject to administrative approval.</label></div>
+      <div class="submit-row">
+        <button type="submit" class="btn-sub" id="tBtn"><i class="fa fa-paper-plane"></i>Submit Transfer Application</button>
+        <button type="button" class="btn-out" onclick="this.closest('form').reset()">Clear</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══ TRANSFER HISTORY ══ -->
+<div class="view" id="view-transfer-history">
+  <div class="pg-title">Transfer History</div>
+  <div class="pg-sub">Track all your chapter transfer applications.</div>
+  <div class="card" id="tHistContainer"><div class="empty"><i class="fa fa-right-left"></i><h4>No Transfer Applications Yet</h4><p>Apply for a transfer from the Chapter Services menu.</p></div></div>
+</div>
+
+<!-- ══ EVENTS ══ -->
+<div class="view" id="view-events">
+  <div class="pg-title">Events</div>
+  <div class="pg-sub">Upcoming events for your chapter, region, and nationally.</div>
+  <div style="text-align:center;padding:20px 0;">
+    <a href="index.html#events" style="display:inline-flex;align-items:center;gap:7px;background:var(--red);color:#fff;padding:13px 26px;border-radius:7px;font-size:14px;font-weight:600;"><i class="fa fa-calendar-days"></i>View All Events on Homepage</a>
+  </div>
+</div>
+
+<!-- ══ NOTIFICATIONS ══ -->
+<div class="view" id="view-notifications">
+  <div class="pg-title">Notifications</div>
+  <div class="pg-sub">Alerts and messages from the National Secretariat.</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="display:flex;gap:10px;padding:13px 0;border-bottom:1px solid rgba(155,28,28,0.05);">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px;"></div>
+        <div><div style="font-size:13px;font-weight:600;">2 Elections open — vote before they close</div><div style="font-size:11px;color:var(--tu);margin-top:2px;"><i class="fa fa-clock"></i> June 2026</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:13px 0;border-bottom:1px solid rgba(155,28,28,0.05);">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:5px;"></div>
+        <div><div style="font-size:13px;font-weight:600;">University Scholarship application now open</div><div style="font-size:11px;color:var(--tu);margin-top:2px;"><i class="fa fa-clock"></i> Deadline July 31, 2026</div></div>
+      </div>
+      <div style="display:flex;gap:10px;padding:13px 0;">
+        <div style="width:8px;height:8px;border-radius:50%;background:var(--tu);flex-shrink:0;margin-top:5px;"></div>
+        <div><div style="font-size:13px;font-weight:600;">Welcome to Igbo Bu Igbo Member Portal</div><div style="font-size:11px;color:var(--tu);margin-top:2px;"><i class="fa fa-clock"></i> Jan 15, 2026</div></div>
+      </div>
     </div>
   </div>
+</div>
+
+<!-- ══ SETTINGS ══ -->
+<div class="view" id="view-settings">
+  <div class="pg-title">Account Settings</div>
+  <div class="pg-sub">Password, notifications, and security preferences.</div>
+  <div class="card">
+    <div class="card-title"><i class="fa fa-lock"></i>Change Password</div>
+    <div class="fr">
+      <div class="fg"><label class="fl">Current Password</label><input type="password" class="fi" placeholder="••••••••"/></div>
+      <div class="fg"><label class="fl">New Password</label><input type="password" class="fi" placeholder="••••••••"/></div>
+    </div>
+    <button class="btn-gold"><i class="fa fa-save"></i>Update Password</button>
+  </div>
+  <div class="card">
+    <div class="card-title"><i class="fa fa-bell"></i>Notifications</div>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;"><input type="checkbox" checked style="accent-color:var(--red);width:15px;height:15px;">Email — Events &amp; Announcements</label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;"><input type="checkbox" checked style="accent-color:var(--red);width:15px;height:15px;">SMS — Payment receipts &amp; election alerts</label>
+      <label style="display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;"><input type="checkbox" style="accent-color:var(--red);width:15px;height:15px;">WhatsApp — Chapter meeting updates</label>
+    </div>
+    <button class="btn-gold" style="margin-top:14px;"><i class="fa fa-save"></i>Save Preferences</button>
+  </div>
+</div>
 
 </main>
 </div>
 
+<!-- ═══════════ MODAL (Wallet Actions) ═══════════ -->
+<div id="wModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:var(--white);border-radius:14px;padding:24px;max-width:420px;width:100%;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:14px;right:14px;background:transparent;border:none;font-size:18px;color:var(--tu);cursor:pointer;"><i class="fa fa-times"></i></button>
+    <div id="wModalContent"></div>
+  </div>
+</div>
+
 <script>
-/* ═══════════════ NAVIGATION ═══════════════ */
-function showView(id) {
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('view-'+id).classList.add('active');
-  // highlight sidebar
-  const map={'overview':'navOverview','profile':'navProfile','idcard':'navIdcard','payments':'navPay','transfer':'navTransfer','transfer-history':'navTransferHist','events':'navEvents','notifications':'navNotif','settings':'navSettings'};
-  if(map[id]){const el=document.getElementById(map[id]);if(el)el.classList.add('active');}
+/* ─── NAVIGATION ─── */
+function sv(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('act'));
+  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('act'));
+  const v=document.getElementById('view-'+id);
+  if(v)v.classList.add('act');
   window.scrollTo(0,0);
-  if(id==='transfer-history') renderHistory();
+  if(id==='transfer-history')renderHist();
 }
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('mob-open');}
+function toggleSB(){document.getElementById('sb').classList.toggle('mob');}
 
-/* ═══════════════ TRANSFER DESTINATION CHAPTERS ═══════════════ */
-const CHAPTERS = {
-  'igbo-speaking': [
-    'Abia State Chapter','Anambra State Chapter','Ebonyi State Chapter',
-    'Enugu State Chapter','Imo State Chapter',
-    'Delta State Chapter (Igbo Communities)','Rivers State Chapter (Igbo Communities)'
-  ],
-  'non-igbo': [
-    'FCT Abuja Chapter','Akwa Ibom State Chapter','Bayelsa State Chapter',
-    'Cross River State Chapter','Edo State Chapter','Ekiti State Chapter',
-    'Lagos State Chapter','Ogun State Chapter','Ondo State Chapter',
-    'Osun State Chapter','Oyo State Chapter','Benue State Chapter',
-    'Kogi State Chapter','Kwara State Chapter','Nasarawa State Chapter',
-    'Niger State Chapter','Plateau State Chapter','Adamawa State Chapter',
-    'Bauchi State Chapter','Borno State Chapter','Gombe State Chapter',
-    'Taraba State Chapter','Yobe State Chapter','Jigawa State Chapter',
-    'Kaduna State Chapter','Kano State Chapter','Katsina State Chapter',
-    'Kebbi State Chapter','Sokoto State Chapter','Zamfara State Chapter'
-  ],
-  'diaspora': [
-    'General Diaspora Chapter','African Chapter — South Africa',
-    'African Chapter — Ghana','African Chapter — Kenya',
-    'African Chapter — Cameroon','African Chapter — Ivory Coast',
-    'African Chapter — Other Countries',
-    'Europe Chapter — United Kingdom','Europe Chapter — Germany',
-    'Europe Chapter — France','Europe Chapter — Italy',
-    'Europe Chapter — Netherlands','Europe Chapter — Other Countries',
-    'US / North America Chapter','Canada Chapter',
-    'Asian Chapter — UAE / Middle East','Asian Chapter — Malaysia',
-    'Asian Chapter — Other Countries','Australia & Oceania Chapter'
-  ]
+/* ─── CHAPTERS DATA ─── */
+const CHS={
+  ig:['Abia State Chapter','Anambra State Chapter','Ebonyi State Chapter','Enugu State Chapter','Imo State Chapter','Delta State Chapter (Igbo Communities)','Rivers State Chapter (Igbo Communities)'],
+  ni:['FCT Abuja Chapter','Akwa Ibom State Chapter','Bayelsa State Chapter','Cross River State Chapter','Edo State Chapter','Ekiti State Chapter','Lagos State Chapter','Ogun State Chapter','Ondo State Chapter','Osun State Chapter','Oyo State Chapter','Benue State Chapter','Kogi State Chapter','Kwara State Chapter','Nasarawa State Chapter','Niger State Chapter','Plateau State Chapter','Adamawa State Chapter','Bauchi State Chapter','Borno State Chapter','Gombe State Chapter','Taraba State Chapter','Yobe State Chapter','Jigawa State Chapter','Kaduna State Chapter','Kano State Chapter','Katsina State Chapter','Kebbi State Chapter','Sokoto State Chapter','Zamfara State Chapter'],
+  di:['General Diaspora Chapter','African Chapter — South Africa','African Chapter — Ghana','African Chapter — Kenya','African Chapter — Cameroon','African Chapter — Ivory Coast','African Chapter — Other Countries','Europe Chapter — United Kingdom','Europe Chapter — Germany','Europe Chapter — France','Europe Chapter — Italy','Europe Chapter — Netherlands','Europe Chapter — Other Countries','US / North America Chapter','Canada Chapter','Asian Chapter — UAE / Middle East','Asian Chapter — Malaysia','Asian Chapter — Other Countries','Australia & Oceania Chapter']
 };
-
-function updateDestChapters(){
-  const region = document.getElementById('destRegion').value;
-  const sel = document.getElementById('destChapter');
-  sel.innerHTML = '<option value="">— Select chapter —</option>';
-  sel.disabled = !region;
-  if(!region) return;
-  CHAPTERS[region].forEach(ch=>{
-    const o=document.createElement('option');
-    o.value=ch; o.textContent=ch; sel.appendChild(o);
-  });
+function updateChaps(){
+  const r=document.getElementById('dReg').value;
+  const s=document.getElementById('dChap');
+  s.innerHTML='<option value="">— Select chapter —</option>';
+  s.disabled=!r;
+  if(r)(CHS[r]||[]).forEach(c=>{const o=document.createElement('option');o.value=o.textContent=c;s.appendChild(o);});
 }
 
-/* ═══════════════ SET MIN DATE ═══════════════ */
-window.addEventListener('DOMContentLoaded',()=>{
-  const d=new Date(); d.setDate(d.getDate()+14);
-  document.getElementById('effectiveDate').min=d.toISOString().split('T')[0];
-  loadHistory();
-});
-
-/* ═══════════════ FILE UPLOAD LABEL ═══════════════ */
-function updateUploadLabel(input){
-  if(input.files.length>0){
-    document.getElementById('uploadLabel').textContent=input.files[0].name;
-  }
+/* ─── POSITIONS DATA ─── */
+const POSITIONS={
+  'Global / Worldwide':['Trustee Chairman','International Coordinator','Global Media Director'],
+  'National':['National President','Vice President (National)','National Secretary','National Treasurer','Financial Secretary','Public Relations Officer'],
+  'Regional':['Regional Coordinator','Regional Secretary','Regional Treasurer'],
+  'Chapter':['Chapter Chairman','Chapter Vice Chairman','Chapter Secretary','Chapter Treasurer','Chapter PRO'],
+  'Zonal':['Zonal Coordinator','Zonal Secretary']
+};
+function updatePositions(){
+  const lv=document.getElementById('elLevel').value;
+  const ps=document.getElementById('elPosition');
+  ps.innerHTML='<option value="">— Select position —</option>';
+  (POSITIONS[lv]||[]).forEach(p=>{const o=document.createElement('option');o.value=o.textContent=p;ps.appendChild(o);});
 }
 
-/* ═══════════════ SUBMIT TRANSFER ═══════════════ */
+/* ─── VOTING ─── */
+function castVote(btn){
+  const row=btn.closest('.candidate-row');
+  const allBtns=row.closest('.ec-body').querySelectorAll('.vote-btn');
+  allBtns.forEach(b=>{b.textContent='Vote';b.classList.remove('voted');b.disabled=false;});
+  btn.textContent='✓ Voted';btn.classList.add('voted');btn.disabled=true;
+  setTimeout(()=>alert('✅ Your vote has been recorded anonymously. Thank you!'),100);
+}
+function filterElections(type,btn){
+  document.querySelectorAll('.view#view-voting button[onclick^="filterElections"]').forEach(b=>{b.style.background='var(--white)';b.style.color='var(--tm)';});
+  btn.style.background='var(--red)';btn.style.color='#fff';
+}
+
+/* ─── WALLET MODAL ─── */
+const MODALS={
+  'deposit':'<h3 style="font-family:\'Playfair Display\',serif;font-size:18px;margin-bottom:14px;">Deposit Funds</h3><p style="font-size:13px;color:var(--tu);margin-bottom:16px;">Add money to your IBI wallet via Paystack.</p><div class="fg" style="margin-bottom:12px;"><label class="fl">Amount (₦) *</label><input type="number" class="fi" placeholder="e.g. 5000" min="100"/></div><div class="fg" style="margin-bottom:16px;"><label class="fl">Note (optional)</label><input type="text" class="fi" placeholder="e.g. Wallet top-up"/></div><button class="btn-sub" style="width:100%;" onclick="closeModal()"><i class="fa fa-credit-card"></i>Proceed to Paystack</button>',
+  'food-contrib':'<h3 style="font-family:\'Playfair Display\',serif;font-size:18px;margin-bottom:14px;">Food Fund Contribution</h3><div class="fg" style="margin-bottom:12px;"><label class="fl">Select Fund *</label><select class="fs"><option>National Convention Feeding Fund</option><option>Abia Meeting Food Fund</option></select></div><div class="fg" style="margin-bottom:16px;"><label class="fl">Amount (₦) *</label><input type="number" class="fi" placeholder="e.g. 2000" min="100"/></div><button class="btn-sub" style="width:100%;" onclick="closeModal()"><i class="fa fa-heart"></i>Contribute</button>',
+  'pay-levy':'<h3 style="font-family:\'Playfair Display\',serif;font-size:18px;margin-bottom:14px;">Pay Levy</h3><div class="fg" style="margin-bottom:12px;"><label class="fl">Outstanding Levy</label><div style="background:var(--cream);border-radius:7px;padding:12px;font-size:13px;"><strong>Convention Levy 2026 — ₦2,000</strong></div></div><button class="btn-sub" style="width:100%;" onclick="closeModal()"><i class="fa fa-receipt"></i>Pay ₦2,000 from Wallet</button>'
+};
+function openModal(type){const m=document.getElementById('wModal');m.style.display='flex';document.getElementById('wModalContent').innerHTML=MODALS[type]||'<p>Coming soon.</p>';}
+function closeModal(){document.getElementById('wModal').style.display='none';}
+window.addEventListener('click',e=>{if(e.target===document.getElementById('wModal'))closeModal();});
+
+function doTransfer(){alert('✅ Transfer successful! Recipient notified via SMS.');}
+
+/* ─── TRANSFER FORM ─── */
+(function(){const d=new Date();d.setDate(d.getDate()+14);const df=document.getElementById('eDate');if(df)df.min=d.toISOString().split('T')[0];})();
+
 function submitTransfer(e){
   e.preventDefault();
-  const details=document.getElementById('transferDetails').value;
-  if(details.length < 30){alert('Please provide more detail (at least 30 characters).');return;}
-  const destChapter=document.getElementById('destChapter').value;
-  const destRegion=document.getElementById('destRegion').value;
-  if(!destChapter){alert('Please select a destination chapter.');return;}
-
-  const btn=document.getElementById('submitBtn');
-  btn.disabled=true;
-  btn.innerHTML='<i class="fa fa-spinner fa-spin"></i> Submitting...';
-
+  const btn=document.getElementById('tBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fa fa-spinner fa-spin"></i> Submitting...';
   setTimeout(()=>{
     const ref='IBI-TRF-'+Date.now().toString().slice(-6);
-    const app={
-      ref,
-      to:destChapter,
-      region:destRegion,
-      reason:document.getElementById('transferReason').value,
-      details,
-      date:new Date().toLocaleDateString('en-NG',{day:'2-digit',month:'short',year:'numeric'}),
-      effectiveDate:document.getElementById('effectiveDate').value,
-      status:'pending'
-    };
-    const apps=JSON.parse(localStorage.getItem('ibi_transfers')||'[]');
-    apps.unshift(app);
-    localStorage.setItem('ibi_transfers',JSON.stringify(apps));
-
-    // Show success
-    document.getElementById('successRef').textContent=ref;
-    const banner=document.getElementById('successBanner');
-    banner.classList.add('show');
-    banner.scrollIntoView({behavior:'smooth'});
-
-    // Update badge
-    document.getElementById('pendingCount').style.display='';
-    document.getElementById('pendingCount').textContent='1';
-
-    btn.disabled=false;
-    btn.innerHTML='<i class="fa fa-paper-plane"></i> Submit Transfer Application';
-    e.target.reset();
-    document.getElementById('destChapter').disabled=true;
-    document.getElementById('destChapter').innerHTML='<option value="">— Select region first —</option>';
-    updateUploadLabel({files:[]});
-    document.getElementById('uploadLabel').textContent='Click to upload or drag & drop';
-  },1500);
+    const app={ref,to:document.getElementById('dChap').value,date:new Date().toLocaleDateString('en-NG',{day:'2-digit',month:'short',year:'numeric'}),status:'pending'};
+    const apps=JSON.parse(localStorage.getItem('ibi_trf')||'[]');apps.unshift(app);
+    localStorage.setItem('ibi_trf',JSON.stringify(apps));
+    document.getElementById('tRef').textContent='Ref: '+ref;
+    document.getElementById('tSucc').classList.add('show');
+    document.getElementById('tSucc').scrollIntoView({behavior:'smooth'});
+    btn.disabled=false;btn.innerHTML='<i class="fa fa-paper-plane"></i>Submit Transfer Application';
+    e.target.reset();document.getElementById('dChap').disabled=true;
+  },1400);
 }
 
-/* ═══════════════ RESET FORM ═══════════════ */
-function resetForm(){
-  document.getElementById('transferForm').reset();
-  document.getElementById('destChapter').disabled=true;
-  document.getElementById('destChapter').innerHTML='<option value="">— Select region first —</option>';
-  document.getElementById('uploadLabel').textContent='Click to upload or drag & drop';
-  document.getElementById('successBanner').classList.remove('show');
+function renderHist(){
+  const apps=JSON.parse(localStorage.getItem('ibi_trf')||'[]');
+  const c=document.getElementById('tHistContainer');
+  if(!apps.length){c.innerHTML='<div class="empty"><i class="fa fa-right-left"></i><h4>No Transfer Applications Yet</h4><p>Apply from the Chapter Services menu.</p></div>';return;}
+  c.innerHTML='<table class="tbl"><thead><tr><th>Ref</th><th>To Chapter</th><th>Date</th><th>Status</th></tr></thead><tbody>'+apps.map(a=>`<tr><td style="font-family:'Share Tech Mono',monospace;color:var(--red);">${a.ref}</td><td>${a.to}</td><td>${a.date}</td><td><span class="pill p-pend"><i class="fa fa-clock"></i>Pending</span></td></tr>`).join('')+'</tbody></table>';
 }
 
-/* ═══════════════ RENDER HISTORY ═══════════════ */
-function loadHistory(){
-  const apps=JSON.parse(localStorage.getItem('ibi_transfers')||'[]');
-  const pending=apps.filter(a=>a.status==='pending');
-  const cnt=document.getElementById('pendingCount');
-  if(pending.length>0){cnt.style.display='';cnt.textContent=pending.length;}
-  else{cnt.style.display='none';}
+/* ─── CANDIDACY SUBMIT ─── */
+function submitCandidacy(e){
+  e.preventDefault();
+  const ref='IBI-CAND-'+Date.now().toString().slice(-6);
+  document.getElementById('candRef').textContent='Ref: '+ref;
+  document.getElementById('candSucc').classList.add('show');
+  document.getElementById('candSucc').scrollIntoView({behavior:'smooth'});
+  e.target.reset();
 }
 
-function renderHistory(){
-  const apps=JSON.parse(localStorage.getItem('ibi_transfers')||'[]');
-  const container=document.getElementById('historyContainer');
-  const activeCard=document.getElementById('activeTransferCard');
-  if(apps.length===0){
-    activeCard.style.display='none';
-    container.innerHTML=`<div class="empty-state"><div class="empty-icon"><i class="fa fa-right-left"></i></div><div class="empty-title">No Transfer Applications Yet</div><div class="empty-desc">When you apply for a chapter transfer, it will appear here.</div><button onclick="showView('transfer')" style="margin-top:14px;background:var(--red);color:#fff;border:none;padding:10px 22px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;"><i class="fa fa-plus"></i> Apply for Transfer</button></div>`;
-    return;
-  }
-  const latest=apps[0];
-  if(latest.status==='pending'){
-    activeCard.style.display='block';
-    document.getElementById('histRef').textContent=latest.ref;
-    document.getElementById('histTo').textContent=latest.to;
-    document.getElementById('histDate').textContent=latest.date;
-    document.getElementById('histReason').textContent=latest.reason;
-    document.getElementById('tlDate1').textContent=latest.date;
-  } else {activeCard.style.display='none';}
-
-  const statusMap={pending:'<span class="status-pill status-pending"><i class="fa fa-clock"></i> Pending Review</span>',approved:'<span class="status-pill status-approved"><i class="fa fa-check"></i> Approved</span>',rejected:'<span class="status-pill status-rejected"><i class="fa fa-xmark"></i> Rejected</span>',processing:'<span class="status-pill status-processing"><i class="fa fa-gear"></i> Processing</span>'};
-  container.innerHTML=`<table class="transfer-table"><thead><tr><th>Ref No.</th><th>To Chapter</th><th>Reason</th><th>Applied</th><th>Status</th></tr></thead><tbody>${apps.map(a=>`<tr><td style="font-family:'Share Tech Mono',monospace;color:var(--red);">${a.ref}</td><td>${a.to}</td><td style="text-transform:capitalize;">${a.reason||'—'}</td><td>${a.date}</td><td>${statusMap[a.status]||a.status}</td></tr>`).join('')}</tbody></table>`;
+/* ─── GRANT SUBMIT ─── */
+function submitGrant(e){
+  e.preventDefault();
+  alert('✅ Your grant application has been submitted! Reference: IBI-GRT-'+Date.now().toString().slice(-6)+'\n\nYou will be notified within 10–14 working days.');
+  sv('grants');
 }
 </script>
 </body>
