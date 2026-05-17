@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Setup Guide — Igbo Bu Igbo Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --red:#9B1C1C;--red-l:#C0392B;--red-d:#6B0F0F;
+      --gold:#C9901A;--gold-l:#F0B429;
+      --dark:#1A0A00;--dark2:#2C1A0A;
+      --cream:#FDF8F0;--cream2:#F5EDD8;--white:#fff;
+      --td:#1A0A00;--tm:#5C3D1E;--tu:#8B6347;
+      --green:#15803d;--gbg:rgba(21,128,61,0.08);--gborder:rgba(21,128,61,0.25);
+      --blue:#1d4ed8;--bbg:rgba(29,78,216,0.07);--bborder:rgba(29,78,216,0.2);
+      --orange:#c2410c;--obg:rgba(194,65,12,0.07);--oborder:rgba(194,65,12,0.2);
+      --purple:#6d28d9;--pbg:rgba(109,40,217,0.07);
+      --code-bg:#0D1117;--code-border:#30363D;
+      --code-green:#3FB950;--code-blue:#58A6FF;--code-yellow:#E3B341;
+      --code-purple:#D2A8FF;--code-red:#FF7B72;--code-gray:#8B949E;
+      --section-num:#9B1C1C;
+    }
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;color:var(--td);background:var(--cream);line-height:1.6;}
+    a{color:var(--blue);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+
+    /* ── COVER ── */
+    .cover{background:var(--dark);min-height:280px;padding:56px 40px;position:relative;overflow:hidden;}
+    .cover-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(201,144,26,0.05) 0,rgba(201,144,26,0.05) 1px,transparent 0,transparent 50%);background-size:20px 20px;}
+    .cover-glow{position:absolute;top:-80px;right:-80px;width:400px;height:400px;background:radial-gradient(ellipse,rgba(155,28,28,0.25) 0%,transparent 70%);}
+    .cover-inner{position:relative;z-index:1;max-width:900px;margin:0 auto;}
+    .cover-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(201,144,26,0.15);border:1px solid rgba(201,144,26,0.3);color:var(--gold-l);font-size:11px;font-weight:600;padding:5px 13px;border-radius:20px;margin-bottom:20px;text-transform:uppercase;letter-spacing:0.6px;}
+    .cover h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:12px;}
+    .cover h1 span{color:var(--gold-l);}
+    .cover-sub{font-size:15px;color:rgba(255,255,255,0.6);max-width:580px;margin-bottom:28px;}
+    .cover-pills{display:flex;gap:10px;flex-wrap:wrap;}
+    .cpill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);font-size:12px;font-weight:500;padding:5px 12px;border-radius:6px;}
+    .cpill i{font-size:13px;color:var(--gold-l);}
+
+    /* ── TOC ── */
+    .toc-wrap{background:var(--white);border-left:4px solid var(--red);border-radius:0 10px 10px 0;padding:20px 24px;margin:32px auto;max-width:900px;}
+    .toc-title{font-size:13px;font-weight:700;color:var(--td);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .toc-title i{color:var(--red);}
+    .toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;}
+    .toc-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--blue);padding:3px 0;}
+    .toc-n{font-size:10px;font-weight:700;color:var(--red);min-width:20px;}
+
+    /* ── MAIN WRAPPER ── */
+    .content{max-width:900px;margin:0 auto;padding:0 24px 60px;}
+
+    /* ── SECTION ── */
+    .section{margin-top:52px;}
+    .section-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid rgba(155,28,28,0.1);}
+    .section-num{width:40px;height:40px;border-radius:10px;background:var(--red);color:var(--white);font-family:'Playfair Display',serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+    .section-info h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--td);}
+    .section-info p{font-size:13px;color:var(--tu);margin-top:4px;}
+
+    /* ── STEPS ── */
+    .steps{display:flex;flex-direction:column;gap:0;}
+    .step{display:flex;gap:14px;position:relative;}
+    .step:not(:last-child)::before{content:'';position:absolute;left:16px;top:36px;bottom:0;width:2px;background:rgba(155,28,28,0.1);}
+    .step-dot{width:32px;height:32px;border-radius:50%;background:rgba(155,28,28,0.1);border:2px solid rgba(155,28,28,0.2);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;font-family:'Playfair Display',serif;}
+    .step-body{padding-bottom:24px;flex:1;}
+    .step-title{font-size:14px;font-weight:600;color:var(--td);margin-bottom:6px;}
+    .step-desc{font-size:13px;color:var(--tm);line-height:1.65;margin-bottom:10px;}
+
+    /* ── CODE BLOCKS ── */
+    .code-block{background:var(--code-bg);border:1px solid var(--code-border);border-radius:9px;overflow:hidden;margin:10px 0 16px;font-size:12.5px;}
+    .code-header{background:rgba(255,255,255,0.04);border-bottom:1px solid var(--code-border);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;}
+    .code-lang{color:var(--code-gray);font-size:11px;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.5px;}
+    .code-file{color:var(--code-yellow);font-size:11px;font-family:'JetBrains Mono',monospace;}
+    .code-body{padding:16px;overflow-x:auto;line-height:1.7;}
+    code{font-family:'JetBrains Mono',monospace;color:var(--white);}
+    .c-g{color:var(--code-green);}
+    .c-b{color:var(--code-blue);}
+    .c-y{color:var(--code-yellow);}
+    .c-p{color:var(--code-purple);}
+    .c-r{color:var(--code-red);}
+    .c-gr{color:var(--code-gray);}
+    .c-o{color:#FFA657;}
+    pre{white-space:pre;}
+    .inline-code{font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(155,28,28,0.08);color:var(--red);padding:2px 6px;border-radius:4px;}
+
+    /* ── BOXES ── */
+    .ibox{background:var(--bbg);border:1px solid var(--bborder);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--blue);display:flex;gap:9px;margin:12px 0;line-height:1.6;}
+    .wbox{background:var(--obg);border:1px solid var(--oborder);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--orange);display:flex;gap:9px;margin:12px 0;line-height:1.6;}
+    .gbox{background:var(--gbg);border:1px solid var(--gborder);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--green);display:flex;gap:9px;margin:12px 0;line-height:1.6;}
+    .tipbox{background:rgba(109,40,217,0.06);border:1px solid rgba(109,40,217,0.2);border-radius:8px;padding:13px 16px;font-size:13px;color:var(--purple);display:flex;gap:9px;margin:12px 0;line-height:1.6;}
+    .box-icon{flex-shrink:0;margin-top:1px;font-size:14px;}
+
+    /* ── TABLES ── */
+    .table-wrap{overflow-x:auto;margin:14px 0;}
+    table{width:100%;border-collapse:collapse;}
+    th{background:var(--dark);color:rgba(255,255,255,0.8);font-size:11px;text-transform:uppercase;letter-spacing:0.5px;font-weight:600;padding:11px 14px;text-align:left;}
+    td{padding:11px 14px;font-size:13px;color:var(--td);border-bottom:1px solid rgba(155,28,28,0.06);}
+    tr:nth-child(even) td{background:var(--cream);}
+    tr:last-child td{border-bottom:none;}
+    .td-mono{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--red);}
+    .td-free{color:var(--green);font-weight:600;}
+    .td-cost{color:var(--orange);font-weight:600;}
+    .td-warn{color:var(--orange);}
+    .td-ok{color:var(--green);}
+    .td-na{color:var(--tu);}
+    .tier-free{background:rgba(21,128,61,0.1);}
+    .tier-paid{background:rgba(194,65,12,0.07);}
+
+    /* ── CHECKLIST ── */
+    .checklist{display:flex;flex-direction:column;gap:6px;margin:12px 0;}
+    .cli{display:flex;align-items:flex-start;gap:9px;padding:8px 12px;border-radius:7px;background:var(--white);border:1px solid rgba(155,28,28,0.07);}
+    .cli input[type=checkbox]{width:15px;height:15px;accent-color:var(--red);flex-shrink:0;margin-top:2px;cursor:pointer;}
+    .cli label{font-size:13px;color:var(--td);cursor:pointer;flex:1;}
+    .cli label .sub{display:block;font-size:11px;color:var(--tu);margin-top:2px;}
+    .cli.done label{color:var(--green);}
+    .cli-section{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--tu);margin:14px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(155,28,28,0.08);}
+
+    /* ── CARDS / GRIDS ── */
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:14px 0;}
+    .info-card{background:var(--white);border-radius:10px;padding:16px;border:1px solid rgba(155,28,28,0.08);}
+    .info-card h4{font-size:13px;font-weight:600;color:var(--td);margin-bottom:8px;display:flex;align-items:center;gap:7px;}
+    .info-card h4 i{color:var(--red);}
+    .info-card p{font-size:12px;color:var(--tu);line-height:1.6;}
+    .info-card .metric{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--red);margin-bottom:3px;}
+    .info-card .metric-lbl{font-size:11px;color:var(--tu);}
+
+    /* ── ARCH DIAGRAM (text-based) ── */
+    .arch-wrap{background:var(--code-bg);border:1px solid var(--code-border);border-radius:10px;padding:24px;margin:16px 0;font-family:'JetBrains Mono',monospace;font-size:12px;overflow-x:auto;}
+    .arch-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;color:rgba(255,255,255,0.8);}
+    .arch-box{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:6px;padding:4px 10px;white-space:nowrap;}
+    .arch-box.frontend{border-color:var(--code-blue);color:var(--code-blue);}
+    .arch-box.backend{border-color:var(--code-green);color:var(--code-green);}
+    .arch-box.db{border-color:var(--code-yellow);color:var(--code-yellow);}
+    .arch-box.payment{border-color:var(--code-purple);color:var(--code-purple);}
+    .arch-box.notif{border-color:var(--code-red);color:var(--code-red);}
+    .arch-arrow{color:var(--code-gray);}
+
+    /* ── COST PROJECTION ── */
+    .projection-card{background:var(--white);border-radius:12px;border:1px solid rgba(155,28,28,0.1);overflow:hidden;margin:14px 0;}
+    .pc-head{background:var(--dark);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;}
+    .pc-title{font-size:14px;font-weight:600;color:var(--white);}
+    .pc-tag{font-size:11px;color:var(--gold-l);font-weight:500;}
+    .pc-body{padding:16px 18px;}
+    .pc-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(155,28,28,0.05);font-size:13px;}
+    .pc-row:last-child{border-bottom:none;}
+    .pc-row .lbl{color:var(--tm);}
+    .pc-row .val{font-weight:600;color:var(--td);}
+    .pc-row .val.free{color:var(--green);}
+    .pc-row .val.warn{color:var(--orange);}
+    .pc-total{background:var(--cream);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-top:2px solid rgba(155,28,28,0.1);}
+    .pc-total .lbl{font-size:13px;font-weight:600;color:var(--td);}
+    .pc-total .val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--red);}
+    .pc-total .val.free-tier{color:var(--green);}
+
+    /* ── PRINT BUTTON ── */
+    .print-btn{position:fixed;bottom:24px;right:24px;background:var(--red);color:#fff;border:none;padding:12px 20px;border-radius:30px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:7px;box-shadow:0 4px 20px rgba(155,28,28,0.3);z-index:100;}
+    .print-btn:hover{background:var(--red-d);}
+
+    /* ── DIVIDER ── */
+    .divider{height:1px;background:rgba(155,28,28,0.08);margin:40px 0;}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:600px){
+      .cover{padding:36px 20px;}
+      .content{padding:0 16px 48px;}
+      .toc-grid{grid-template-columns:1fr;}
+      .cards-grid{grid-template-columns:1fr;}
+      .fr{grid-template-columns:1fr!important;}
+    }
+
+    /* ── PRINT ── */
+    @media print{
+      .print-btn{display:none;}
+      .cover{padding:36px;}
+      .code-block{break-inside:avoid;}
+      .section{break-before:auto;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-pattern"></div>
+  <div class="cover-glow"></div>
+  <div class="cover-inner">
+    <div class="cover-tag"><i class="fa fa-code"></i> Developer Guide — v1.0 — May 2026</div>
+    <h1>Igbo Bu Igbo Platform<br><span>Complete Tech Setup Guide</span></h1>
+    <p class="cover-sub">Step-by-step setup for the full igbobuigbo.org.ng platform — Firebase, Next.js, and Paystack — with exact free-tier limits, upgrade paths, and all deliverables.</p>
+    <div class="cover-pills">
+      <span class="cpill"><i class="fa fa-brands fa-react"></i>Next.js 14</span>
+      <span class="cpill"><i class="fa fa-fire"></i>Firebase (Spark → Blaze)</span>
+      <span class="cpill"><i class="fa fa-credit-card"></i>Paystack</span>
+      <span class="cpill"><i class="fa fa-envelope"></i>Brevo Email</span>
+      <span class="cpill"><i class="fa fa-comment-sms"></i>Termii SMS</span>
+      <span class="cpill"><i class="fa fa-cloud"></i>Vercel</span>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div style="max-width:900px;margin:0 auto;padding:0 24px;">
+  <div class="toc-wrap">
+    <div class="toc-title"><i class="fa fa-list"></i> Table of Contents</div>
+    <div class="toc-grid">
+      <a href="#s1" class="toc-item"><span class="toc-n">01</span> Architecture Overview</a>
+      <a href="#s2" class="toc-item"><span class="toc-n">02</span> Prerequisites &amp; Accounts</a>
+      <a href="#s3" class="toc-item"><span class="toc-n">03</span> Next.js Project Setup</a>
+      <a href="#s4" class="toc-item"><span class="toc-n">04</span> Firebase Setup &amp; Config</a>
+      <a href="#s5" class="toc-item"><span class="toc-n">05</span> Firestore Database Schema</a>
+      <a href="#s6" class="toc-item"><span class="toc-n">06</span> Firebase Authentication</a>
+      <a href="#s7" class="toc-item"><span class="toc-n">07</span> Firebase Storage</a>
+      <a href="#s8" class="toc-item"><span class="toc-n">08</span> Paystack Payment Integration</a>
+      <a href="#s9" class="toc-item"><span class="toc-n">09</span> Email — Brevo Setup</a>
+      <a href="#s10" class="toc-item"><span class="toc-n">10</span> SMS — Termii Setup</a>
+      <a href="#s11" class="toc-item"><span class="toc-n">11</span> Digital ID Card Generation</a>
+      <a href="#s12" class="toc-item"><span class="toc-n">12</span> Vercel Deployment</a>
+      <a href="#s13" class="toc-item"><span class="toc-n">13</span> Free Tier Limits (Full Table)</a>
+      <a href="#s14" class="toc-item"><span class="toc-n">14</span> Upgrade Path &amp; Cost Projection</a>
+      <a href="#s15" class="toc-item"><span class="toc-n">15</span> Deliverables Checklist</a>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ══════════════════════════════════════════
+     SECTION 1 — ARCHITECTURE
+══════════════════════════════════════════ -->
+<div class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <div class="section-info">
+      <h2>Architecture Overview</h2>
+      <p>How all the services connect to power igbobuigbo.org.ng</p>
+    </div>
+  </div>
+
+  <div class="arch-wrap">
+    <div style="color:var(--code-gray);margin-bottom:16px;font-size:11px;">// IGBO BU IGBO — PLATFORM ARCHITECTURE</div>
+    <div class="arch-row"><span class="arch-box frontend">Browser / Mobile</span><span class="arch-arrow">──►</span><span class="arch-box frontend">Next.js 14 (Vercel)</span><span class="arch-arrow">──►</span><span class="arch-box backend">API Routes (Edge Functions)</span></div>
+    <div style="margin:8px 0 8px 140px;color:var(--code-gray);">│ ├── Auth &amp; Session</div>
+    <div class="arch-row" style="margin-left:140px;"><span class="arch-box db">Firestore DB</span><span class="arch-arrow">  </span><span class="arch-box db">Firebase Auth</span><span class="arch-arrow">  </span><span class="arch-box db">Firebase Storage</span></div>
+    <div style="margin:8px 0 8px 140px;color:var(--code-gray);">│ ├── Payments</div>
+    <div class="arch-row" style="margin-left:140px;"><span class="arch-box payment">Paystack API</span><span class="arch-arrow">──►</span><span class="arch-box payment">Webhook → Update Firestore</span></div>
+    <div style="margin:8px 0 8px 140px;color:var(--code-gray);">│ └── Notifications</div>
+    <div class="arch-row" style="margin-left:140px;"><span class="arch-box notif">Brevo (Email)</span><span class="arch-arrow">  </span><span class="arch-box notif">Termii (SMS — Nigeria)</span></div>
+    <div style="margin-top:16px;color:var(--code-gray);font-size:11px;">// CDN: Cloudflare (Free) | Domain: igbobuigbo.org.ng + igbobuigbo.com.ng</div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="info-card"><h4><i class="fa fa-brands fa-react"></i>Frontend</h4><p><strong>Next.js 14</strong> with App Router. React components, server-side rendering for SEO, API routes for backend logic. Deployed on Vercel (free tier).</p></div>
+    <div class="info-card"><h4><i class="fa fa-fire"></i>Backend + DB</h4><p><strong>Firebase</strong> handles authentication, Firestore database, and file storage. No separate server needed at launch — Firebase handles everything.</p></div>
+    <div class="info-card"><h4><i class="fa fa-credit-card"></i>Payments</h4><p><strong>Paystack</strong> processes all Nigerian Naira payments. Free to integrate — only 1.5% + ₦100 per transaction. Supports cards, bank transfer, USSD.</p></div>
+    <div class="info-card"><h4><i class="fa fa-globe"></i>Hosting &amp; CDN</h4><p><strong>Vercel</strong> hosts the Next.js app free (100 GB bandwidth/month). <strong>Cloudflare</strong> free tier provides CDN and DDoS protection for the domain.</p></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2 — PREREQUISITES
+══════════════════════════════════════════ -->
+<div class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <div class="section-info">
+      <h2>Prerequisites &amp; Accounts</h2>
+      <p>Everything you need before writing a single line of code</p>
+    </div>
+  </div>
+
+  <div class="ibox"><i class="fa fa-circle-info box-icon"></i><div>All tools below are <strong>free to install and create</strong>. The only costs at this stage are the domain names (ch we have alreadypaid for both).</div></div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">Install Node.js LTS (v20+)</div>
+        <div class="step-desc">Download from <a href="https://nodejs.org" target="_blank">nodejs.org</a> — choose the LTS version. This also installs npm.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">terminal</span></div>
+          <div class="code-body"><code><span class="c-gr"># Verify installation</span>
+node <span class="c-b">--version</span>      <span class="c-gr"># Should show v20.x.x or higher</span>
+npm <span class="c-b">--version</span>       <span class="c-gr"># Should show 10.x.x or higher</span></code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">Install Git &amp; VS Code</div>
+        <div class="step-desc">Git from <a href="https://git-scm.com" target="_blank">git-scm.com</a>. VS Code from <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a>. Recommended VS Code extensions: ESLint, Prettier, Tailwind CSS IntelliSense, Firebase Explorer.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Create Required Accounts (All Free)</div>
+        <div class="step-desc">Sign up for each service before starting development:</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Service</th><th>URL</th><th>Cost to Create</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Firebase</strong></td><td class="td-mono">firebase.google.com</td><td class="td-free">Free (Google Account)</td><td>Database, Auth, Storage</td></tr>
+              <tr><td><strong>Vercel</strong></td><td class="td-mono">vercel.com</td><td class="td-free">Free</td><td>Hosting the Next.js app</td></tr>
+              <tr><td><strong>GitHub</strong></td><td class="td-mono">github.com</td><td class="td-free">Free</td><td>Code repository</td></tr>
+              <tr><td><strong>Paystack</strong></td><td class="td-mono">paystack.com</td><td class="td-free">Free (Nigerian business)</td><td>Payment processing</td></tr>
+              <tr><td><strong>Brevo</strong></td><td class="td-mono">brevo.com</td><td class="td-free">Free tier (300 emails/day)</td><td>Email notifications</td></tr>
+              <tr><td><strong>Termii</strong></td><td class="td-mono">termii.com</td><td class="td-free">Free to sign up (pay-per-SMS)</td><td>SMS notifications (Nigeria)</td></tr>
+              <tr><td><strong>Cloudflare</strong></td><td class="td-mono">cloudflare.com</td><td class="td-free">Free tier</td><td>CDN + DNS for domain</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">4</div>
+      <div class="step-body">
+        <div class="step-title">Register Your Domains</div>
+        <div class="step-desc">Register both domains from a Nigerian registrar. Recommended: <strong>Whogohost</strong> or <strong>Web4Africa</strong>.</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Domain</th><th>Status</th><th>Registrar</th></tr></thead>
+            <tbody>
+              <tr><td class="td-mono">igbobuigbo.org.ng</td><td class="td-cost">Active</td><td>Whogohost</td></tr>
+              <tr><td class="td-mono">igbobuigbo.com.ng</td><td class="td-cost">Active</td><td>Whogohost</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tipbox"><i class="fa fa-lightbulb box-icon"></i><div>Now we need to point the domain's nameservers to Cloudflare. Then connect Cloudflare to Vercel via CNAME records. Vercel provides a free SSL certificate automatically.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3 — NEXT.JS SETUP
+══════════════════════════════════════════ -->
+<div class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <div class="section-info">
+      <h2>Next.js Project Setup</h2>
+      <p>Scaffolding the project with the right folder structure</p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">Create the Next.js App</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">terminal</span></div>
+          <div class="code-body"><code>npx create-next-app@latest igbobuigbo-platform <span class="c-b">\</span>
+  <span class="c-b">--typescript</span> <span class="c-b">--tailwind</span> <span class="c-b">--eslint</span> <span class="c-b">--app</span> <span class="c-b">--src-dir</span>
+
+<span class="c-gr"># When prompted:</span>
+<span class="c-g">✓</span> Would you like to use TypeScript?  <span class="c-y">Yes</span>
+<span class="c-g">✓</span> Would you like to use Tailwind CSS?  <span class="c-y">Yes</span>
+<span class="c-g">✓</span> Would you like to use App Router?    <span class="c-y">Yes</span>
+<span class="c-g">✓</span> Would you like to use src/ directory? <span class="c-y">Yes</span>
+
+cd igbobuigbo-platform
+npm run dev   <span class="c-gr"># Test at http://localhost:3000</span></code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">Install All Required Packages</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">terminal</span><span class="code-file">All dependencies</span></div>
+          <div class="code-body"><code><span class="c-gr"># Firebase</span>
+npm install firebase firebase-admin
+
+<span class="c-gr"># Paystack</span>
+npm install @paystack/inline-js
+
+<span class="c-gr"># Email (Brevo / Sendinblue)</span>
+npm install @getbrevo/brevo
+
+<span class="c-gr"># UI & utilities</span>
+npm install lucide-react clsx date-fns zod react-hook-form
+
+<span class="c-gr"># QR Code and ID Card generation</span>
+npm install qrcode html2canvas jspdf
+
+<span class="c-gr"># Image optimization</span>
+npm install sharp</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Project Folder Structure</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">text</span><span class="code-file">src/ directory structure</span></div>
+          <div class="code-body"><code><span class="c-b">igbobuigbo-platform/</span>
+<span class="c-y">├── src/</span>
+<span class="c-y">│   ├── app/</span>                          <span class="c-gr"># Next.js App Router pages</span>
+<span class="c-y">│   │   ├── (public)/</span>                 <span class="c-gr"># Public pages (no auth)</span>
+<span class="c-y">│   │   │   ├── page.tsx</span>              <span class="c-gr"># Homepage</span>
+<span class="c-y">│   │   │   ├── about/</span>
+<span class="c-y">│   │   │   ├── events/</span>
+<span class="c-y">│   │   │   ├── news/</span>
+<span class="c-y">│   │   │   ├── verify/</span>               <span class="c-gr"># Public member verification</span>
+<span class="c-y">│   │   │   └── donate/</span>
+<span class="c-y">│   │   ├── (auth)/</span>
+<span class="c-y">│   │   │   ├── login/</span>
+<span class="c-y">│   │   │   └── register/</span>
+<span class="c-y">│   │   ├── dashboard/</span>                <span class="c-gr"># Member dashboard (protected)</span>
+<span class="c-y">│   │   │   ├── overview/</span>
+<span class="c-y">│   │   │   ├── profile/</span>
+<span class="c-y">│   │   │   ├── wallet/</span>
+<span class="c-y">│   │   │   ├── voting/</span>
+<span class="c-y">│   │   │   ├── grants/</span>
+<span class="c-y">│   │   │   └── transfer/</span>
+<span class="c-y">│   │   ├── admin/</span>                    <span class="c-gr"># Admin dashboard (restricted)</span>
+<span class="c-y">│   │   │   ├── members/</span>
+<span class="c-y">│   │   │   ├── approvals/</span>
+<span class="c-y">│   │   │   ├── payments/</span>
+<span class="c-y">│   │   │   └── reports/</span>
+<span class="c-y">│   │   └── api/</span>                      <span class="c-gr"># API routes</span>
+<span class="c-y">│   │       ├── paystack/</span>             <span class="c-gr"># webhook, verify-payment</span>
+<span class="c-y">│   │       ├── members/</span>
+<span class="c-y">│   │       ├── send-email/</span>
+<span class="c-y">│   │       └── send-sms/</span>
+<span class="c-y">│   ├── components/</span>                   <span class="c-gr"># Reusable React components</span>
+<span class="c-y">│   ├── lib/</span>                          <span class="c-gr"># Firebase, Paystack, Brevo config</span>
+<span class="c-y">│   ├── hooks/</span>                        <span class="c-gr"># Custom React hooks</span>
+<span class="c-y">│   └── types/</span>                        <span class="c-gr"># TypeScript type definitions</span>
+<span class="c-y">├── public/</span>                           <span class="c-gr"># Static files (logo, favicon)</span>
+<span class="c-y">└── .env.local</span>                        <span class="c-gr"># Environment variables (NEVER commit)</span></code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">4</div>
+      <div class="step-body">
+        <div class="step-title">Create .env.local file</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">env</span><span class="code-file">.env.local</span></div>
+          <div class="code-body"><code><span class="c-gr"># ─── FIREBASE ───────────────────────────────────</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_API_KEY</span>=<span class="c-y">your_api_key</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN</span>=<span class="c-y">igbobuigbo.firebaseapp.com</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_PROJECT_ID</span>=<span class="c-y">igbobuigbo</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET</span>=<span class="c-y">igbobuigbo.appspot.com</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID</span>=<span class="c-y">123456789</span>
+<span class="c-b">NEXT_PUBLIC_FIREBASE_APP_ID</span>=<span class="c-y">1:123456789:web:abc123</span>
+
+<span class="c-gr"># ─── FIREBASE ADMIN (server-side only) ──────────</span>
+<span class="c-b">FIREBASE_ADMIN_PROJECT_ID</span>=<span class="c-y">igbobuigbo</span>
+<span class="c-b">FIREBASE_ADMIN_PRIVATE_KEY</span>=<span class="c-y">"-----BEGIN PRIVATE KEY-----\n..."</span>
+<span class="c-b">FIREBASE_ADMIN_CLIENT_EMAIL</span>=<span class="c-y">firebase-adminsdk@igbobuigbo.iam.gserviceaccount.com</span>
+
+<span class="c-gr"># ─── PAYSTACK ───────────────────────────────────</span>
+<span class="c-b">NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY</span>=<span class="c-y">pk_live_xxxxxxxxxxxx</span>
+<span class="c-b">PAYSTACK_SECRET_KEY</span>=<span class="c-y">sk_live_xxxxxxxxxxxx</span>   <span class="c-gr"># SERVER ONLY — never expose</span>
+
+<span class="c-gr"># ─── BREVO EMAIL ────────────────────────────────</span>
+<span class="c-b">BREVO_API_KEY</span>=<span class="c-y">xkeysib-xxxxxxxxxxxxxxxxxxxx</span>
+<span class="c-b">EMAIL_FROM</span>=<span class="c-y">noreply@igbobuigbo.org.ng</span>
+
+<span class="c-gr"># ─── TERMII SMS ─────────────────────────────────</span>
+<span class="c-b">TERMII_API_KEY</span>=<span class="c-y">TLxxxxxxxxxxxxxxxxxxxxxxxx</span>
+<span class="c-b">TERMII_SENDER_ID</span>=<span class="c-y">IgboIBI</span>   <span class="c-gr"># Max 11 chars, approved by Termii</span>
+
+<span class="c-gr"># ─── SITE ───────────────────────────────────────</span>
+<span class="c-b">NEXT_PUBLIC_SITE_URL</span>=<span class="c-y">https://igbobuigbo.org.ng</span></code></div>
+        </div>
+        <div class="wbox"><i class="fa fa-triangle-exclamation box-icon"></i><div>Add <span class="inline-code">.env.local</span> to your <span class="inline-code">.gitignore</span> file immediately. <strong>Never commit API keys to GitHub</strong> — especially Paystack secret key and Firebase Admin private key. Use Vercel's environment variables panel for production.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 4 — FIREBASE SETUP
+══════════════════════════════════════════ -->
+<div class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <div class="section-info">
+      <h2>Firebase Setup &amp; Configuration</h2>
+      <p>Creating the project and enabling all required services</p>
+    </div>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">Create Firebase Project</div>
+        <div class="step-desc">Go to <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → Click "Add project" → Name it <span class="inline-code">igbobuigbo</span> → Enable Google Analytics → Create project.</div>
+        <div class="ibox"><i class="fa fa-circle-info box-icon"></i><div>Start on the <strong>Spark (Free) plan</strong>. You can upgrade to Blaze (pay-as-you-go) at any time without losing data. Upgrading is a one-click process.</div></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">Enable Firebase Services</div>
+        <div class="step-desc">In the Firebase Console, enable these services in order:</div>
+        <div class="checklist">
+          <div class="cli"><input type="checkbox" id="fb1"/><label for="fb1"><strong>Authentication</strong> → Enable Email/Password + Google sign-in<span class="sub">Build → Authentication → Sign-in method → Enable Email/Password → Save</span></label></div>
+          <div class="cli"><input type="checkbox" id="fb2"/><label for="fb2"><strong>Firestore Database</strong> → Start in Test Mode (you'll add rules later)<span class="sub">Build → Firestore Database → Create database → Choose region: nam5 (US) or eur3 (Europe)</span></label></div>
+          <div class="cli"><input type="checkbox" id="fb3"/><label for="fb3"><strong>Storage</strong> → Default bucket, start in test mode<span class="sub">Build → Storage → Get started → Choose same region as Firestore</span></label></div>
+          <div class="cli"><input type="checkbox" id="fb4"/><label for="fb4"><strong>Add Web App</strong> → Get config keys for .env.local<span class="sub">Project Settings (⚙) → General → Your apps → Add app → Web app → Get config snippet</span></label></div>
+          <div class="cli"><input type="checkbox" id="fb5"/><label for="fb5"><strong>Service Account</strong> → Download private key for Admin SDK<span class="sub">Project Settings → Service accounts → Generate new private key → Download JSON</span></label></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Initialize Firebase in Next.js</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/firebase.ts (client-side)</span></div>
+          <div class="code-body"><code><span class="c-p">import</span> { initializeApp, getApps } <span class="c-p">from</span> <span class="c-g">'firebase/app'</span>;
+<span class="c-p">import</span> { getAuth } <span class="c-p">from</span> <span class="c-g">'firebase/auth'</span>;
+<span class="c-p">import</span> { getFirestore } <span class="c-p">from</span> <span class="c-g">'firebase/firestore'</span>;
+<span class="c-p">import</span> { getStorage } <span class="c-p">from</span> <span class="c-g">'firebase/storage'</span>;
+
+<span class="c-b">const</span> firebaseConfig = {
+  apiKey:            process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_API_KEY</span>,
+  authDomain:        process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN</span>,
+  projectId:         process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_PROJECT_ID</span>,
+  storageBucket:     process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET</span>,
+  messagingSenderId: process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID</span>,
+  appId:             process.env.<span class="c-y">NEXT_PUBLIC_FIREBASE_APP_ID</span>,
+};
+
+<span class="c-b">const</span> app = getApps().length ? getApps()[<span class="c-o">0</span>] : initializeApp(firebaseConfig);
+
+<span class="c-p">export</span> <span class="c-b">const</span> auth    = getAuth(app);
+<span class="c-p">export</span> <span class="c-b">const</span> db      = getFirestore(app);
+<span class="c-p">export</span> <span class="c-b">const</span> storage = getStorage(app);</code></div>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/firebase-admin.ts (server-side only)</span></div>
+          <div class="code-body"><code><span class="c-p">import</span> { initializeApp, getApps, cert } <span class="c-p">from</span> <span class="c-g">'firebase-admin/app'</span>;
+<span class="c-p">import</span> { getFirestore } <span class="c-p">from</span> <span class="c-g">'firebase-admin/firestore'</span>;
+<span class="c-p">import</span> { getAuth } <span class="c-p">from</span> <span class="c-g">'firebase-admin/auth'</span>;
+
+<span class="c-b">const</span> adminApp = getApps().find(a => a.name === <span class="c-g">'admin'</span>) ||
+  initializeApp({
+    credential: cert({
+      projectId:   process.env.<span class="c-y">FIREBASE_ADMIN_PROJECT_ID</span>,
+      privateKey:  process.env.<span class="c-y">FIREBASE_ADMIN_PRIVATE_KEY</span>?.replace(<span class="c-g">/\\n/g</span>, <span class="c-g">'\n'</span>),
+      clientEmail: process.env.<span class="c-y">FIREBASE_ADMIN_CLIENT_EMAIL</span>,
+    }),
+  }, <span class="c-g">'admin'</span>);
+
+<span class="c-p">export</span> <span class="c-b">const</span> adminDb   = getFirestore(adminApp);
+<span class="c-p">export</span> <span class="c-b">const</span> adminAuth = getAuth(adminApp);</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">4</div>
+      <div class="step-body">
+        <div class="step-title">Firestore Security Rules</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">firestore rules</span><span class="code-file">firestore.rules</span></div>
+          <div class="code-body"><code>rules_version = <span class="c-g">'2'</span>;
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    <span class="c-gr">// Helper functions</span>
+    function isAuth() { return request.auth != null; }
+    function isAdmin() { return isAuth() &&
+      get(/databases/$(database)/documents/members/$(request.auth.uid)).data.role
+      in [<span class="c-g">'super_admin'</span>,<span class="c-g">'national_exec'</span>,<span class="c-g">'state_coord'</span>]; }
+    function isOwner(uid) { return request.auth.uid == uid; }
+
+    <span class="c-gr">// Members — read own, admin reads all</span>
+    match /members/{memberId} {
+      allow read:   if isOwner(memberId) || isAdmin();
+      allow create: if isAuth();
+      allow update: if isOwner(memberId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    <span class="c-gr">// Public verification — only read specific safe fields</span>
+    match /members/{memberId} {
+      allow get: if resource.data.keys().hasOnly(
+        [<span class="c-g">'fullName'</span>,<span class="c-g">'membershipId'</span>,<span class="c-g">'status'</span>,<span class="c-g">'chapter'</span>,<span class="c-g">'photoURL'</span>]);
+    }
+
+    <span class="c-gr">// Payments — members read own</span>
+    match /payments/{payId} {
+      allow read:   if isAuth() && resource.data.userId == request.auth.uid || isAdmin();
+      allow write:  if isAdmin(); <span class="c-gr">// Only server/admin can write payments</span>
+    }
+
+    <span class="c-gr">// Elections — all authenticated members can read; admin writes</span>
+    match /elections/{elId} {
+      allow read:  if isAuth();
+      allow write: if isAdmin();
+    }
+
+    <span class="c-gr">// Votes — write-only for member (no re-reading own vote)</span>
+    match /votes/{voteId} {
+      allow create: if isAuth() && !exists(
+        /databases/$(database)/documents/votes/$(request.auth.uid + '_' + request.resource.data.electionId));
+      allow read:   if isAdmin();
+    }
+
+    <span class="c-gr">// Grants, Transfers, Wallet — member reads/writes own</span>
+    match /transfers/{tId} {
+      allow read, create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow update:       if isAdmin();
+    }
+    match /wallet/{wId} {
+      allow read: if isAuth() && isOwner(wId);
+      allow write: if isAdmin(); <span class="c-gr">// Only server updates wallet balances</span>
+    }
+  }
+}</code></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 5 — FIRESTORE SCHEMA
+══════════════════════════════════════════ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <div class="section-info">
+      <h2>Firestore Database Schema</h2>
+      <p>Complete data structure for all IBI platform features</p>
+    </div>
+  </div>
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Complete Firestore Collections</span></div>
+    <div class="code-body"><code><span class="c-gr">// ── /members/{memberId} ────────────────────────────</span>
+{
+  memberId:     <span class="c-g">"FCT/01/0001"</span>,          <span class="c-gr">// Generated: STATE/ZONE/NUMBER</span>
+  uid:          <span class="c-g">"firebase_auth_uid"</span>,
+  fullName:     <span class="c-g">"Emmanuel Adams"</span>,
+  email:        <span class="c-g">"e.adams@email.com"</span>,
+  phone:        <span class="c-g">"+2348012345678"</span>,
+  gender:       <span class="c-g">"Male"</span>,
+  dateOfBirth:  <span class="c-g">"1990-01-15"</span>,
+  stateOfOrigin:<span class="c-g">"Enugu"</span>,
+  lga:          <span class="c-g">"Igbo-Eze North"</span>,
+  occupation:   <span class="c-g">"Engineer"</span>,
+  address:      <span class="c-g">"No. 12, Wuse Zone 5, Abuja"</span>,
+  photoURL:     <span class="c-g">"https://storage.googleapis.com/..."</span>,
+  idDocURL:     <span class="c-g">"https://storage.googleapis.com/..."</span>,
+  nextOfKin:    { name: <span class="c-g">""</span>, phone: <span class="c-g">""</span>, relationship: <span class="c-g">""</span> },
+  chapter:      <span class="c-g">"FCT Abuja"</span>,
+  region:       <span class="c-g">"non-igbo-speaking"</span>,   <span class="c-gr">// igbo-speaking | non-igbo | diaspora</span>
+  position:     <span class="c-g">"Vice President"</span>,
+  role:         <span class="c-g">"member"</span>,                <span class="c-gr">// member | state_coord | national_exec | super_admin</span>
+  membershipCategory: <span class="c-g">"executive"</span>,    <span class="c-gr">// ordinary | executive | patron | trustee</span>
+  referredBy:   <span class="c-g">"ABI/01/0005"</span>,
+  status:       <span class="c-g">"active"</span>,               <span class="c-gr">// pending | active | suspended | inactive</span>
+  registeredAt: <span class="c-p">Timestamp</span>,
+  duesPaidUntil:<span class="c-g">"2026-12-31"</span>,
+  walletBalance:<span class="c-o">12500</span>,
+  createdAt:    <span class="c-p">Timestamp</span>, updatedAt: <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /payments/{paymentId} ──────────────────────────</span>
+{
+  reference:   <span class="c-g">"IBI_1234567890"</span>,       <span class="c-gr">// Paystack reference</span>
+  userId:      <span class="c-g">"firebase_auth_uid"</span>,
+  memberId:    <span class="c-g">"FCT/01/0001"</span>,
+  amount:      <span class="c-o">15000</span>,                   <span class="c-gr">// In Naira</span>
+  amountKobo:  <span class="c-o">1500000</span>,                <span class="c-gr">// Paystack uses kobo</span>
+  type:        <span class="c-g">"registration"</span>,          <span class="c-gr">// registration | dues | donation | event | levy | wallet</span>
+  status:      <span class="c-g">"success"</span>,              <span class="c-gr">// pending | success | failed</span>
+  channel:     <span class="c-g">"card"</span>,                  <span class="c-gr">// card | bank | ussd | qr</span>
+  receiptURL:  <span class="c-g">"..."</span>,
+  paidAt:      <span class="c-p">Timestamp</span>, createdAt: <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /elections/{electionId} ────────────────────────</span>
+{
+  title:       <span class="c-g">"National President Election 2026"</span>,
+  level:       <span class="c-g">"national"</span>,             <span class="c-gr">// global | national | regional | chapter | zone</span>
+  type:        <span class="c-g">"election"</span>,             <span class="c-gr">// election | decision</span>
+  scope:       <span class="c-g">"all"</span>,                  <span class="c-gr">// all | chapter:FCT | region:non-igbo</span>
+  status:      <span class="c-g">"live"</span>,                 <span class="c-gr">// upcoming | live | closed</span>
+  openAt:      <span class="c-p">Timestamp</span>, closeAt: <span class="c-p">Timestamp</span>,
+  candidates: [{ id: <span class="c-g">"FCT/01/0001"</span>, name: <span class="c-g">"..."</span>, manifesto: <span class="c-g">"..."</span> }],
+  totalVotes:  <span class="c-o">2341</span>,
+  results:     { <span class="c-g">"FCT/01/0001"</span>: <span class="c-o">1450</span> }  <span class="c-gr">// Tallied after close</span>
+}
+
+<span class="c-gr">// ── /votes/{uid_electionId} ────────────────────────</span>
+{ electionId: <span class="c-g">"..."</span>, candidateId: <span class="c-g">"..."</span>, createdAt: <span class="c-p">Timestamp</span> }
+<span class="c-gr">// Document ID = uid + '_' + electionId → prevents double-voting</span>
+
+<span class="c-gr">// ── /transfers/{transferId} ────────────────────────</span>
+{
+  ref:           <span class="c-g">"IBI-TRF-123456"</span>,
+  userId:        <span class="c-g">"firebase_auth_uid"</span>,
+  memberId:      <span class="c-g">"FCT/01/0001"</span>,
+  fromChapter:   <span class="c-g">"FCT Abuja Chapter"</span>,
+  toChapter:     <span class="c-g">"Lagos State Chapter"</span>,
+  toRegion:      <span class="c-g">"non-igbo-speaking"</span>,
+  reason:        <span class="c-g">"Work / Employment"</span>,
+  details:       <span class="c-g">"Transferred by employer to Lagos..."</span>,
+  docURL:        <span class="c-g">"https://storage..."</span>,
+  effectiveDate: <span class="c-g">"2026-07-01"</span>,
+  status:        <span class="c-g">"pending"</span>,            <span class="c-gr">// pending | approved | rejected</span>
+  adminNote:     <span class="c-g">""</span>,
+  createdAt:     <span class="c-p">Timestamp</span>, updatedAt: <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /wallet_transactions/{txId} ────────────────────</span>
+{
+  userId:  <span class="c-g">"firebase_auth_uid"</span>,
+  type:    <span class="c-g">"credit"</span>,                    <span class="c-gr">// credit | debit</span>
+  amount:  <span class="c-o">5000</span>,
+  desc:    <span class="c-g">"Annual Dues 2026"</span>,
+  ref:     <span class="c-g">"IBI_PAY_xxx"</span>,
+  balance: <span class="c-o">12500</span>,                      <span class="c-gr">// Balance after this tx</span>
+  createdAt: <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /grants/{grantId} — Applications ───────────────</span>
+{
+  memberId:  <span class="c-g">"FCT/01/0001"</span>,
+  grantType: <span class="c-g">"scholarship"</span>,             <span class="c-gr">// scholarship | business | welfare | emergency</span>
+  amount:    <span class="c-o">200000</span>,
+  purpose:   <span class="c-g">"University tuition..."</span>,
+  docURLs:   [<span class="c-g">"https://..."</span>],
+  bankAccount: { bank: <span class="c-g">"GTBank"</span>, number: <span class="c-g">"0123456789"</span>, name: <span class="c-g">"..."</span> },
+  status:    <span class="c-g">"pending"</span>,                 <span class="c-gr">// pending | approved | rejected | disbursed</span>
+  createdAt: <span class="c-p">Timestamp</span>
+}</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 6 — FIREBASE AUTH
+══════════════════════════════════════════ -->
+<div class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num">6</div>
+    <div class="section-info">
+      <h2>Firebase Authentication</h2>
+      <p>Member login, registration, and role-based access</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Auth Method</th><th>Spark (Free)</th><th>Blaze (Paid)</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Email &amp; Password</td><td class="td-free">Unlimited users</td><td class="td-free">Unlimited users</td><td class="td-free">Free always</td></tr>
+        <tr><td>Google Sign-In</td><td class="td-free">Unlimited</td><td class="td-free">Unlimited</td><td class="td-free">Free always</td></tr>
+        <tr><td>Phone / SMS OTP</td><td class="td-warn">10 verifications/day</td><td>After free: unlimited</td><td class="td-cost">$0.0055/verification (~₦8.80)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ibox"><i class="fa fa-lightbulb box-icon"></i><div><strong>Recommended:</strong> We can use Email/Password for member login (free, unlimited). Then use Termii for OTP/SMS instead of Firebase Phone Auth — it's cheaper for Nigeria (₦8–15/SMS vs Firebase's ₦8.80 per verification which requires Blaze plan).</div></div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/auth-helpers.ts</span></div>
+    <div class="code-body"><code><span class="c-p">import</span> { signInWithEmailAndPassword, createUserWithEmailAndPassword,
+         sendEmailVerification, sendPasswordResetEmail } <span class="c-p">from</span> <span class="c-g">'firebase/auth'</span>;
+<span class="c-p">import</span> { auth, db } <span class="c-p">from</span> <span class="c-g">'./firebase'</span>;
+<span class="c-p">import</span> { doc, getDoc } <span class="c-p">from</span> <span class="c-g">'firebase/firestore'</span>;
+
+<span class="c-gr">// LOGIN</span>
+<span class="c-p">export</span> <span class="c-b">async function</span> loginMember(email: <span class="c-b">string</span>, password: <span class="c-b">string</span>) {
+  <span class="c-b">const</span> cred = <span class="c-p">await</span> signInWithEmailAndPassword(auth, email, password);
+  <span class="c-b">const</span> member = <span class="c-p">await</span> getDoc(doc(db, <span class="c-g">'members'</span>, cred.user.uid));
+  <span class="c-p">if</span> (member.data()?.status === <span class="c-g">'suspended'</span>)
+    <span class="c-p">throw</span> <span class="c-b">new</span> Error(<span class="c-g">'Account suspended. Contact admin.'</span>);
+  <span class="c-p">return</span> { user: cred.user, memberData: member.data() };
+}
+
+<span class="c-gr">// REGISTER (creates Firebase Auth user + Firestore member doc)</span>
+<span class="c-p">export</span> <span class="c-b">async function</span> registerMember(email: <span class="c-b">string</span>, password: <span class="c-b">string</span>, data: MemberData) {
+  <span class="c-b">const</span> cred = <span class="c-p">await</span> createUserWithEmailAndPassword(auth, email, password);
+  <span class="c-p">await</span> sendEmailVerification(cred.user);
+  <span class="c-gr">// Create pending member doc in Firestore</span>
+  <span class="c-p">await</span> setDoc(doc(db, <span class="c-g">'members'</span>, cred.user.uid), {
+    ...data, uid: cred.user.uid, status: <span class="c-g">'pending'</span>,
+    createdAt: serverTimestamp(), role: <span class="c-g">'member'</span>
+  });
+  <span class="c-p">return</span> cred.user;
+}</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 7 — FIREBASE STORAGE
+══════════════════════════════════════════ -->
+<div class="section" id="s7">
+  <div class="section-header">
+    <div class="section-num">7</div>
+    <div class="section-info">
+      <h2>Firebase Storage</h2>
+      <p>Storing profile photos, ID documents, and grant attachments</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Spark (Free)</th><th>Blaze (Paid — after free)</th></tr></thead>
+      <tbody>
+        <tr class="tier-free"><td>Storage space</td><td class="td-free">5 GiB</td><td class="td-cost">$0.026/GiB/month (~₦41.60)</td></tr>
+        <tr class="tier-free"><td>Downloads / day</td><td class="td-free">1 GiB/day</td><td class="td-cost">$0.12/GiB (~₦192)</td></tr>
+        <tr class="tier-free"><td>Upload operations</td><td class="td-free">20,000/day</td><td class="td-cost">$0.004/1,000 ops</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="gbox"><i class="fa fa-circle-check box-icon"></i><div><strong>5 GiB free storage</strong> easily handles 4,000–5,000 members' photos and documents. Each passport photo ≈ 150–300 KB → 5,000 photos ≈ 1.5 GiB. We won't need to upgrade storage for thousands of members.</div></div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/upload-helpers.ts</span></div>
+    <div class="code-body"><code><span class="c-p">import</span> { ref, uploadBytes, getDownloadURL } <span class="c-p">from</span> <span class="c-g">'firebase/storage'</span>;
+<span class="c-p">import</span> { storage } <span class="c-p">from</span> <span class="c-g">'./firebase'</span>;
+
+<span class="c-gr">// Upload member photo — stored as members/{uid}/photo.jpg</span>
+<span class="c-p">export</span> <span class="c-b">async function</span> uploadMemberPhoto(uid: <span class="c-b">string</span>, file: File) {
+  <span class="c-gr">// Validate: max 2MB, image only</span>
+  <span class="c-p">if</span> (file.size > <span class="c-o">2 * 1024 * 1024</span>) <span class="c-p">throw</span> <span class="c-b">new</span> Error(<span class="c-g">'Photo must be under 2 MB'</span>);
+  <span class="c-p">if</span> (!file.type.startsWith(<span class="c-g">'image/'</span>)) <span class="c-p">throw</span> <span class="c-b">new</span> Error(<span class="c-g">'Must be an image'</span>);
+  <span class="c-b">const</span> storageRef = ref(storage, <span class="c-g">`members/<span class="c-b">${uid}</span>/photo`</span>);
+  <span class="c-p">await</span> uploadBytes(storageRef, file, { contentType: file.type });
+  <span class="c-p">return</span> getDownloadURL(storageRef);
+}
+
+<span class="c-gr">// Upload document (ID, grant doc) — max 5 MB</span>
+<span class="c-p">export</span> <span class="c-b">async function</span> uploadDocument(uid: <span class="c-b">string</span>, file: File, type: <span class="c-b">string</span>) {
+  <span class="c-p">if</span> (file.size > <span class="c-o">5 * 1024 * 1024</span>) <span class="c-p">throw</span> <span class="c-b">new</span> Error(<span class="c-g">'Document must be under 5 MB'</span>);
+  <span class="c-b">const</span> storageRef = ref(storage, <span class="c-g">`members/<span class="c-b">${uid}</span>/<span class="c-b">${type}</span>_<span class="c-b">${Date.now()}</span>`</span>);
+  <span class="c-p">await</span> uploadBytes(storageRef, file);
+  <span class="c-p">return</span> getDownloadURL(storageRef);
+}</code></div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">firestore rules</span><span class="code-file">storage.rules</span></div>
+    <div class="code-body"><code>rules_version = <span class="c-g">'2'</span>;
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /members/{uid}/{allPaths=**} {
+      allow read:  if request.auth != null;          <span class="c-gr">// Any member can read</span>
+      allow write: if request.auth.uid == uid        <span class="c-gr">// Own files only</span>
+                   && request.resource.size < <span class="c-o">5 * 1024 * 1024</span>
+                   && (request.resource.contentType.matches(<span class="c-g">'image/.*'</span>)
+                       || request.resource.contentType == <span class="c-g">'application/pdf'</span>);
+    }
+    match /public/{allPaths=**} {
+      allow read: if true;   <span class="c-gr">// Public assets (logos, event banners)</span>
+    }
+  }
+}</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 8 — PAYSTACK
+══════════════════════════════════════════ -->
+<div class="section" id="s8">
+  <div class="section-header">
+    <div class="section-num">8</div>
+    <div class="section-info">
+      <h2>Paystack Payment Integration</h2>
+      <p>Registration fees, dues, donations, wallet top-up — all in Naira</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Payment Type</th><th>Paystack Fee</th><th>Example</th><th>Net to IBI</th></tr></thead>
+      <tbody>
+        <tr><td>Local card / bank (≤₦2,500)</td><td class="td-cost">1.5% only</td><td>₦2,000 → ₦30 fee</td><td class="td-ok">₦1,970</td></tr>
+        <tr><td>Local card / bank (₦2,501–₦133,333)</td><td class="td-cost">1.5% + ₦100</td><td>₦5,000 → ₦175 fee</td><td class="td-ok">₦4,825</td></tr>
+        <tr><td>Local (capped at ₦2,000 max fee)</td><td class="td-cost">1.5% + ₦100 ≤ ₦2,000</td><td>₦100,000 → ₦1,600 fee</td><td class="td-ok">₦98,400</td></tr>
+        <tr><td>International card</td><td class="td-cost">3.9% + ₦100</td><td>₦50,000 → ₦2,050 fee</td><td class="td-ok">₦47,950</td></tr>
+        <tr><td>Monthly platform fee</td><td class="td-free">₦0</td><td>—</td><td class="td-free">Free forever</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">Paystack Account Setup</div>
+        <div class="step-desc">Register at <a href="https://paystack.com" target="_blank">paystack.com</a>. We'll need: Business name (Igbo Bu Igbo Unity Initiative), CAC registration number, Bank account details, BVN. Verification takes 1–3 business days. Get test keys immediately; live keys after verification.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">Payment Component (Frontend)</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/components/PaystackButton.tsx</span></div>
+          <div class="code-body"><code><span class="c-g">'use client'</span>;
+<span class="c-p">import</span> { usePaystackPayment } <span class="c-p">from</span> <span class="c-g">'react-paystack'</span>;
+
+<span class="c-b">interface</span> Props {
+  amount:   <span class="c-b">number</span>;       <span class="c-gr">// In Naira (converted to kobo internally)</span>
+  email:    <span class="c-b">string</span>;
+  metadata: Record&lt;<span class="c-b">string</span>, <span class="c-b">any</span>&gt;;
+  label:    <span class="c-b">string</span>;
+  onSuccess: (ref: <span class="c-b">string</span>) => <span class="c-b">void</span>;
+}
+
+<span class="c-p">export default function</span> PaystackButton({ amount, email, metadata, label, onSuccess }: Props) {
+  <span class="c-b">const</span> config = {
+    reference:  <span class="c-g">`IBI_<span class="c-b">${Date.now()}</span>`</span>,
+    email,
+    amount:     amount * <span class="c-o">100</span>,         <span class="c-gr">// Paystack uses kobo (₦1 = 100 kobo)</span>
+    publicKey:  process.env.<span class="c-y">NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY</span>!,
+    currency:   <span class="c-g">'NGN'</span>,
+    metadata,
+    channels:   [<span class="c-g">'card'</span>, <span class="c-g">'bank'</span>, <span class="c-g">'ussd'</span>, <span class="c-g">'mobile_money'</span>],
+  };
+
+  <span class="c-b">const</span> initPayment = usePaystackPayment(config);
+
+  <span class="c-p">return</span> (
+    &lt;button onClick={() => initPayment({
+      onSuccess: (res) => onSuccess(res.reference),
+      onClose:   () => console.log(<span class="c-g">'Payment cancelled'</span>),
+    })}&gt;
+      {label}
+    &lt;/button&gt;
+  );
+}</code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Paystack Webhook (Verify &amp; Update Database)</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/app/api/paystack/webhook/route.ts</span></div>
+          <div class="code-body"><code><span class="c-p">import</span> { NextRequest, NextResponse } <span class="c-p">from</span> <span class="c-g">'next/server'</span>;
+<span class="c-p">import</span> crypto <span class="c-p">from</span> <span class="c-g">'crypto'</span>;
+<span class="c-p">import</span> { adminDb } <span class="c-p">from</span> <span class="c-g">'@/lib/firebase-admin'</span>;
+
+<span class="c-p">export async function</span> POST(req: NextRequest) {
+  <span class="c-b">const</span> secret = process.env.<span class="c-y">PAYSTACK_SECRET_KEY</span>!;
+  <span class="c-b">const</span> hash   = req.headers.get(<span class="c-g">'x-paystack-signature'</span>);
+  <span class="c-b">const</span> body   = <span class="c-p">await</span> req.text();
+
+  <span class="c-gr">// Verify webhook signature (CRITICAL — prevents fake webhooks)</span>
+  <span class="c-b">const</span> expected = crypto.createHmac(<span class="c-g">'sha512'</span>, secret).update(body).digest(<span class="c-g">'hex'</span>);
+  <span class="c-p">if</span> (hash !== expected) <span class="c-p">return</span> NextResponse.json({ error: <span class="c-g">'Invalid signature'</span> }, { status: <span class="c-o">401</span> });
+
+  <span class="c-b">const</span> event = JSON.parse(body);
+
+  <span class="c-p">if</span> (event.event === <span class="c-g">'charge.success'</span>) {
+    <span class="c-b">const</span> { reference, amount, metadata } = event.data;
+    <span class="c-gr">// Save payment to Firestore</span>
+    <span class="c-p">await</span> adminDb.collection(<span class="c-g">'payments'</span>).doc(reference).set({
+      reference, amount: amount / <span class="c-o">100</span>, amountKobo: amount,
+      status: <span class="c-g">'success'</span>, userId: metadata.userId,
+      memberId: metadata.memberId, type: metadata.paymentType,
+      paidAt: <span class="c-b">new</span> Date(), channel: event.data.channel
+    });
+    <span class="c-gr">// If registration fee — activate pending member</span>
+    <span class="c-p">if</span> (metadata.paymentType === <span class="c-g">'registration'</span>) {
+      <span class="c-p">await</span> adminDb.collection(<span class="c-g">'members'</span>).doc(metadata.userId).update({
+        status: <span class="c-g">'pending_approval'</span>  <span class="c-gr">// Admin still needs to approve</span>
+      });
+    }
+  }
+  <span class="c-p">return</span> NextResponse.json({ received: <span class="c-b">true</span> });
+}</code></div>
+        </div>
+        <div class="tipbox"><i class="fa fa-lightbulb box-icon"></i><div>Set your webhook URL in Paystack Dashboard → Settings → API Keys &amp; Webhooks → Webhook URL: <span class="inline-code">https://igbobuigbo.org.ng/api/paystack/webhook</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 9 — EMAIL
+══════════════════════════════════════════ -->
+<div class="section" id="s9">
+  <div class="section-header">
+    <div class="section-num">9</div>
+    <div class="section-info">
+      <h2>Email Notifications — Brevo</h2>
+      <p>Confirmation emails, receipts, and announcements</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Plan</th><th>Emails/Day</th><th>Emails/Month</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr class="tier-free"><td><strong>Free</strong></td><td class="td-free">300</td><td class="td-free">~9,000</td><td class="td-free">₦0/month</td></tr>
+        <tr><td><strong>Starter</strong></td><td class="td-ok">Unlimited</td><td class="td-ok">5,000</td><td class="td-cost">$9/month (~₦14,400)</td></tr>
+        <tr><td><strong>Business</strong></td><td class="td-ok">Unlimited</td><td class="td-ok">20,000</td><td class="td-cost">$25/month (~₦40,000)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ibox"><i class="fa fa-circle-info box-icon"></i><div>300 emails/day free is enough for thousands of members if we send mostly triggered emails (registration, receipt, approval). For newsletters/announcements to all members, upgrade to Starter ($9/month).</div></div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/app/api/send-email/route.ts</span></div>
+    <div class="code-body"><code><span class="c-p">import</span> * as brevo <span class="c-p">from</span> <span class="c-g">'@getbrevo/brevo'</span>;
+
+<span class="c-b">const</span> apiInstance = <span class="c-b">new</span> brevo.TransactionalEmailsApi();
+apiInstance.authentications[<span class="c-g">'apiKey'</span>].apiKey = process.env.<span class="c-y">BREVO_API_KEY</span>!;
+
+<span class="c-p">export async function</span> sendWelcomeEmail(to: <span class="c-b">string</span>, name: <span class="c-b">string</span>, memberId: <span class="c-b">string</span>) {
+  <span class="c-p">await</span> apiInstance.sendTransacEmail({
+    sender:  { name: <span class="c-g">'Igbo Bu Igbo'</span>, email: <span class="c-g">'noreply@igbobuigbo.org.ng'</span> },
+    to:      [{ email: to, name }],
+    subject: <span class="c-g">`Welcome, <span class="c-b">${name}</span>! Your IBI Membership — <span class="c-b">${memberId}</span>`</span>,
+    htmlContent: <span class="c-g">`
+      &lt;h2&gt;Nno, <span class="c-b">${name}</span>!&lt;/h2&gt;
+      &lt;p&gt;Your Igbo Bu Igbo membership (ID: &lt;strong&gt;<span class="c-b">${memberId}</span>&lt;/strong&gt;) has been activated.&lt;/p&gt;
+      &lt;p&gt;Download your digital ID card at:
+         &lt;a href="https://igbobuigbo.org.ng/dashboard"&gt;igbobuigbo.org.ng/dashboard&lt;/a&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;em&gt;Igbo Bu Igbo Initiative&lt;/em&gt;&lt;/p&gt;
+    `</span>
+  });
+}</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 10 — SMS
+══════════════════════════════════════════ -->
+<div class="section" id="s10">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-info">
+      <h2>SMS Notifications — Termii (Nigeria)</h2>
+      <p>OTP, payment confirmations, and event reminders via SMS</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>SMS Bundle</th><th>Cost (NGN)</th><th>Per SMS</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td>1,000 units</td><td class="td-cost">~₦10,000</td><td class="td-cost">₦10</td><td>Testing phase</td></tr>
+        <tr><td>5,000 units</td><td class="td-cost">~₦45,000</td><td class="td-cost">₦9</td><td>Up to 5,000 members</td></tr>
+        <tr><td>10,000 units</td><td class="td-cost">~₦80,000</td><td class="td-cost">₦8</td><td>Scale phase</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/app/api/send-sms/route.ts</span></div>
+    <div class="code-body"><code><span class="c-p">export async function</span> sendSMS(phone: <span class="c-b">string</span>, message: <span class="c-b">string</span>) {
+  <span class="c-b">const</span> res = <span class="c-p">await</span> fetch(<span class="c-g">'https://api.ng.termii.com/api/sms/send'</span>, {
+    method: <span class="c-g">'POST'</span>,
+    headers: { <span class="c-g">'Content-Type'</span>: <span class="c-g">'application/json'</span> },
+    body: JSON.stringify({
+      to:       phone,      <span class="c-gr">// e.g. "2348012345678" (no + prefix)</span>
+      from:     process.env.<span class="c-y">TERMII_SENDER_ID</span>,   <span class="c-gr">// "IgboIBI"</span>
+      sms:      message,
+      type:     <span class="c-g">'plain'</span>,
+      channel:  <span class="c-g">'generic'</span>,
+      api_key:  process.env.<span class="c-y">TERMII_API_KEY</span>,
+    })
+  });
+  <span class="c-p">return</span> res.json();
+}
+
+<span class="c-gr">// Usage — send payment confirmation SMS</span>
+<span class="c-p">await</span> sendSMS(member.phone,
+  <span class="c-g">`IBI: Payment of ₦<span class="c-b">${amount}</span> confirmed. Ref: <span class="c-b">${ref}</span>. Membership ID: <span class="c-b">${memberId}</span>. igbobuigbo.org.ng`</span>
+);</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 11 — DIGITAL ID CARD
+══════════════════════════════════════════ -->
+<div class="section" id="s11">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-info">
+      <h2>Digital ID Card Generation</h2>
+      <p>QR code, downloadable PNG and PDF — all in the browser</p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/id-card-generator.ts</span></div>
+    <div class="code-body"><code><span class="c-p">import</span> QRCode <span class="c-p">from</span> <span class="c-g">'qrcode'</span>;
+<span class="c-p">import</span> html2canvas <span class="c-p">from</span> <span class="c-g">'html2canvas'</span>;
+<span class="c-p">import</span> jsPDF <span class="c-p">from</span> <span class="c-g">'jspdf'</span>;
+
+<span class="c-gr">// Generate QR code data URL for verification</span>
+<span class="c-p">export async function</span> generateQRCode(memberId: <span class="c-b">string</span>): Promise&lt;<span class="c-b">string</span>&gt; {
+  <span class="c-b">const</span> verifyURL = <span class="c-g">`https://igbobuigbo.org.ng/verify?id=<span class="c-b">${memberId}</span>`</span>;
+  <span class="c-p">return</span> QRCode.toDataURL(verifyURL, {
+    width: <span class="c-o">200</span>, margin: <span class="c-o">1</span>,
+    color: { dark: <span class="c-g">'#1A0A00'</span>, light: <span class="c-g">'#FFFFFF'</span> }
+  });
+}
+
+<span class="c-gr">// Download ID Card as high-resolution PNG</span>
+<span class="c-p">export async function</span> downloadCardAsPNG(cardElementId: <span class="c-b">string</span>, memberId: <span class="c-b">string</span>) {
+  <span class="c-b">const</span> el = document.getElementById(cardElementId)!;
+  <span class="c-b">const</span> canvas = <span class="c-p">await</span> html2canvas(el, {
+    scale: <span class="c-o">3</span>, useCORS: <span class="c-b">true</span>, allowTaint: <span class="c-b">true</span>, backgroundColor: <span class="c-b">null</span>
+  });
+  <span class="c-b">const</span> link = document.createElement(<span class="c-g">'a'</span>);
+  link.download = <span class="c-g">`IBI-Card-<span class="c-b">${memberId}</span>.png`</span>;
+  link.href = canvas.toDataURL(<span class="c-g">'image/png'</span>);
+  link.click();
+}
+
+<span class="c-gr">// Download as PDF</span>
+<span class="c-p">export async function</span> downloadCardAsPDF(cardElementId: <span class="c-b">string</span>, memberId: <span class="c-b">string</span>) {
+  <span class="c-b">const</span> el = document.getElementById(cardElementId)!;
+  <span class="c-b">const</span> canvas = <span class="c-p">await</span> html2canvas(el, { scale: <span class="c-o">3</span>, useCORS: <span class="c-b">true</span> });
+  <span class="c-b">const</span> imgData = canvas.toDataURL(<span class="c-g">'image/png'</span>);
+  <span class="c-b">const</span> pdf = <span class="c-b">new</span> jsPDF({ orientation: <span class="c-g">'landscape'</span>, unit: <span class="c-g">'mm'</span>, format: [<span class="c-o">86</span>, <span class="c-o">54</span>] }); <span class="c-gr">// Credit card size</span>
+  pdf.addImage(imgData, <span class="c-g">'PNG'</span>, <span class="c-o">0</span>, <span class="c-o">0</span>, <span class="c-o">86</span>, <span class="c-o">54</span>);
+  pdf.save(<span class="c-g">`IBI-Card-<span class="c-b">${memberId}</span>.pdf`</span>);
+}</code></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 12 — VERCEL DEPLOYMENT
+══════════════════════════════════════════ -->
+<div class="section" id="s12">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-info">
+      <h2>Vercel Deployment</h2>
+      <p>From GitHub to live in under 5 minutes — free tier</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Feature</th><th>Vercel Free (Hobby)</th><th>Vercel Pro</th></tr></thead>
+      <tbody>
+        <tr class="tier-free"><td>Bandwidth</td><td class="td-free">100 GB/month</td><td>1 TB/month</td></tr>
+        <tr class="tier-free"><td>Deployments</td><td class="td-free">Unlimited</td><td>Unlimited</td></tr>
+        <tr class="tier-free"><td>Custom domains + SSL</td><td class="td-free">Unlimited (Free SSL)</td><td>Unlimited</td></tr>
+        <tr class="tier-free"><td>Serverless functions</td><td class="td-free">1M invocations/month</td><td>Unlimited</td></tr>
+        <tr class="tier-free"><td>Build time</td><td class="td-free">6,000 min/month</td><td>24,000 min/month</td></tr>
+        <tr><td>Team members</td><td class="td-warn">1 (personal only)</td><td>Unlimited</td></tr>
+        <tr><td>Cost</td><td class="td-free">₦0/month</td><td class="td-cost">$20/month (~₦32,000)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">Push to GitHub &amp; Deploy</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">terminal</span></div>
+          <div class="code-body"><code>git init
+git add .
+git commit -m <span class="c-g">"Initial IBI platform"</span>
+git remote add origin https://github.com/yourusername/igbobuigbo-platform.git
+git push -u origin main
+
+<span class="c-gr"># Then: Go to vercel.com → New Project → Import from GitHub</span>
+<span class="c-gr"># → Select igbobuigbo-platform → Deploy</span>
+<span class="c-gr"># Vercel auto-detects Next.js and configures build settings</span></code></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">Add Environment Variables in Vercel</div>
+        <div class="step-desc">In Vercel Dashboard → Project → Settings → Environment Variables → Add all variables from your <span class="inline-code">.env.local</span> file. Mark sensitive ones (PAYSTACK_SECRET_KEY, FIREBASE_ADMIN_PRIVATE_KEY) as "Production only".</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Connect Custom Domain</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">dns</span><span class="code-file">Cloudflare DNS Records for igbobuigbo.org.ng</span></div>
+          <div class="code-body"><code><span class="c-gr">Type    Name    Value                          Proxy</span>
+CNAME   @       cname.vercel-dns.com           ☁ Proxied
+CNAME   www     cname.vercel-dns.com           ☁ Proxied
+
+<span class="c-gr"># Mirror domain igbobuigbo.com.ng</span>
+<span class="c-gr"># Point to same Vercel project or redirect com.ng → org.ng</span></code></div>
+        </div>
+        <div class="gbox"><i class="fa fa-circle-check box-icon"></i><div>Vercel provides <strong>free automatic SSL</strong> for all custom domains. HTTPS is enabled instantly. No configuration needed.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 13 — FREE TIER LIMITS
+══════════════════════════════════════════ -->
+<div class="section" id="s13">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-info">
+      <h2>Free Tier Limits — Complete Reference</h2>
+      <p>Exact numbers for every service — know when you'll hit the ceiling</p>
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Service</th><th>Limit</th><th>Free Allowance</th><th>IBI Usage Est.</th><th>Hit Limit When?</th></tr></thead>
+      <tbody>
+        <tr class="tier-free"><td><strong>Firestore Reads</strong></td><td>Per day</td><td class="td-free">50,000 reads/day</td><td>~5,000–15,000</td><td class="td-ok">~10,000+ daily active users</td></tr>
+        <tr class="tier-free"><td><strong>Firestore Writes</strong></td><td>Per day</td><td class="td-free">20,000 writes/day</td><td>~500–2,000</td><td class="td-ok">Never at launch scale</td></tr>
+        <tr class="tier-free"><td><strong>Firestore Deletes</strong></td><td>Per day</td><td class="td-free">20,000 deletes/day</td><td>~50–200</td><td class="td-ok">Never at launch scale</td></tr>
+        <tr class="tier-free"><td><strong>Firestore Storage</strong></td><td>Total</td><td class="td-free">1 GiB</td><td>~50–200 MB</td><td class="td-ok">~50,000+ member records</td></tr>
+        <tr class="tier-free"><td><strong>Firestore Bandwidth</strong></td><td>Per month</td><td class="td-free">10 GiB/month</td><td>~1–3 GiB</td><td class="td-ok">Very large scale only</td></tr>
+        <tr class="tier-free"><td><strong>Firebase Auth Users</strong></td><td>Total</td><td class="td-free">Unlimited</td><td>All members</td><td class="td-ok">Never</td></tr>
+        <tr class="tier-free"><td><strong>Firebase Auth (Phone)</strong></td><td>Per day</td><td class="td-warn">10 SMS/day</td><td>Use Termii instead</td><td class="td-warn">Day 1 if used heavily</td></tr>
+        <tr class="tier-free"><td><strong>Firebase Storage</strong></td><td>Total</td><td class="td-free">5 GiB</td><td>~1.5–2 GiB (5K members)</td><td class="td-ok">~10,000+ members</td></tr>
+        <tr class="tier-free"><td><strong>Storage Downloads</strong></td><td>Per day</td><td class="td-free">1 GiB/day</td><td>~200–500 MB</td><td class="td-ok">~5,000+ daily downloads</td></tr>
+        <tr class="tier-free"><td><strong>Vercel Bandwidth</strong></td><td>Per month</td><td class="td-free">100 GB/month</td><td>~5–20 GB</td><td class="td-ok">Very large traffic only</td></tr>
+        <tr class="tier-free"><td><strong>Brevo Email</strong></td><td>Per day</td><td class="td-free">300 emails/day</td><td>~50–200</td><td class="td-warn">Mass announcements to 300+ members</td></tr>
+        <tr class="tier-free"><td><strong>Paystack</strong></td><td>Monthly fee</td><td class="td-free">₦0 (% per tx only)</td><td>—</td><td class="td-ok">Never (always free to integrate)</td></tr>
+        <tr><td><strong>Termii SMS</strong></td><td>Per SMS</td><td class="td-warn">Pay per use from Day 1</td><td>~₦8–10/SMS</td><td class="td-na">Budget ~₦10,000 for 1,000 SMS</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wbox"><i class="fa fa-triangle-exclamation box-icon"></i><div><strong>Spark plan limitation:</strong> Cloud Functions (background jobs, scheduled tasks) are NOT available on the Spark plan. Upgrade to Blaze to use Cloud Functions for tasks like auto-expiring dues, scheduled reports, and async email triggers.</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 14 — UPGRADE PATHS & COSTS
+══════════════════════════════════════════ -->
+<div class="section" id="s14">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-info">
+      <h2>Upgrade Path &amp; Cost Projections</h2>
+      <p>What we'll pay at 1K, 5K, and 10K active members — in Naira</p>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:24px;">
+
+    <div class="projection-card">
+      <div class="pc-head"><span class="pc-title">Launch Phase</span><span class="pc-tag">0 – 1,000 Members</span></div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="lbl">Firebase (Spark)</span><span class="val free">₦0</span></div>
+        <div class="pc-row"><span class="lbl">Vercel (Hobby)</span><span class="val free">₦0</span></div>
+        <div class="pc-row"><span class="lbl">Brevo Email</span><span class="val free">₦0</span></div>
+        <div class="pc-row"><span class="lbl">Termii SMS (~500)</span><span class="val warn">~₦5,000</span></div>
+
+        <div class="pc-row"><span class="lbl">Paystack fees</span><span class="val warn">1.5% + ₦100/tx</span></div>
+      </div>
+      <div class="pc-total"><span class="lbl">Est. Monthly Cost</span><span class="val free-tier">~₦6,000</span></div>
+    </div>
+
+    <div class="projection-card">
+      <div class="pc-head"><span class="pc-title">Growth Phase</span><span class="pc-tag">1,000 – 5,000 Members</span></div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="lbl">Firebase Blaze</span><span class="val warn">~₦8,000</span></div>
+        <div class="pc-row"><span class="lbl">Cloud Functions</span><span class="val free">Free tier</span></div>
+        <div class="pc-row"><span class="lbl">Vercel Hobby</span><span class="val free">₦0</span></div>
+        <div class="pc-row"><span class="lbl">Brevo Starter</span><span class="val warn">~₦14,400</span></div>
+        <div class="pc-row"><span class="lbl">Termii (~2,000 SMS)</span><span class="val warn">~₦18,000</span></div>
+
+      </div>
+      <div class="pc-total"><span class="lbl">Est. Monthly Cost</span><span class="val">~₦41,300</span></div>
+    </div>
+
+    <div class="projection-card">
+      <div class="pc-head"><span class="pc-title">Scale Phase</span><span class="pc-tag">5,000 – 10,000 Members</span></div>
+      <div class="pc-body">
+        <div class="pc-row"><span class="lbl">Firebase Blaze</span><span class="val warn">~₦25,000</span></div>
+        <div class="pc-row"><span class="lbl">Vercel Pro</span><span class="val warn">~₦32,000</span></div>
+        <div class="pc-row"><span class="lbl">Brevo Business</span><span class="val warn">~₦40,000</span></div>
+        <div class="pc-row"><span class="lbl">Termii (~5K SMS)</span><span class="val warn">~₦40,000</span></div>
+        <div class="pc-row"><span class="lbl">Cloudinary (media)</span><span class="val warn">~₦16,000</span></div>
+
+      </div>
+      <div class="pc-total"><span class="lbl">Est. Monthly Cost</span><span class="val">~₦154,000</span></div>
+    </div>
+  </div>
+
+  <div class="tipbox"><i class="fa fa-lightbulb box-icon"></i><div><strong>Smart upgrade order:</strong><br>
+  1. <strong>First</strong>: Upgrade Firebase to Blaze (enables Cloud Functions — required for automated workflows)<br>
+  2. <strong>Then</strong>: Upgrade Brevo when you start sending newsletters<br>
+  3. <strong>Later</strong>: Upgrade Vercel Pro only when you add team members or exceed bandwidth<br>
+  4. <strong>Never needed</strong>: Firebase storage upgrade likely not needed until 10,000+ members</div></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Trigger to Upgrade</th><th>Upgrade</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr><td>Need background jobs / scheduled tasks</td><td>Firebase Spark → Blaze</td><td class="td-cost">Pay-as-you-go (starts at ~$5–20/month)</td></tr>
+        <tr><td>Sending announcements to 300+ members</td><td>Brevo Free → Starter</td><td class="td-cost">$9/month (~₦14,400)</td></tr>
+        <tr><td>Need multiple developers on Vercel</td><td>Vercel Hobby → Pro</td><td class="td-cost">$20/month (~₦32,000)</td></tr>
+        <tr><td>Firestore reads &gt; 40,000/day consistently</td><td>Optimize queries first, then Blaze</td><td class="td-cost">$0.06/100K reads</td></tr>
+        <tr><td>Storage &gt; 4 GiB</td><td>Firebase Storage (Blaze)</td><td class="td-cost">$0.026/GiB/month</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 15 — DELIVERABLES
+══════════════════════════════════════════ -->
+<div class="section" id="s15">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-info">
+      <h2>Complete Deliverables Checklist</h2>
+      <p>Everything that must be built and delivered for the full platform</p>
+    </div>
+  </div>
+
+  <div class="cli-section">Phase 1 — Public Website (Weeks 1–3)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d1"/><label for="d1">Homepage (index.html / page.tsx) — hero, stats, quick actions, events, chapters, verify, news, footer<span class="sub">Includes abiaGenMeeting.jpg banner, video section, 3-region chapter accordion</span></label></div>
+    <div class="cli"><input type="checkbox" id="d2"/><label for="d2">About page — organisation history, mission, vision, leadership<span class="sub">SEO optimized with metadata</span></label></div>
+    <div class="cli"><input type="checkbox" id="d3"/><label for="d3">Events listing page — with chapter, regional, and national categorization</label></div>
+    <div class="cli"><input type="checkbox" id="d4"/><label for="d4">News &amp; Media page — articles, press releases, photo gallery, video</label></div>
+    <div class="cli"><input type="checkbox" id="d5"/><label for="d5">Donate page — Paystack integration, donation categories, receipt generation</label></div>
+    <div class="cli"><input type="checkbox" id="d6"/><label for="d6">Public member verification page — search by ID, phone, email, QR scan</label></div>
+    <div class="cli"><input type="checkbox" id="d7"/><label for="d7">Contact page — form, WhatsApp link, office address, FAQ</label></div>
+    <div class="cli"><input type="checkbox" id="d8"/><label for="d8">Coming soon page — with countdown timer, notify-by-email form</label></div>
+  </div>
+
+  <div class="cli-section">Phase 2 — Registration &amp; Payments (Weeks 4–6)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d9"/><label for="d9">Multi-step registration form — all 15 required fields, photo upload, ID upload<span class="sub">Zod validation, React Hook Form, Firebase Storage for file uploads</span></label></div>
+    <div class="cli"><input type="checkbox" id="d10"/><label for="d10">Paystack payment integration — registration fee, dues, donations, events, levies</label></div>
+    <div class="cli"><input type="checkbox" id="d11"/><label for="d11">Paystack webhook — auto-verify payment, update Firestore, trigger emails/SMS</label></div>
+    <div class="cli"><input type="checkbox" id="d12"/><label for="d12">Automatic email confirmation — welcome email, payment receipt, approval notification</label></div>
+    <div class="cli"><input type="checkbox" id="d13"/><label for="d13">SMS confirmation — Termii integration for Nigerian numbers</label></div>
+    <div class="cli"><input type="checkbox" id="d14"/><label for="d14">Application status page — track application from submission to approval</label></div>
+  </div>
+
+  <div class="cli-section">Phase 3 — Member Dashboard (Weeks 7–9)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d15"/><label for="d15">Member login / logout / password reset</label></div>
+    <div class="cli"><input type="checkbox" id="d16"/><label for="d16">Overview dashboard — membership status, wallet balance, notifications</label></div>
+    <div class="cli"><input type="checkbox" id="d17"/><label for="d17">Profile management — edit personal information, upload photo</label></div>
+    <div class="cli"><input type="checkbox" id="d18"/><label for="d18">Digital ID card — QR code, download PNG, download PDF, print</label></div>
+    <div class="cli"><input type="checkbox" id="d19"/><label for="d19">Wallet system — deposit, transfer to member, pay dues/levies, ajo/isusu, food contributions</label></div>
+    <div class="cli"><input type="checkbox" id="d20"/><label for="d20">Payment history — all transactions with downloadable receipts</label></div>
+    <div class="cli"><input type="checkbox" id="d21"/><label for="d21">Chapter / Region Transfer application + status tracking</label></div>
+    <div class="cli"><input type="checkbox" id="d22"/><label for="d22">Elections &amp; Voting — live elections, cast vote, view results, decision votes</label></div>
+    <div class="cli"><input type="checkbox" id="d23"/><label for="d23">Candidacy Application — apply for positions at any level</label></div>
+    <div class="cli"><input type="checkbox" id="d24"/><label for="d24">Grants &amp; Scholarships — browse, apply, track status</label></div>
+    <div class="cli"><input type="checkbox" id="d25"/><label for="d25">Event registration from dashboard</label></div>
+    <div class="cli"><input type="checkbox" id="d26"/><label for="d26">Notifications center — unread count, mark as read</label></div>
+  </div>
+
+  <div class="cli-section">Phase 4 — Admin Dashboard (Weeks 10–12)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d27"/><label for="d27">Role-based access — Super Admin, Trustee Chairman, National Exec, State Coord, Financial Sec, Media, Member</label></div>
+    <div class="cli"><input type="checkbox" id="d28"/><label for="d28">Member approval workflow — review applications, approve/reject with reason</label></div>
+    <div class="cli"><input type="checkbox" id="d29"/><label for="d29">Member management — search, filter, view, suspend, reactivate</label></div>
+    <div class="cli"><input type="checkbox" id="d30"/><label for="d30">Payment dashboard — all transactions, filters, totals, reconciliation</label></div>
+    <div class="cli"><input type="checkbox" id="d31"/><label for="d31">Transfer management — approve/reject chapter transfers</label></div>
+    <div class="cli"><input type="checkbox" id="d32"/><label for="d32">Election management — create elections, add candidates, close, declare results</label></div>
+    <div class="cli"><input type="checkbox" id="d33"/><label for="d33">Grants management — review applications, approve/reject, mark as disbursed</label></div>
+    <div class="cli"><input type="checkbox" id="d34"/><label for="d34">Announcement system — send notifications to all, chapter, or region</label></div>
+    <div class="cli"><input type="checkbox" id="d35"/><label for="d35">Reports — member count, revenue, by state, active/inactive, export to PDF/Excel/CSV</label></div>
+    <div class="cli"><input type="checkbox" id="d36"/><label for="d36">Audit log — all admin actions timestamped</label></div>
+  </div>
+
+  <div class="cli-section">Phase 5 — Events &amp; Media (Weeks 13–14)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d37"/><label for="d37">Event creation &amp; management — chapter meetings, regional conventions, national events, Exhbitions, Expos, Festivals and Awards</label></div>
+    <div class="cli"><input type="checkbox" id="d38"/><label for="d38">Event ticket payment — Paystack integration, QR ticket, attendance check-in</label></div>
+    <div class="cli"><input type="checkbox" id="d39"/><label for="d39">Photo gallery CMS — upload, organize, display</label></div>
+    <div class="cli"><input type="checkbox" id="d40"/><label for="d40">News/blog CMS — create, edit, publish, unpublish articles</label></div>
+  </div>
+
+  <div class="cli-section">Phase 6 — Launch (Weeks 15–16)</div>
+  <div class="checklist">
+    <div class="cli"><input type="checkbox" id="d41"/><label for="d41">Full security audit — Firestore rules, API routes, input validation</label></div>
+    <div class="cli"><input type="checkbox" id="d42"/><label for="d42">SEO optimization — metadata, sitemap, robots.txt, Open Graph</label></div>
+    <div class="cli"><input type="checkbox" id="d43"/><label for="d43">Performance optimization — image optimization, code splitting, caching</label></div>
+    <div class="cli"><input type="checkbox" id="d44"/><label for="d44">Mobile responsiveness testing — Android (Chrome), iPhone (Safari)</label></div>
+    <div class="cli"><input type="checkbox" id="d45"/><label for="d45">Cross-browser testing — Chrome, Firefox, Edge, Safari</label></div>
+    <div class="cli"><input type="checkbox" id="d46"/><label for="d46">Domain setup — igbobuigbo.org.ng and igbobuigbo.com.ng on Cloudflare + Vercel</label></div>
+    <div class="cli"><input type="checkbox" id="d47"/><label for="d47">Admin credentials documentation — super admin setup, role assignment</label></div>
+    <div class="cli"><input type="checkbox" id="d48"/><label for="d48">Developer handover — source code (GitHub), documentation, database schema, deployment guide</label></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SUMMARY BOX -->
+  <div style="background:var(--dark);border-radius:14px;padding:28px;position:relative;overflow:hidden;margin-top:32px;">
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(201,144,26,0.04) 0,rgba(201,144,26,0.04) 1px,transparent 0,transparent 50%);background-size:16px 16px;"></div>
+    <div style="position:relative;z-index:1;">
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--white);margin-bottom:6px;">Summary</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:20px;">Estimated timeline and total launch cost for igbobuigbo.org.ng</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;">
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">16</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);">Weeks to Launch</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">48</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);">Feature Deliverables</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:26px;color:#4ade80;">₦0</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);">Monthly Infra at Launch</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;">
+          <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--gold-l);">~₦12K</div>
+          <div style="font-size:11px;color:rgba(255,255,255,0.5);">Emails + SMS Budget</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+        <strong style="color:rgba(255,255,255,0.8);">Stack:</strong> Next.js 14 + Firebase (Spark → Blaze) + Paystack + Brevo + Termii + Vercel + Cloudflare<br/>
+        <strong style="color:rgba(255,255,255,0.8);">Repo:</strong> GitHub private repository — deploy to Vercel on every push to main<br/>
+        <strong style="color:rgba(255,255,255,0.8);">Domains:</strong> igbobuigbo.org.ng (primary) · igbobuigbo.com.ng (mirror redirect)
+      </div>
+    </div>
+  </div>
+
+<!-- ══════════════════════════════════════════
+     APPENDX SECTION
+══════════════════════════════════════════ -->
+<div class="section" id="sX">
+  <div class="section-header">
+    <div class="section-num">X</div>
+    <div class="section-info">
+      <h2>Emmanuel Adams </h2>
+      <p><strong>Head of Development</strong> <br>@Adams Consults <br>www.adams.com.ng</p>
+    </div>
+  </div>
+
+</div><!-- end .content -->
+
+<!-- PRINT BUTTON -->
+<button class="print-btn" onclick="window.print()"><i class="fa fa-print"></i> Print / Save as PDF</button>
+
+</body>
+</html>
