@@ -506,8 +506,21 @@ npm install lucide-react clsx date-fns zod react-hook-form @hookform/resolvers
 <span class="c-gr"># ID Card generation</span>
 npm install qrcode html2canvas jspdf
 
-<span class="c-gr"># Marketplace — image handling</span>
-npm install sharp browser-image-compression
+<span class="c-gr"># Marketplace — client-side image compression before upload</span>
+npm install browser-image-compression
+
+<span class="c-gr"># Marketplace — server-side image processing (thumbnails, WebP conversion)</span>
+npm install sharp multer @types/multer
+
+<span class="c-gr"># ⚠️  IMAGE CDN — install at Phase 5 (Marketplace launch)</span>
+<span class="c-gr"># Firebase Storage free tier = 5 GiB total. With 43 chapters × ~50 product</span>
+<span class="c-gr"># listings each × 3 images × 300 KB = ~1.8 GiB consumed by marketplace alone.</span>
+<span class="c-gr"># Add Cloudinary at Phase 5 before public marketplace goes live.</span>
+npm install cloudinary @cloudinary/url-gen
+
+<span class="c-gr"># WhatsApp Business (Termii supports WhatsApp channel — same API key)</span>
+<span class="c-gr"># Termii WhatsApp channel: change "channel":"generic" → "channel":"whatsapp"</span>
+<span class="c-gr"># No extra SDK needed — handled via existing Termii fetch utility.</span>
 
 <span class="c-gr"># Charts (analytics dashboard)</span>
 npm install recharts
@@ -516,7 +529,7 @@ npm install recharts
 npm install @tiptap/react @tiptap/starter-kit
 
 <span class="c-gr"># Utilities</span>
-npm install nanoid slugify</code></div>
+npm install nanoid slugify uuid</code></div>
         </div>
       </div>
     </div>
@@ -926,6 +939,111 @@ npm install nanoid slugify</code></div>
   link:    <span class="c-g">"/events/national-conv-2026"</span>,
   readAt:  <span class="c-p">null</span>,
   createdAt: <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /marketplace_orders/{orderId} ──────────────────────────────</span>
+<span class="c-gr">// Created when a buyer initiates purchase of a marketplace listing</span>
+{
+  buyerUid:        <span class="c-g">"firebase_auth_uid"</span>,
+  buyerMemberId:   <span class="c-g">"FCT/01/0001"</span>,
+  sellerUid:       <span class="c-g">"firebase_auth_uid_2"</span>,
+  sellerMemberId:  <span class="c-g">"ABI/01/0044"</span>,
+  listingId:       <span class="c-g">"marketplace_item_id"</span>,
+  listingTitle:    <span class="c-g">"Handwoven Akwete Cloth"</span>,
+  quantity:        <span class="c-o">2</span>,
+  unitPrice:       <span class="c-o">35000</span>,
+  totalAmount:     <span class="c-o">70000</span>,
+  paystackRef:     <span class="c-g">"IBI_MKT_1234567890"</span>,
+  deliveryMethod:  <span class="c-g">"pickup"</span>,          <span class="c-gr">// pickup | courier | in_person</span>
+  deliveryAddress: <span class="c-g">"No. 12, Wuse Zone 5, Abuja"</span>,
+  buyerNote:       <span class="c-g">"Please call before delivery"</span>,
+  status:          <span class="c-g">"paid"</span>,             <span class="c-gr">// pending | paid | confirmed | shipped | delivered | disputed | refunded</span>
+  disputeReason:   <span class="c-p">null</span>,
+  createdAt:       <span class="c-p">Timestamp</span>,
+  confirmedAt:     <span class="c-p">Timestamp</span>,
+  deliveredAt:     <span class="c-p">null</span>
+}
+
+<span class="c-gr">// ── /marketplace_reviews/{reviewId} ────────────────────────────</span>
+<span class="c-gr">// Written by buyer after order is marked delivered</span>
+{
+  orderId:       <span class="c-g">"marketplace_order_id"</span>,
+  listingId:     <span class="c-g">"marketplace_item_id"</span>,
+  buyerUid:      <span class="c-g">"firebase_auth_uid"</span>,
+  sellerUid:     <span class="c-g">"firebase_auth_uid_2"</span>,
+  rating:        <span class="c-o">5</span>,                    <span class="c-gr">// 1–5 stars</span>
+  comment:       <span class="c-g">"Excellent quality, fast delivery!"</span>,
+  adminApproved: <span class="c-b">true</span>,               <span class="c-gr">// Moderated before showing publicly</span>
+  createdAt:     <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /food_sharing_schedules/{scheduleId} ───────────────────────</span>
+<span class="c-gr">// Manages collection / distribution logistics for each food sharing group</span>
+{
+  groupId:       <span class="c-g">"food_sharing_group_id"</span>,
+  chapter:       <span class="c-g">"FCT Abuja Chapter"</span>,
+  collectionDate:<span class="c-g">"2026-06-22"</span>,
+  collectionTime:<span class="c-g">"10:00"</span>,
+  collectionPoints: [
+    { name: <span class="c-g">"IBI FCT HQ, Wuse Zone 3"</span>,   coordinator: <span class="c-g">"FCT/01/0001"</span>, capacity: <span class="c-o">15</span> },
+    { name: <span class="c-g">"Garki Area 11 Hub"</span>,           coordinator: <span class="c-g">"FCT/03/0012"</span>, capacity: <span class="c-o">10</span> }
+  ],
+  totalMembersConfirmed: <span class="c-o">18</span>,
+  itemsSourced:   <span class="c-b">false</span>,             <span class="c-gr">// Coordinator marks true when items purchased</span>
+  itemsReady:     <span class="c-b">false</span>,             <span class="c-gr">// Coordinator marks true when packed for pickup</span>
+  distributionComplete: <span class="c-b">false</span>,
+  reminderSentAt: <span class="c-p">null</span>,              <span class="c-gr">// Cloud Function sends 24hr reminder</span>
+  notes:          <span class="c-g">"Members must bring own bags for rice"</span>,
+  createdAt:      <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /bulk_purchase_orders/{orderId} ────────────────────────────</span>
+<span class="c-gr">// Tracks the actual supplier order lifecycle after slots fill up</span>
+{
+  groupId:         <span class="c-g">"bulk_purchases_group_id"</span>,
+  supplierRef:     <span class="c-g">"suppliers_supplier_id"</span>,
+  supplierName:    <span class="c-g">"Shenzhen Electronics Wholesale Co."</span>,
+  supplierContact: <span class="c-g">"+8613800138000"</span>,
+  totalUnitsOrdered: <span class="c-o">50</span>,
+  totalAmountCollected: <span class="c-o">4250000</span>,      <span class="c-gr">// From member slot payments (held in escrow)</span>
+  supplierInvoiceURL: <span class="c-g">"https://storage.../invoice.pdf"</span>,
+  orderPlacedAt:   <span class="c-p">Timestamp</span>,
+  estimatedShipping: <span class="c-g">"2026-07-10"</span>,
+  estimatedArrival:  <span class="c-g">"2026-09-01"</span>,
+  shippingProvider:  <span class="c-g">"DHL Express"</span>,
+  trackingNumber:    <span class="c-g">"DHL1234567890"</span>,
+  customsStatus:     <span class="c-g">"pending"</span>,       <span class="c-gr">// not_applicable | pending | cleared | held</span>
+  estimatedDuties:   <span class="c-o">0</span>,               <span class="c-gr">// NGN — pre-calculated before member payment</span>
+  actualDuties:      <span class="c-p">null</span>,
+  distributionDate:  <span class="c-p">null</span>,
+  memberAllocations: [
+    { memberId: <span class="c-g">"FCT/01/0001"</span>, slots: <span class="c-o">2</span>, collected: <span class="c-b">false</span>, collectedAt: <span class="c-p">null</span> }
+  ],
+  fundsReleased:  <span class="c-b">false</span>,             <span class="c-gr">// Admin releases escrow to coordinator only after delivery confirmed</span>
+  status:         <span class="c-g">"ordered"</span>,          <span class="c-gr">// ordered | shipped | in_customs | arrived | distributed | disputed</span>
+  createdAt:      <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /suppliers/{supplierId} ────────────────────────────────────</span>
+<span class="c-gr">// Verified supplier directory for bulk purchase coordinators</span>
+{
+  name:          <span class="c-g">"Shenzhen Wholesale Electronics Hub"</span>,
+  country:       <span class="c-g">"China"</span>,
+  category:      <span class="c-g">"electronics"</span>,        <span class="c-gr">// electronics|fashion|machinery|food|building|appliances</span>
+  contactPerson: <span class="c-g">"Mr. Wang (English)"</span>,
+  phone:         <span class="c-g">"+8613800138000"</span>,
+  email:         <span class="c-g">"wang@shenzhenhub.com"</span>,
+  whatsapp:      <span class="c-g">"+8613800138000"</span>,
+  moqTypical:    <span class="c-o">50</span>,                  <span class="c-gr">// Typical minimum order quantity</span>
+  leadTimeDays:  <span class="c-o">45</span>,                  <span class="c-gr">// Average days from order to Lagos arrival</span>
+  shippingModes: [<span class="c-g">"sea"</span>, <span class="c-g">"air"</span>],
+  paymentTerms:  <span class="c-g">"50% deposit, 50% before shipping"</span>,
+  rating:        <span class="c-o">4.3</span>,                 <span class="c-gr">// Avg rating from completed IBI bulk orders</span>
+  completedOrders: <span class="c-o">3</span>,
+  verifiedBy:    <span class="c-g">"FCT/01/0001"</span>,       <span class="c-gr">// Admin who approved this supplier</span>
+  notes:         <span class="c-g">"Reliable. Always provide tracking. Request 30% extra units as buffer."</span>,
+  isActive:      <span class="c-b">true</span>,
+  createdAt:     <span class="c-p">Timestamp</span>
 }</code></div>
   </div>
 </div>
@@ -957,14 +1075,16 @@ npm install nanoid slugify</code></div>
     <table>
       <thead><tr><th>Storage Metric</th><th>Spark (Free)</th><th>Blaze (After Free)</th><th>IBI Usage</th></tr></thead>
       <tbody>
-        <tr class="tr-free"><td>Total Storage</td><td class="tfree">5 GiB</td><td class="tcost">$0.026/GiB/month</td><td>~1.5–2 GiB for 5,000 members + marketplace images</td></tr>
+        <tr class="tr-free"><td>Total Storage</td><td class="tfree">5 GiB</td><td class="tcost">$0.026/GiB/month</td><td>Members only: ~1–1.5 GiB. <strong>Marketplace adds ~1.8 GiB at Phase 5.</strong></td></tr>
         <tr class="tr-free"><td>Downloads/day</td><td class="tfree">1 GiB/day</td><td class="tcost">$0.12/GiB</td><td>~300–600 MB — safe for launch</td></tr>
         <tr class="tr-free"><td>Upload ops/day</td><td class="tfree">20,000/day</td><td class="tcost">$0.004/1K ops</td><td>~200–500 — well within limit</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="gbox"><i class="fa fa-circle-check bi"></i><div>5 GiB free storage handles passport photos (~200 KB each), ID documents (~500 KB), and marketplace product images (~300 KB). At 5,000 members + 2,000 marketplace listings: ~2 GiB total — still within the free tier.</div></div>
+  <div class="wbox"><i class="fa fa-triangle-exclamation bi"></i><div><strong>Storage runs out faster than expected with marketplace images.</strong> At Phase 5 launch: 43 chapters × ~50 product listings × 3 images × 300 KB = <strong>~1.8 GiB for marketplace alone</strong>. Add member photos (~1 GiB), food sharing item photos (~200 MB), and bulk purchase product images (~200 MB) and you hit the 5 GiB free limit with only ~2,000–3,000 active marketplace listings. <strong>Integrate Cloudinary at Phase 5 start — before public marketplace launch — not at "scale phase".</strong></div></div>
+
+  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Recommended image storage strategy:</strong> Use Firebase Storage for member photos and ID documents (1–2 GiB). Route all marketplace product images, bulk purchase item photos, and food sharing images through <strong>Cloudinary free tier</strong> (25 GiB storage, 25 GiB bandwidth/month — far more generous than Firebase). Cloudinary also auto-generates WebP thumbnails, resizes on-the-fly, and delivers via global CDN for faster load on Nigerian mobile networks.</div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1166,79 +1286,366 @@ sendSMS(phone, <span class="c-g">`IBI: Your food sharing slot (June 2026) is con
     <div class="section-num dark">12</div>
     <div class="section-info">
       <h2>Marketplace &amp; Cooperative Modules</h2>
-      <p>The economic engine — business listings, bulk purchasing, food sharing, travel groups, Ajo/Isusu</p>
+      <p>Full technical breakdown — image pipeline, orders, escrow, food scheduling, bulk purchase coordination, WhatsApp notifications</p>
     </div>
   </div>
 
-  <div class="ibox"><i class="fa fa-circle-info bi"></i><div>These modules are what make the platform a <strong>trusted economic ecosystem</strong> — not just a cultural website. They are the strongest drivers of member registration and retention. All are built on Firestore + Paystack, requiring no new infrastructure.</div></div>
+  <div class="ibox"><i class="fa fa-circle-info bi"></i><div>These modules are what make the platform a <strong>trusted economic ecosystem</strong>. They are the strongest drivers of member registration and long-term retention. All built on Firestore + Paystack + Cloudinary — no new paid infrastructure until Phase 5 marketplace launch.</div></div>
 
   <div class="steps">
+
+    <!-- STEP 1 — MARKETPLACE IMAGE PIPELINE -->
     <div class="step">
       <div class="step-dot">1</div>
       <div class="step-body">
-        <div class="step-title">Marketplace — Business Directory &amp; Product Listings</div>
-        <div class="step-desc">Members can list businesses, products, and services. Admin verifies vendors and awards verification badges. Categories: fashion, food, electronics, agriculture, services, artisans, machinery.</div>
+        <div class="step-title">Marketplace — Image Upload &amp; CDN Delivery Pipeline</div>
+        <div class="step-desc">Every product listing supports up to 6 images. Images must be compressed client-side, uploaded to Cloudinary (not Firebase Storage), and served via Cloudinary CDN with auto-generated thumbnails. This keeps Firebase Storage free for member photos only.</div>
         <div class="code-block">
-          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Key marketplace API — src/app/api/marketplace/route.ts</span></div>
-          <div class="code-body"><code><span class="c-gr">// GET — public search with chapter/category filters</span>
-<span class="c-b">const</span> q = query(collection(db, <span class="c-g">'marketplace'</span>),
-  where(<span class="c-g">'status'</span>, <span class="c-g">'=='</span>, <span class="c-g">'active'</span>),
-  where(<span class="c-g">'category'</span>, <span class="c-g">'=='</span>, category),   <span class="c-gr">// optional filter</span>
-  orderBy(<span class="c-g">'createdAt'</span>, <span class="c-g">'desc'</span>),
-  limit(<span class="c-o">20</span>));
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/image-upload.ts — full pipeline</span></div>
+          <div class="code-body"><code><span class="c-p">import</span> imageCompression <span class="c-p">from</span> <span class="c-g">'browser-image-compression'</span>;
+<span class="c-p">import</span> { v2 <span class="c-b">as</span> cloudinary } <span class="c-p">from</span> <span class="c-g">'cloudinary'</span>;
 
-<span class="c-gr">// POST — member submits listing (admin approval required)</span>
-<span class="c-p">await</span> addDoc(collection(db, <span class="c-g">'marketplace'</span>), {
-  ...listingData,
-  sellerId:  userId,
-  isVerified: <span class="c-b">false</span>,    <span class="c-gr">// Admin verifies vendor before badge shows</span>
-  status:    <span class="c-g">'pending'</span>,
-  createdAt: serverTimestamp()
-});</code></div>
+<span class="c-gr">// ── STEP 1: Client-side compression before upload ──────────────</span>
+<span class="c-p">export async function</span> compressImage(file: File): Promise&lt;File&gt; {
+  <span class="c-p">return</span> imageCompression(file, {
+    maxSizeMB:         <span class="c-o">0.8</span>,          <span class="c-gr">// 800 KB max per image</span>
+    maxWidthOrHeight:  <span class="c-o">1200</span>,         <span class="c-gr">// Resize to max 1200px on longest side</span>
+    useWebWorker:      <span class="c-b">true</span>,
+    fileType:          <span class="c-g">'image/webp'</span>,  <span class="c-gr">// Convert to WebP for 30% smaller files</span>
+    initialQuality:    <span class="c-o">0.85</span>,
+  });
+}
+
+<span class="c-gr">// ── STEP 2: Upload to Cloudinary via server API route ─────────</span>
+<span class="c-gr">// Client calls: POST /api/images/upload</span>
+<span class="c-gr">// Server handles Cloudinary SDK (secret key never exposed to browser)</span>
+cloudinary.config({
+  cloud_name:  process.env.<span class="c-y">CLOUDINARY_CLOUD_NAME</span>,
+  api_key:     process.env.<span class="c-y">CLOUDINARY_API_KEY</span>,
+  api_secret:  process.env.<span class="c-y">CLOUDINARY_API_SECRET</span>,
+});
+
+<span class="c-p">export async function</span> uploadToCloudinary(base64: <span class="c-b">string</span>, folder: <span class="c-b">string</span>, memberId: <span class="c-b">string</span>) {
+  <span class="c-b">const</span> result = <span class="c-p">await</span> cloudinary.uploader.upload(base64, {
+    folder:         <span class="c-g">`ibi/${folder}/${memberId}`</span>,
+    transformation: [
+      { width: <span class="c-o">800</span>, crop: <span class="c-g">'limit'</span>, quality: <span class="c-g">'auto'</span>, fetch_format: <span class="c-g">'webp'</span> }
+    ],
+    eager: [
+      { width: <span class="c-o">200</span>, height: <span class="c-o">200</span>, crop: <span class="c-g">'thumb'</span>, gravity: <span class="c-g">'auto'</span> },  <span class="c-gr">// Grid thumbnail</span>
+      { width: <span class="c-o">400</span>, crop: <span class="c-g">'limit'</span>, quality: <span class="c-g">'auto'</span>                 },  <span class="c-gr">// Mobile preview</span>
+    ],
+    eager_async: <span class="c-b">true</span>,
+  });
+  <span class="c-p">return</span> {
+    url:      result.secure_url,          <span class="c-gr">// Full 800px image</span>
+    thumb:    result.eager[<span class="c-o">0</span>].secure_url, <span class="c-gr">// 200×200 thumbnail for grid</span>
+    preview:  result.eager[<span class="c-o">1</span>].secure_url, <span class="c-gr">// 400px for mobile</span>
+    publicId: result.public_id,
+  };
+}
+
+<span class="c-gr">// ── STEP 3: Firestore listing stores all 3 URL sizes ──────────</span>
+<span class="c-gr">// listing.images = [{url, thumb, preview}, ...]</span>
+<span class="c-gr">// Display grid: use thumb | Lightbox: use url | Mobile card: use preview</span>
+
+<span class="c-gr">// ── STEP 4: Delete from Cloudinary when listing is removed ────</span>
+<span class="c-p">export async function</span> deleteImage(publicId: <span class="c-b">string</span>) {
+  <span class="c-p">return</span> cloudinary.uploader.destroy(publicId);
+}</code></div>
         </div>
+        <div class="cg">
+          <div class="ic-card"><h4><i class="fa fa-image"></i>Image Specs Per Type</h4>
+            <p><strong>Product listings:</strong> max 6 images, 800px wide, WebP<br/>
+            <strong>Food sharing items:</strong> max 2 images per item, 600px<br/>
+            <strong>Bulk purchase products:</strong> max 4 images (from supplier catalogue)<br/>
+            <strong>Member passport photo:</strong> Firebase Storage only, 400×400px circle crop<br/>
+            <strong>Event banners:</strong> Firebase Storage, 1200×630px (OG standard)</p>
+          </div>
+          <div class="ic-card"><h4><i class="fa fa-folder-open"></i>Cloudinary Folder Structure</h4>
+            <p><code>ibi/marketplace/{memberId}/</code><br/>
+            <code>ibi/food-sharing/{groupId}/</code><br/>
+            <code>ibi/bulk-purchase/{groupId}/</code><br/>
+            <code>ibi/events/{eventId}/</code><br/>
+            <code>ibi/news/{articleId}/</code></p>
+          </div>
+          <div class="ic-card"><h4><i class="fa fa-cloud"></i>Cloudinary Free Tier</h4>
+            <p><strong>25 GiB storage</strong> (vs Firebase's 5 GiB)<br/>
+            <strong>25 GiB bandwidth/month</strong><br/>
+            Auto WebP delivery, CDN edge nodes<br/>
+            On-the-fly resizing via URL params<br/>
+            ~₦0/month for Phase 5 marketplace at launch</p>
+          </div>
+        </div>
+        <div class="wbox"><i class="fa fa-triangle-exclamation bi"></i><div>Add <span class="ic">CLOUDINARY_CLOUD_NAME</span>, <span class="ic">CLOUDINARY_API_KEY</span>, and <span class="ic">CLOUDINARY_API_SECRET</span> to your <span class="ic">.env.local</span> and Vercel environment variables. Never expose the API secret client-side.</div></div>
       </div>
     </div>
+
+    <!-- STEP 2 — MARKETPLACE ORDERS & REVIEWS -->
     <div class="step">
       <div class="step-dot">2</div>
       <div class="step-body">
-        <div class="step-title">Community Food Sharing Groups</div>
-        <div class="step-desc">Chapter coordinators create food sharing groups (rice, palm oil, garri, yam, goat/cow shares, etc.). Members pay their share via Paystack into the group. On the collection date, items are distributed. Reflects <em>"Onye Aghana Nwanne Ya"</em> — collective support.</div>
-        <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div>Each food sharing group is a Firestore document. Payment triggers the Paystack webhook to mark the member as paid and decrement remaining slots. When full, coordinator is notified to proceed with bulk purchasing.</div></div>
-      </div>
-    </div>
-    <div class="step">
-      <div class="step-dot">3</div>
-      <div class="step-body">
-        <div class="step-title">Bulk Purchase Groups — Local &amp; International</div>
-        <div class="step-desc">Verified members join bulk buying groups for products from local markets and international sources (especially China). Each group has an MOQ (Minimum Order Quantity), per-slot price, and a coordinator. Reduces importation costs and splits shipping.</div>
+        <div class="step-title">Marketplace — Orders &amp; Vendor Review System</div>
+        <div class="step-desc">A listing without an order system is just an advert. Members need to purchase items, track delivery, and leave verified reviews. Reviews are only allowed after a confirmed delivery — preventing fake reviews.</div>
         <div class="code-block">
-          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Join bulk purchase — payment flow</span></div>
-          <div class="code-body"><code><span class="c-gr">// 1. Member selects number of slots (1 slot = 1 unit MOQ)</span>
-<span class="c-gr">// 2. Paystack charge: slots × unitPrice</span>
-<span class="c-gr">// 3. Webhook: increment takenSlots, add member to group</span>
-<span class="c-gr">// 4. When takenSlots === totalSlots: auto-notify coordinator to order</span>
-<span class="c-gr">// 5. Status updates: open → full → ordered → shipped → delivered</span>
-<span class="c-gr">// 6. SMS + email at each status change to all group members</span></code></div>
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Marketplace order + review flow</span></div>
+          <div class="code-body"><code><span class="c-gr">// ── BUYER places order ──────────────────────────────────────────</span>
+<span class="c-gr">// 1. Buyer clicks "Buy Now" → Paystack initializes with metadata:</span>
+{ paymentType: <span class="c-g">'marketplace'</span>, listingId, quantity, sellerId, buyerId }
+
+<span class="c-gr">// 2. Paystack webhook confirms payment → create /marketplace_orders doc:</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'marketplace_orders'</span>).add({
+  buyerUid, sellerUid, listingId, quantity, totalAmount,
+  paystackRef,  status: <span class="c-g">'paid'</span>,  createdAt: serverTimestamp()
+});
+
+<span class="c-gr">// 3. Notify seller via SMS (Termii) + Email (Brevo) + in-app notification</span>
+sendSMS(sellerPhone, <span class="c-g">`IBI Marketplace: New order for "${listingTitle}" from ${buyerName}. Log in to confirm.`</span>);
+
+<span class="c-gr">// ── SELLER confirms + marks shipped ─────────────────────────────</span>
+<span class="c-gr">// Seller dashboard: confirm order → add tracking note → mark shipped</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'marketplace_orders'</span>).doc(orderId).update({
+  status: <span class="c-g">'shipped'</span>,  confirmedAt: serverTimestamp()
+});
+
+<span class="c-gr">// ── BUYER confirms delivery → review unlocked ───────────────────</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'marketplace_orders'</span>).doc(orderId).update({
+  status: <span class="c-g">'delivered'</span>,  deliveredAt: serverTimestamp()
+});
+<span class="c-gr">// Cloud Function: send buyer a "Leave a review" notification</span>
+
+<span class="c-gr">// ── REVIEW submitted (buyer only, once per order) ───────────────</span>
+<span class="c-p">await</span> addDoc(collection(db, <span class="c-g">'marketplace_reviews'</span>), {
+  orderId, listingId, buyerUid, sellerUid,
+  rating: <span class="c-o">5</span>,  comment: <span class="c-g">"Perfect quality..."</span>,
+  adminApproved: <span class="c-b">false</span>,  createdAt: serverTimestamp()
+});
+<span class="c-gr">// Admin moderates within 48hrs → sets adminApproved: true → visible on listing</span>
+
+<span class="c-gr">// ── SELLER rating auto-updated on Firestore member doc ──────────</span>
+<span class="c-gr">// Cloud Function: recalculate seller's avg rating on /members/{sellerUid}</span>
+<span class="c-gr">// members.marketplaceRating = avg of all approved reviews for this seller</span></code></div>
         </div>
       </div>
     </div>
+
+    <!-- STEP 3 — FOOD SHARING PIPELINE -->
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">Food Sharing — Complete Group Lifecycle &amp; Collection Logistics</div>
+        <div class="step-desc">Food sharing groups have a 6-stage lifecycle: <strong>Open → Full → Sourcing → Ready → Collecting → Distributed.</strong> Each stage triggers notifications. Item photos from the coordinator help members know exactly what to expect at collection.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Food sharing lifecycle — status transitions + Cloud Functions</span></div>
+          <div class="code-body"><code><span class="c-gr">// STATUS FLOW: open → full → sourcing → ready → collecting → distributed</span>
+
+<span class="c-gr">// ── MEMBER joins group (open status) ───────────────────────────</span>
+<span class="c-gr">// Paystack payment triggers webhook → mark member as paid in group</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'food_sharing_groups'</span>).doc(groupId).update({
+  members: FieldValue.arrayUnion(<span class="c-g">"FCT/01/0001"</span>),
+  takenSlots: FieldValue.increment(<span class="c-o">1</span>)
+});
+<span class="c-gr">// If takenSlots === maxSlots → auto-set status: "full", notify coordinator</span>
+
+<span class="c-gr">// ── COORDINATOR uploads item photos (sourcing status) ──────────</span>
+<span class="c-gr">// Coordinator photographs items sourced (e.g. sacks of rice at market)</span>
+<span class="c-gr">// Uploads to Cloudinary under ibi/food-sharing/{groupId}/</span>
+<span class="c-gr">// Members can see proof of purchase in dashboard</span>
+
+<span class="c-gr">// ── 24-HOUR REMINDER (Cloud Function — scheduled) ──────────────</span>
+<span class="c-gr">// Firestore /food_sharing_schedules doc: reminderSentAt = null</span>
+<span class="c-gr">// Scheduled function checks daily: if collectionDate = tomorrow AND reminderSentAt = null</span>
+<span class="c-p">for</span> (<span class="c-b">const</span> memberId <span class="c-b">of</span> group.members) {
+  sendSMS(memberPhone, <span class="c-g">`IBI Food Sharing: Collection TOMORROW (${collectionDate}) at ${point.name}. Bring own bags. Time: ${collectionTime}`</span>);
+  <span class="c-gr">// Also send WhatsApp via Termii: channel: "whatsapp"</span>
+}
+<span class="c-p">await</span> schedule.update({ reminderSentAt: serverTimestamp() });
+
+<span class="c-gr">// ── COLLECTION DAY: coordinator marks each member collected ────</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'food_sharing_schedules'</span>).doc(scheduleId).update({
+  memberAllocations: FieldValue.arrayUnion({ memberId: <span class="c-g">"FCT/01/0001"</span>, collected: <span class="c-b">true</span>, collectedAt: serverTimestamp() })
+});
+<span class="c-gr">// When all members collected → set group status: "distributed"</span>
+
+<span class="c-gr">// ── RECURRING GROUP CREATION (Cloud Function — monthly) ─────────</span>
+<span class="c-gr">// Groups with recurrence: "monthly" auto-generate next month's group</span>
+<span class="c-gr">// Template data copied, new collectionDate = +1 month, status: "open"</span>
+<span class="c-gr">// Notify chapter members: "June food sharing group is now open!"</span></code></div>
+        </div>
+        <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Food item images matter for trust.</strong> The coordinator should upload photos of each item (e.g. branded rice bags, palm oil drums) before marking "Sourcing complete". Store these in Cloudinary under <span class="ic">ibi/food-sharing/{groupId}/</span>. Members see proof in their dashboard before collection day.</div></div>
+      </div>
+    </div>
+
+    <!-- STEP 4 — BULK PURCHASE ESCROW -->
     <div class="step">
       <div class="step-dot">4</div>
       <div class="step-body">
-        <div class="step-title">Community Travel Groups</div>
-        <div class="step-desc">Coordinators create travel groups for business trips, cultural visits, conventions, tourism, and diaspora networking. Members pay per-person cost via Paystack. Reflects the Igbo proverb: <em>"Njepu Amaka — a traveler is more enlightened than an old person."</em></div>
+        <div class="step-title">Bulk Purchasing — Escrow Trust Model &amp; Coordinator Accountability</div>
+        <div class="step-desc">The biggest trust risk in bulk purchasing is: <em>members pay → coordinator disappears with funds.</em> The IBI platform solves this with a partial escrow model. Funds are held in the <strong>group wallet</strong> (a Firestore balance, not a bank account) and only released to the coordinator in stages, with admin sign-off at each gate.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Bulk purchase escrow gates — status-gated fund release</span></div>
+          <div class="code-body"><code><span class="c-gr">// ── ESCROW GATE MODEL ───────────────────────────────────────────</span>
+<span class="c-gr">// Gate 1 (open → ordered):   Admin verifies supplier invoice + releases 50% to coordinator</span>
+<span class="c-gr">// Gate 2 (shipped → arrived): Admin verifies tracking number proof + releases 40%</span>
+<span class="c-gr">// Gate 3 (arrived → distributed): Members confirm receipt + releases final 10%</span>
+<span class="c-gr">// If disputed at any gate: funds frozen, admin mediates, refund issued if needed</span>
+
+<span class="c-gr">// ── WHEN slots are full → create /bulk_purchase_orders doc ─────</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'bulk_purchase_orders'</span>).add({
+  groupId, supplierRef, totalAmountCollected,
+  fundsReleased: <span class="c-b">false</span>,  status: <span class="c-g">'pending_invoice'</span>
+});
+
+<span class="c-gr">// ── COORDINATOR uploads: supplier invoice + product photos ─────</span>
+<span class="c-gr">// Product photos from supplier catalogue → Cloudinary ibi/bulk-purchase/{groupId}/</span>
+<span class="c-gr">// Members see what they ordered before shipping starts</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'bulk_purchase_orders'</span>).doc(orderId).update({
+  supplierInvoiceURL, productImageURLs: [<span class="c-g">"https://res.cloudinary.com/..."</span>],
+  status: <span class="c-g">'awaiting_admin_approval'</span>
+});
+
+<span class="c-gr">// ── ADMIN approves invoice → releases Gate 1 (50%) ─────────────</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'bulk_purchase_orders'</span>).doc(orderId).update({
+  status: <span class="c-g">'ordered'</span>, gate1ReleasedAt: serverTimestamp(),
+  gate1Amount: totalAmountCollected * <span class="c-o">0.5</span>
+});
+sendSMS(coordinatorPhone, <span class="c-g">`IBI Bulk: ₦${gate1Amount} released to your wallet. Place order now.`</span>);
+
+<span class="c-gr">// ── COORDINATOR uploads shipping tracking → Gate 2 release ─────</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'bulk_purchase_orders'</span>).doc(orderId).update({
+  trackingNumber, shippingProvider, status: <span class="c-g">'shipped'</span>
+});
+<span class="c-gr">// Notify all group members with tracking number via SMS + WhatsApp</span>
+<span class="c-p">for</span> (<span class="c-b">const</span> m <span class="c-b">of</span> order.memberAllocations) {
+  sendSMS(m.phone, <span class="c-g">`IBI Bulk: Your order has shipped! Tracking: ${trackingNumber} via ${shippingProvider}. ETA: ${estimatedArrival}`</span>);
+}
+
+<span class="c-gr">// ── DISTRIBUTION: coordinator marks each member's slots collected</span>
+<span class="c-gr">// When all members collected → Gate 3 released, group closed</span></code></div>
+        </div>
       </div>
     </div>
+
+    <!-- STEP 5 — SUPPLIER MANAGEMENT -->
     <div class="step">
       <div class="step-dot">5</div>
       <div class="step-body">
-        <div class="step-title">Ajo / Isusu — Cooperative Savings</div>
-        <div class="step-desc">Traditional Igbo rotating savings — the digital version. Each member contributes monthly; one member collects the full pool each cycle. The system tracks who has collected, auto-notifies on contribution due dates, and manages group balances via the wallet system.</div>
+        <div class="step-title">Supplier Directory &amp; International Purchase Preparation</div>
+        <div class="step-desc">The <span class="ic">/suppliers</span> collection builds a verified, rated directory of international and local suppliers that coordinators can reuse across multiple bulk purchase groups. This prevents fraudulent supplier submissions and builds institutional memory.</div>
+        <div class="cg">
+          <div class="ic-card"><h4><i class="fa fa-globe"></i>International Suppliers</h4><p>Primarily China (electronics, fashion, machinery). Key considerations: <strong>customs duties</strong> (must be calculated and included in the per-slot price upfront), <strong>lead time</strong> (sea = 45–60 days, air = 7–14 days), <strong>payment</strong> (Western Union, Wise, or Alipay — coordinator handles). Include estimated duty cost in slot price calculation.</p></div>
+          <div class="ic-card"><h4><i class="fa fa-flag"></i>Local Suppliers</h4><p>Nigerian market (Onitsha Main Market, Aba, Kano). Payment via bank transfer with Paystack invoice. Lead time: 2–5 days. No customs. Coordinator visits in person or uses verified agent. Food items primarily sourced from local wholesale markets.</p></div>
+          <div class="ic-card"><h4><i class="fa fa-calculator"></i>Slot Price Formula</h4><p><strong>Slot price = </strong>(Unit cost × 1 slot) + Shipping per unit + Customs per unit + IBI coordination fee (3–5%). Display the breakdown transparently in the group listing so members understand what they're paying for.</p></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="gbox"><i class="fa fa-rocket bi"></i><div><strong>Future Phase — Advanced Features:</strong> Community escrow system · Verified vendor marketplace · Cargo/import tracking · Group hotel/flight booking discounts · Agricultural cooperative circles · Shared warehouse system · Chapter-based food banks · Igbo business directory · Trusted artisans network · Community crowdfunding.</div></div>
+    <!-- STEP 6 — WHATSAPP NOTIFICATIONS -->
+    <div class="step">
+      <div class="step-dot">6</div>
+      <div class="step-body">
+        <div class="step-title">WhatsApp Notifications — Critical for Nigerian Market</div>
+        <div class="step-desc">In Nigeria, WhatsApp has higher open rates than SMS. Use Termii's WhatsApp channel (same API key, same fetch utility — just change the <span class="ic">channel</span> field) for group purchase updates, food sharing reminders, and bulk order shipping alerts. SMS remains the fallback.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">src/lib/notify.ts — WhatsApp via Termii (same API, different channel)</span></div>
+          <div class="code-body"><code><span class="c-gr">// Single function handles both SMS and WhatsApp — just switch channel</span>
+<span class="c-p">export async function</span> sendNotification(
+  phone: <span class="c-b">string</span>,
+  message: <span class="c-b">string</span>,
+  channel: <span class="c-g">'generic'</span> | <span class="c-g">'whatsapp'</span> = <span class="c-g">'whatsapp'</span>
+) {
+  <span class="c-b">const</span> res = <span class="c-p">await</span> fetch(<span class="c-g">'https://api.ng.termii.com/api/sms/send'</span>, {
+    method: <span class="c-g">'POST'</span>,
+    headers: { <span class="c-g">'Content-Type'</span>: <span class="c-g">'application/json'</span> },
+    body: JSON.stringify({
+      to:      phone,
+      from:    process.env.<span class="c-y">TERMII_SENDER_ID</span>,
+      sms:     message,
+      type:    <span class="c-g">'plain'</span>,
+      channel,            <span class="c-gr">// 'whatsapp' OR 'generic' (SMS fallback)</span>
+      api_key: process.env.<span class="c-y">TERMII_API_KEY</span>,
+    }),
+  }).then(r => r.json());
+
+  <span class="c-gr">// If WhatsApp delivery fails (number not on WhatsApp), retry via SMS</span>
+  <span class="c-p">if</span> (res.code !== <span class="c-g">'ok'</span> && channel === <span class="c-g">'whatsapp'</span>) {
+    <span class="c-p">return</span> sendNotification(phone, message, <span class="c-g">'generic'</span>);
+  }
+  <span class="c-p">return</span> res;
+}
+
+<span class="c-gr">// WhatsApp message examples — more detailed than SMS (500 char limit)</span>
+<span class="c-gr">// Food sharing reminder:</span>
+sendNotification(phone, <span class="c-g">`
+*IBI Food Sharing — Collection Tomorrow* 🍚
+
+📅 Date: Saturday, 22 June 2026
+⏰ Time: 10:00 AM
+📍 Location: IBI FCT HQ, Wuse Zone 3
+
+*Your items:*
+• 1 bag Rice (50kg)
+• 2 litres Palm Oil (25L tin)
+
+Please bring your own bags and come with your Membership ID card.
+
+Track your order: igbobuigbo.org.ng/dashboard
+`</span>, <span class="c-g">'whatsapp'</span>);</code></div>
+        </div>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Notification Event</th><th>Channel</th><th>Triggered By</th></tr></thead>
+            <tbody>
+              <tr><td>Food sharing slot payment confirmed</td><td class="tok">WhatsApp + Email</td><td>Paystack webhook</td></tr>
+              <tr><td>Food sharing collection reminder (24hrs)</td><td class="tok">WhatsApp + SMS</td><td>Cloud Function scheduled</td></tr>
+              <tr><td>Bulk purchase slot payment confirmed</td><td class="tok">WhatsApp + Email</td><td>Paystack webhook</td></tr>
+              <tr><td>Bulk order shipped (tracking number)</td><td class="tok">WhatsApp + SMS</td><td>Coordinator action</td></tr>
+              <tr><td>Bulk order arrived — schedule distribution</td><td class="tok">WhatsApp + SMS</td><td>Admin action</td></tr>
+              <tr><td>Marketplace order placed (to seller)</td><td class="tok">WhatsApp + Email</td><td>Paystack webhook</td></tr>
+              <tr><td>Marketplace order confirmed (to buyer)</td><td class="tok">WhatsApp</td><td>Seller confirms</td></tr>
+              <tr><td>Travel group new departure reminder</td><td class="tok">WhatsApp + SMS</td><td>Cloud Function 48hrs prior</td></tr>
+              <tr><td>Ajo/Isusu contribution due this week</td><td class="tok">WhatsApp</td><td>Cloud Function monthly</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 — TRAVEL GROUPS -->
+    <div class="step">
+      <div class="step-dot">7</div>
+      <div class="step-body">
+        <div class="step-title">Community Travel Groups</div>
+        <div class="step-desc">Coordinators create travel groups for business trips, cultural visits, conventions, tourism, and diaspora networking. Members pay per-person cost via Paystack. Reflects the Igbo proverb: <em>"Njepu Amaka — a traveler is more enlightened than an old person."</em> Coordinators can attach hotel booking confirmations and flight itineraries as Cloudinary-hosted PDFs.</div>
+      </div>
+    </div>
+
+    <!-- STEP 8 — AJO / ISUSU -->
+    <div class="step">
+      <div class="step-dot">8</div>
+      <div class="step-body">
+        <div class="step-title">Ajo / Isusu — Digital Rotating Cooperative Savings</div>
+        <div class="step-desc">Traditional Igbo rotating savings — the digital version. Each member contributes monthly; one member collects the full pool each cycle. The system tracks who has collected, auto-notifies via WhatsApp on contribution due dates, and manages group balances. A missed contribution triggers a grace-period notification before the member is flagged.</div>
+        <div class="code-block">
+          <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Ajo/Isusu — monthly Cloud Function workflow</span></div>
+          <div class="code-body"><code><span class="c-gr">// Cloud Function: runs 1st of every month</span>
+<span class="c-gr">// 1. Find all active cooperatives with frequency: "monthly"</span>
+<span class="c-gr">// 2. For each group, notify all members their contribution is due</span>
+sendNotification(phone, <span class="c-g">`*IBI Ajo/Isusu* — Your monthly contribution of ₦${amount} is due.\nPay now: igbobuigbo.org.ng/dashboard → Ajo/Isusu\nThis month's collector: ${collectorName}`</span>);
+<span class="c-gr">// 3. After 7 days: flag unpaid members, send gentle reminder</span>
+<span class="c-gr">// 4. After 14 days: escalate to group coordinator + admin alert</span>
+<span class="c-gr">// 5. On month-end: payout pool to collector's wallet balance</span>
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'members'</span>).doc(collectorUid).update({
+  walletBalance: FieldValue.increment(poolTotal)
+});
+<span class="c-gr">// Notify collector: "Your Ajo collection of ₦60,000 has been added to your wallet"</span></code></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end steps -->
+
+  <div class="gbox"><i class="fa fa-rocket bi"></i><div><strong>What's in the "Future Phase" advanced roadmap:</strong> Full community escrow with Paystack's split payment API · IBI-issued cargo/import tracking portal · Group hotel &amp; flight negotiated rates · Agricultural cooperative land-pooling · Chapter-based food bank for welfare · Trusted artisans registry with verified work portfolio · Community crowdfunding for SME startups · IBI Verified Vendor marketplace (like a chapter-level Jumia) · WhatsApp Business broadcast lists for chapter announcements.</div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1565,7 +1972,6 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
       <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--td);">Emmanuel Adams</div>
       <div style="font-size:14px;color:var(--red);font-weight:600;margin:3px 0;">Head of Development — Igbo Bu Igbo Platform</div>
       <div style="font-size:13px;color:var(--tm);">Adams Consults</div>
-      <div><i class="fa fa-envelope" style="color:var(--red);margin-right:6px;"></i>emmanuel@adams.com.ng</div>
       <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;">
         <a href="https://www.adams.com.ng" style="font-size:13px;color:var(--blue);display:flex;align-items:center;gap:5px;"><i class="fa fa-globe"></i> www.adams.com.ng</a>
         <span style="font-size:13px;color:var(--tm);display:flex;align-items:center;gap:5px;"><i class="fa fa-id-badge" style="color:var(--red);"></i> Membership ID: FCT/01/0001</span>
