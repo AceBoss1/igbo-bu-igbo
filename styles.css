@@ -553,6 +553,9 @@ button:focus-visible {
 }
 
 
+/* =========================================================
+   REGIONS AND CHAPTER CATEGORIES SECTION — index.html responsive styles for summary and regions
+   ========================================================= */
 
 .ch-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:36px;}
 .ch-sum-box{background:var(--white);border-radius:12px;padding:18px 20px;border:1px solid rgba(155,28,28,0.1);display:flex;align-items:center;gap:14px;}
