@@ -201,18 +201,22 @@
   <div class="cover-pattern"></div>
   <div class="cover-glow"></div>
   <div class="cover-inner">
-    <div class="cover-tag"><i class="fa fa-code"></i> Developer &amp; Platform Guide — v2.0 — June 2026</div>
+    <div class="cover-tag"><i class="fa fa-code"></i> Developer &amp; Platform Guide — v3.0 — June 2026</div>
     <h1>Igbo Bu Igbo Platform<br><span>Complete Tech Setup Guide</span></h1>
-    <p class="cover-sub">Full technical blueprint for igbobuigbo.org.ng — incorporating the complete member benefits framework, cooperative programs, marketplace, cultural platform, and all digital services. Firebase + Next.js + Paystack with exact free-tier limits, upgrade costs, and complete deliverables.</p>
+    <p class="cover-sub">Full technical blueprint for igbobuigbo.org.ng — incorporating the complete member benefits framework, cooperative programs, marketplace, cultural platform, IBI co-branded debit cards, escrow system, mobile apps, advertising platform, and all digital services. Firebase + Next.js + Paystack + Expo with exact free-tier limits, upgrade costs, and complete deliverables.</p>
     <div class="cover-pills">
       <span class="cpill"><i class="fa fa-brands fa-react"></i>Next.js 14</span>
       <span class="cpill"><i class="fa fa-fire"></i>Firebase</span>
       <span class="cpill"><i class="fa fa-credit-card"></i>Paystack</span>
       <span class="cpill"><i class="fa fa-envelope"></i>Brevo Email</span>
-      <span class="cpill"><i class="fa fa-comment-sms"></i>Termii SMS</span>
+      <span class="cpill"><i class="fa fa-comment-sms"></i>Termii SMS+WA</span>
       <span class="cpill"><i class="fa fa-cloud"></i>Vercel</span>
       <span class="cpill"><i class="fa fa-store"></i>Marketplace</span>
       <span class="cpill"><i class="fa fa-coins"></i>Cooperatives</span>
+      <span class="cpill"><i class="fa fa-mobile-screen"></i>React Native</span>
+      <span class="cpill"><i class="fa fa-id-card"></i>IBI Cards</span>
+      <span class="cpill"><i class="fa fa-lock"></i>Escrow</span>
+      <span class="cpill"><i class="fa fa-bullhorn"></i>Ads Platform</span>
     </div>
   </div>
 </div>
@@ -231,13 +235,17 @@
       <a href="#s7"  class="toc-item"><span class="toc-n">07</span> Firebase Auth &amp; Storage</a>
       <a href="#s8"  class="toc-item"><span class="toc-n">08</span> Paystack Integration</a>
       <a href="#s9"  class="toc-item"><span class="toc-n">09</span> Email — Brevo</a>
-      <a href="#s10" class="toc-item"><span class="toc-n">10</span> SMS — Termii Nigeria</a>
+      <a href="#s10" class="toc-item"><span class="toc-n">10</span> SMS &amp; WhatsApp — Termii</a>
       <a href="#s11" class="toc-item"><span class="toc-n">11</span> Digital ID Card Generation</a>
       <a href="#s12" class="toc-item"><span class="toc-n">12</span> Marketplace &amp; Cooperative Modules</a>
       <a href="#s13" class="toc-item"><span class="toc-n">13</span> Vercel Deployment &amp; Domains</a>
       <a href="#s14" class="toc-item"><span class="toc-n">14</span> Free Tier Limits — Full Reference</a>
       <a href="#s15" class="toc-item"><span class="toc-n">15</span> Upgrade Path &amp; Cost Projections</a>
       <a href="#s16" class="toc-item"><span class="toc-n">16</span> Complete Deliverables Checklist</a>
+      <a href="#s17" class="toc-item"><span class="toc-n">17</span> Platform Escrow System</a>
+      <a href="#s18" class="toc-item"><span class="toc-n">18</span> IBI Debit Card Issuance &amp; Management</a>
+      <a href="#s19" class="toc-item"><span class="toc-n">19</span> Mobile Apps — Android &amp; iOS (Expo)</a>
+      <a href="#s20" class="toc-item"><span class="toc-n">20</span> Advertise With Us — Mini Ad Platform</a>
       <a href="#sX"  class="toc-item"><span class="toc-n">A</span> Developer &amp; Contact</a>
     </div>
   </div>
@@ -398,10 +406,13 @@
     <div class="arow" style="margin-left:60px;"><span class="abox pay">Paystack API</span><span class="aarr">──►</span><span class="abox pay">Webhook → Firestore → Wallet</span></div>
     <div style="margin:4px 0 4px 40px;color:var(--code-gray);">│</div>
     <div style="margin-left:40px;color:var(--code-gray);font-size:11px;">├── Notifications</div>
-    <div class="arow" style="margin-left:60px;"><span class="abox notif">Brevo Email</span><span class="aarr"> </span><span class="abox notif">Termii SMS (Nigeria)</span></div>
+    <div class="arow" style="margin-left:60px;"><span class="abox notif">Brevo Email</span><span class="aarr"> </span><span class="abox notif">Termii SMS</span><span class="aarr"> </span><span class="abox notif">Termii WhatsApp</span></div>
+    <div style="margin:4px 0 4px 40px;color:var(--code-gray);">│</div>
+    <div style="margin-left:40px;color:var(--code-gray);font-size:11px;">├── Image CDN (marketplace, food sharing, bulk purchase)</div>
+    <div class="arow" style="margin-left:60px;"><span class="abox mk">Cloudinary (25 GiB free)</span><span class="aarr">──►</span><span class="abox mk">Auto WebP · Thumbnails · Global CDN</span></div>
     <div style="margin:4px 0 4px 40px;color:var(--code-gray);">│</div>
     <div style="margin-left:40px;color:var(--code-gray);font-size:11px;">├── Marketplace &amp; Commerce</div>
-    <div class="arow" style="margin-left:60px;"><span class="abox mk">Business Listings</span><span class="aarr"> </span><span class="abox mk">Bulk Purchases</span><span class="aarr"> </span><span class="abox mk">Food Sharing</span><span class="aarr"> </span><span class="abox mk">Travel Groups</span></div>
+    <div class="arow" style="margin-left:60px;"><span class="abox mk">Listings + Orders + Reviews</span><span class="aarr"> </span><span class="abox mk">Bulk Purchases + Escrow</span><span class="aarr"> </span><span class="abox mk">Food Sharing + Schedules</span><span class="aarr"> </span><span class="abox mk">Travel Groups</span></div>
     <div style="margin:4px 0 4px 40px;color:var(--code-gray);">│</div>
     <div style="margin-left:40px;color:var(--code-gray);font-size:11px;">└── Cultural &amp; Governance</div>
     <div class="arow" style="margin-left:60px;"><span class="abox fe">E-learning Portal</span><span class="aarr"> </span><span class="abox fe">Elections / Voting</span><span class="aarr"> </span><span class="abox fe">Grants &amp; Scholarships</span></div>
@@ -413,7 +424,7 @@
     <div class="ic-card"><h4><i class="fa fa-brands fa-react"></i>Frontend</h4><p><strong>Next.js 14</strong> App Router — SSR for SEO, API routes for backend, React components, Tailwind CSS. Deployed on Vercel free tier. Separate dashboard, admin, and public routes.</p></div>
     <div class="ic-card"><h4><i class="fa fa-fire"></i>Backend + Database</h4><p><strong>Firebase</strong> Firestore for all data, Firebase Auth for all users, Firebase Storage for photos/docs. No separate server at launch — Firebase handles everything.</p></div>
     <div class="ic-card"><h4><i class="fa fa-credit-card"></i>Payments</h4><p><strong>Paystack</strong> — all NGN transactions (registration, dues, wallet deposits, marketplace). 1.5% + ₦100 per transaction, capped at ₦2,000. Zero monthly fee.</p></div>
-    <div class="ic-card"><h4><i class="fa fa-store"></i>Marketplace</h4><p>Built on <strong>Firestore</strong> collections with Firebase Storage for product images. No third-party marketplace service needed at launch — fully custom-built.</p></div>
+    <div class="ic-card"><h4><i class="fa fa-store"></i>Marketplace + Cooperatives</h4><p>Listings, orders, and reviews on <strong>Firestore</strong>. All product images (marketplace, food sharing, bulk purchase) served from <strong>Cloudinary</strong> free tier — auto WebP, 3 thumbnail sizes, global CDN. Firebase Storage reserved for member photos only.</p></div>
   </div>
 </div>
 
@@ -1043,6 +1054,138 @@ npm install nanoid slugify uuid</code></div>
   verifiedBy:    <span class="c-g">"FCT/01/0001"</span>,       <span class="c-gr">// Admin who approved this supplier</span>
   notes:         <span class="c-g">"Reliable. Always provide tracking. Request 30% extra units as buffer."</span>,
   isActive:      <span class="c-b">true</span>,
+  createdAt:     <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /escrow_transactions/{txId} ────────────────────────────────</span>
+<span class="c-gr">// Platform-level escrow for bulk purchases, marketplace, food sharing, travel</span>
+{
+  type:           <span class="c-g">"bulk_purchase"</span>,     <span class="c-gr">// bulk_purchase | marketplace_order | food_sharing | travel_group</span>
+  referenceId:    <span class="c-g">"bulk_purchase_orders/orderId"</span>,
+  totalCollected: <span class="c-o">4250000</span>,            <span class="c-gr">// Total NGN held in escrow</span>
+  platformFee:    <span class="c-o">127500</span>,             <span class="c-gr">// 3% of total — IBI revenue</span>
+  netPayable:     <span class="c-o">4122500</span>,            <span class="c-gr">// Released to coordinator after deducting platform fee</span>
+  gates: [
+    { gateNum: <span class="c-o">1</span>, percentage: <span class="c-o">50</span>, amount: <span class="c-o">2125000</span>, releasedAt: <span class="c-p">Timestamp</span>, releasedBy: <span class="c-g">"admin_uid"</span> },
+    { gateNum: <span class="c-o">2</span>, percentage: <span class="c-o">40</span>, amount: <span class="c-o">1700000</span>, releasedAt: <span class="c-p">null</span>,      releasedBy: <span class="c-p">null</span>       },
+    { gateNum: <span class="c-o">3</span>, percentage: <span class="c-o">10</span>, amount: <span class="c-o">425000</span>,  releasedAt: <span class="c-p">null</span>,      releasedBy: <span class="c-p">null</span>       }
+  ],
+  totalReleased:  <span class="c-o">2125000</span>,
+  balance:        <span class="c-o">2125000</span>,            <span class="c-gr">// Still held</span>
+  coordinatorUid: <span class="c-g">"firebase_auth_uid"</span>,
+  coordinatorMemberId: <span class="c-g">"FCT/01/0001"</span>,
+  status:         <span class="c-g">"partial_released"</span>,  <span class="c-gr">// holding | partial_released | fully_released | refunded | disputed</span>
+  disputeReason:  <span class="c-p">null</span>,
+  createdAt:      <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /card_orders/{cardOrderId} ─────────────────────────────────</span>
+<span class="c-gr">// IBI Verve / Visa co-branded debit card orders</span>
+{
+  memberId:        <span class="c-g">"FCT/01/0001"</span>,
+  memberUid:       <span class="c-g">"firebase_auth_uid"</span>,
+  cardNetwork:     <span class="c-g">"verve"</span>,           <span class="c-gr">// verve | visa</span>
+  deliveryType:    <span class="c-g">"physical"</span>,         <span class="c-gr">// virtual | physical</span>
+  issuingPartner:  <span class="c-g">"Sudo Africa"</span>,      <span class="c-gr">// BaaS partner handling card issuance</span>
+  orderFee:        <span class="c-o">4000</span>,              <span class="c-gr">// NGN: virtual Verve ₦1,500 | virtual Visa ₦2,500 | physical Verve ₦4,000 | physical Visa ₦6,000</span>
+  partnerCost:     <span class="c-o">1500</span>,              <span class="c-gr">// NGN cost charged by BaaS partner per card</span>
+  ibiFeeRevenue:   <span class="c-o">2500</span>,              <span class="c-gr">// IBI revenue = orderFee - partnerCost</span>
+  paystackRef:     <span class="c-g">"IBI_CARD_1234567890"</span>,
+  deliveryAddress: <span class="c-g">"No. 12, Wuse Zone 5, Abuja"</span>,
+  deliveryPhone:   <span class="c-g">"+2348012345678"</span>,
+  virtualCard: {
+    cardNumber:    <span class="c-g">"ENCRYPTED"</span>,       <span class="c-gr">// AES-256 encrypted — never stored in plain text</span>
+    cvv:           <span class="c-g">"ENCRYPTED"</span>,
+    expiryMonth:   <span class="c-o">12</span>, expiryYear: <span class="c-o">2028</span>,
+    isActive:      <span class="c-b">true</span>,
+    isFrozen:      <span class="c-b">false</span>
+  },
+  physicalCard: {
+    courierName:          <span class="c-g">"DHL Nigeria"</span>,
+    trackingNumber:       <span class="c-g">"DHL9876543210"</span>,
+    estimatedDelivery:    <span class="c-g">"2026-07-05"</span>,
+    deliveredAt:          <span class="c-p">null</span>
+  },
+  spendingLimit:   <span class="c-o">500000</span>,            <span class="c-gr">// NGN daily limit (member-configurable up to max)</span>
+  status:          <span class="c-g">"processing"</span>,       <span class="c-gr">// pending_payment | paid | processing | issued | active | suspended | cancelled</span>
+  activatedAt:     <span class="c-p">null</span>,
+  createdAt:       <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /card_transactions/{cardTxId} ──────────────────────────────</span>
+<span class="c-gr">// Tracks all debit transactions on IBI cards (sourced from BaaS webhook)</span>
+{
+  cardOrderId:   <span class="c-g">"card_order_id"</span>,
+  memberUid:     <span class="c-g">"firebase_auth_uid"</span>,
+  cardLast4:     <span class="c-g">"7890"</span>,
+  amount:        <span class="c-o">15000</span>,              <span class="c-gr">// NGN</span>
+  merchant:      <span class="c-g">"Shoprite Abuja"</span>,
+  merchantCode:  <span class="c-g">"5411"</span>,             <span class="c-gr">// MCC code</span>
+  channel:       <span class="c-g">"pos"</span>,              <span class="c-gr">// pos | atm | online | contactless</span>
+  type:          <span class="c-g">"debit"</span>,            <span class="c-gr">// debit | reversal | refund</span>
+  balanceBefore: <span class="c-o">120000</span>,
+  balanceAfter:  <span class="c-o">105000</span>,
+  interchangeFee:<span class="c-o">45</span>,                 <span class="c-gr">// NGN micro-revenue to IBI from card scheme</span>
+  status:        <span class="c-g">"success"</span>,          <span class="c-gr">// success | declined | pending | reversed</span>
+  timestamp:     <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /ad_campaigns/{campaignId} ─────────────────────────────────</span>
+<span class="c-gr">// Advertise With Us — self-service ad platform (members + non-members)</span>
+{
+  advertiserId:      <span class="c-g">"firebase_auth_uid or null"</span>,  <span class="c-gr">// null for non-member advertisers</span>
+  advertiserName:    <span class="c-g">"Chibueze Motors Ltd"</span>,
+  advertiserEmail:   <span class="c-g">"chibueze@motors.ng"</span>,
+  advertiserPhone:   <span class="c-g">"+2348056789012"</span>,
+  adTitle:           <span class="c-g">"Trusted Car Sales — Igbo-Owned Dealership"</span>,
+  adText:            <span class="c-g">"Quality cars at the best prices. FCT Abuja. Call now."</span>,
+  adImageURL:        <span class="c-g">"https://res.cloudinary.com/ibi/ad-campaigns/..."</span>,
+  adLinkURL:         <span class="c-g">"https://chibuezemotors.ng"</span>,
+  adType:            <span class="c-g">"banner"</span>,          <span class="c-gr">// banner | sidebar | featured_listing | sponsored_post | interstitial</span>
+  placement:         [<span class="c-g">"homepage"</span>, <span class="c-g">"marketplace"</span>],  <span class="c-gr">// homepage|dashboard|marketplace|events|news|mobile|all</span>
+  targetRegion:      <span class="c-g">"all"</span>,            <span class="c-gr">// all | igbo-speaking | non-igbo | diaspora</span>
+  targetChapter:     <span class="c-g">"FCT Abuja Chapter"</span>,
+  budget:            <span class="c-o">25000</span>,            <span class="c-gr">// NGN total budget for this campaign</span>
+  spent:             <span class="c-o">8500</span>,             <span class="c-gr">// NGN spent so far</span>
+  priceModel:        <span class="c-g">"cpm"</span>,            <span class="c-gr">// cpm (per 1K impressions) | cpc (per click) | weekly_flat | monthly_flat</span>
+  ratePerUnit:       <span class="c-o">500</span>,              <span class="c-gr">// NGN per 1,000 impressions (CPM) or per click (CPC)</span>
+  impressions:       <span class="c-o">17000</span>,
+  clicks:            <span class="c-o">340</span>,
+  ctr:               <span class="c-o">2.0</span>,              <span class="c-gr">// Click-through rate %</span>
+  startDate:         <span class="c-g">"2026-07-01"</span>,
+  endDate:           <span class="c-g">"2026-07-31"</span>,
+  paystackRef:       <span class="c-g">"IBI_AD_1234567890"</span>,
+  adminApprovedBy:   <span class="c-g">"admin_uid"</span>,
+  rejectionReason:   <span class="c-p">null</span>,
+  status:            <span class="c-g">"active"</span>,         <span class="c-gr">// pending_payment | pending_approval | active | paused | completed | rejected | budget_exhausted</span>
+  createdAt:         <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /ad_impressions/{impId} ────────────────────────────────────</span>
+<span class="c-gr">// Lightweight impression tracking (batched writes every 50 impressions)</span>
+{
+  campaignId:  <span class="c-g">"ad_campaign_id"</span>,
+  page:        <span class="c-g">"homepage"</span>,
+  memberUid:   <span class="c-p">null</span>,              <span class="c-gr">// null for anonymous visitors</span>
+  clickedAt:   <span class="c-p">null</span>,              <span class="c-gr">// Timestamp if this impression resulted in a click</span>
+  timestamp:   <span class="c-p">Timestamp</span>
+}
+
+<span class="c-gr">// ── /donations/{donationId} ────────────────────────────────────</span>
+<span class="c-gr">// Supports anonymous + logged-in + custom amount + custom reason</span>
+{
+  donorUid:      <span class="c-p">null</span>,              <span class="c-gr">// null = anonymous donation</span>
+  donorName:     <span class="c-g">"Anonymous"</span>,        <span class="c-gr">// "Anonymous" if donor opted out | actual name if provided</span>
+  donorEmail:    <span class="c-g">"donor@email.com"</span>,  <span class="c-gr">// For receipt — not displayed publicly</span>
+  isAnonymous:   <span class="c-b">true</span>,
+  amount:        <span class="c-o">7500</span>,              <span class="c-gr">// Any NGN amount — no minimum</span>
+  currency:      <span class="c-g">"NGN"</span>,
+  category:      <span class="c-g">"custom"</span>,          <span class="c-gr">// community | youth | education | back2school | cultural | welfare | custom</span>
+  customReason:  <span class="c-g">"Support for Anambra flood victims in our community"</span>,
+  inHonourOf:    <span class="c-g">"Late Mazi Odumegwu"</span>,  <span class="c-gr">// Optional — gift/memorial donation</span>
+  displayOnWall: <span class="c-b">false</span>,            <span class="c-gr">// Show on donation wall? (false = fully anonymous)</span>
+  paystackRef:   <span class="c-g">"IBI_DON_1234567890"</span>,
+  receiptSent:   <span class="c-b">false</span>,
   createdAt:     <span class="c-p">Timestamp</span>
 }</code></div>
   </div>
@@ -1718,18 +1861,21 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
         <tr class="tr-free"><td><strong>Firestore Egress</strong></td><td class="tfree">10 GiB/month</td><td>~1–4 GiB/month</td><td class="tok">Very large scale only</td></tr>
         <tr class="tr-free"><td><strong>Firebase Auth Users</strong></td><td class="tfree">Unlimited</td><td>All members</td><td class="tok">Never</td></tr>
         <tr class="tr-free"><td><strong>Firebase Auth Phone</strong></td><td class="twarn">10 SMS/day only</td><td>Use Termii instead</td><td class="twarn">Day 1 if used directly</td></tr>
-        <tr class="tr-free"><td><strong>Firebase Storage</strong></td><td class="tfree">5 GiB total</td><td>~1.5–3 GiB (photos + marketplace)</td><td class="tok">~8,000–10,000 members+listings</td></tr>
-        <tr class="tr-free"><td><strong>Storage Downloads</strong></td><td class="tfree">1 GiB/day</td><td>~300–700 MB/day</td><td class="tok">~3,000+ simultaneous users</td></tr>
-        <tr class="tr-free"><td><strong>Cloud Functions</strong></td><td class="twarn">NOT on Spark plan</td><td>Needed for scheduled tasks</td><td class="twarn">Upgrade to Blaze first</td></tr>
+        <tr><td><strong>Firebase Storage</strong></td><td class="twarn">5 GiB total</td><td>Member photos + ID docs only (~1–1.5 GiB). <strong>Route all marketplace, food &amp; bulk images to Cloudinary</strong></td><td class="twarn"><strong>Phase 5 if marketplace images stored here</strong> — 43 chapters × 50 listings × 3 images = ~1.8 GiB marketplace alone</td></tr>
+        <tr class="tr-free"><td><strong>Storage Downloads</strong></td><td class="tfree">1 GiB/day</td><td>~300–700 MB/day (member photos)</td><td class="tok">Safe — marketplace images served from Cloudinary CDN</td></tr>
+        <tr class="tr-free"><td><strong>Cloud Functions</strong></td><td class="twarn">NOT on Spark plan</td><td>Needed: food reminders, ajo payouts, order status auto-updates</td><td class="twarn">Upgrade to Blaze before Phase 5</td></tr>
+        <tr class="tr-free"><td><strong>Cloudinary (images CDN)</strong></td><td class="tfree">25 GiB storage · 25 GiB bandwidth/month</td><td>Marketplace + food + bulk purchase images</td><td class="tok">~5,000 active listings with 3 images each before limit</td></tr>
         <tr class="tr-free"><td><strong>Vercel Bandwidth</strong></td><td class="tfree">100 GB/month</td><td>~5–25 GB/month</td><td class="tok">Very large traffic only</td></tr>
         <tr class="tr-free"><td><strong>Brevo Email</strong></td><td class="tfree">300/day (~9,000/mo)</td><td>~50–250 triggered emails/day</td><td class="twarn">When sending mass announcements</td></tr>
         <tr><td><strong>Paystack</strong></td><td class="tfree">₦0 monthly fee always</td><td>1.5% + ₦100 per transaction</td><td class="tok">No limit — scales with transactions</td></tr>
-        <tr><td><strong>Termii SMS</strong></td><td class="twarn">Pay-per-use from day 1</td><td>~₦8–10 per SMS</td><td class="tna">Budget ₦10,000 for 1,000 SMS</td></tr>
+        <tr><td><strong>Termii SMS</strong></td><td class="twarn">Pay-per-use from day 1</td><td>~₦8–10/SMS · ₦6–8/WhatsApp msg</td><td class="tna">Budget ₦10,000 for 1,000 SMS; WhatsApp slightly cheaper</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="wbox"><i class="fa fa-triangle-exclamation bi"></i><div><strong>Critical:</strong> Cloud Functions are NOT available on Firebase Spark plan. Upgrade to Blaze immediately if you need scheduled tasks (auto-expire dues, send reminders, process pending orders). Blaze is pay-as-you-go — the first 2M function calls/month are FREE on Blaze.</div></div>
+  <div class="wbox"><i class="fa fa-triangle-exclamation bi"></i><div><strong>Critical:</strong> Cloud Functions are NOT available on Firebase Spark plan. Upgrade to Blaze immediately if you need scheduled tasks (auto-expire dues, send Ajo reminders, food sharing collection notifications, bulk purchase order status updates). Blaze is pay-as-you-go — the first 2M function calls/month are FREE on Blaze. <strong>Also: do NOT store marketplace, food sharing, or bulk purchase images in Firebase Storage</strong> — use Cloudinary. Firebase Storage's 5 GiB is consumed fast by product photos.</div></div>
+
+  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Termii WhatsApp vs SMS pricing:</strong> WhatsApp Business messages via Termii are typically ₦6–8 per message vs ₦8–10 for SMS. For bulk group notifications (food sharing reminders, bulk order updates, travel group alerts), WhatsApp is both cheaper and has higher open rates in Nigeria. Use the same Termii API key — just change <span class="ic">channel: "generic"</span> to <span class="ic">channel: "whatsapp"</span> in your notify function.</div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1789,18 +1935,20 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
 
   <div class="tw">
     <table>
-      <thead><tr><th>Trigger</th><th>Upgrade</th><th>Monthly Cost</th><th>Priority</th></tr></thead>
+      <thead><tr><th>Trigger</th><th>Upgrade / Action</th><th>Monthly Cost</th><th>Priority</th></tr></thead>
       <tbody>
-        <tr><td>Need scheduled tasks (auto-reminders, due expiry)</td><td>Firebase Spark → Blaze</td><td class="tcost">~$5–20/month</td><td><strong>First</strong></td></tr>
-        <tr><td>Mass announcements to 300+ members/day</td><td>Brevo Free → Starter</td><td class="tcost">$9/month (~₦14,400)</td><td><strong>Second</strong></td></tr>
-        <tr><td>Multiple developers working simultaneously</td><td>Vercel Hobby → Pro</td><td class="tcost">$20/month (~₦32,000)</td><td>Later</td></tr>
-        <tr><td>Marketplace images &gt; 4 GiB</td><td>Firebase Storage → Cloudinary</td><td class="tcost">$99/month (~₦158,000)</td><td>Scale phase</td></tr>
-        <tr><td>Firestore reads &gt; 40K/day consistently</td><td>Query optimization first, then Blaze</td><td class="tcost">$0.06/100K reads</td><td>Scale phase</td></tr>
+        <tr><td>Need scheduled tasks (food reminders, Ajo payouts, bulk order auto-updates, dues expiry)</td><td>Firebase Spark → Blaze</td><td class="tcost">~$5–20/month</td><td><strong>First — before Phase 5</strong></td></tr>
+        <tr><td><strong>Marketplace, food sharing, or bulk purchase goes live (Phase 5)</strong></td><td><strong>Integrate Cloudinary free tier for ALL product images</strong> — do NOT wait for 5 GiB Firebase Storage limit</td><td class="tfree">₦0 (Cloudinary free)</td><td><strong>Phase 5 start — mandatory</strong></td></tr>
+        <tr><td>Mass announcements to 300+ members/day</td><td>Brevo Free → Starter</td><td class="tcost">$9/month (~₦14,400)</td><td><strong>Phase 3 growth</strong></td></tr>
+        <tr><td>WhatsApp group notifications for food sharing + bulk orders</td><td>Termii WhatsApp channel (same API key, switch channel field)</td><td class="tcost">~₦6–8/message (cheaper than SMS)</td><td><strong>Phase 5 — activate at marketplace launch</strong></td></tr>
+        <tr><td>Multiple developers working simultaneously</td><td>Vercel Hobby → Pro</td><td class="tcost">$20/month (~₦32,000)</td><td>Phase 4–5</td></tr>
+        <tr><td>Cloudinary free tier exceeded (5,000+ active listings × 3 images)</td><td>Cloudinary Starter — 25 GiB storage</td><td class="tcost">$89/month (~₦142,000)</td><td>Scale phase only</td></tr>
+        <tr><td>Firestore reads &gt; 40K/day consistently</td><td>Query optimization first, then Blaze pay-as-you-go reads</td><td class="tcost">$0.06/100K reads</td><td>Scale phase</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Revenue offset:</strong> Paystack marketplace transaction fees (charged to buyers, not IBI) can generate revenue to offset infrastructure costs. A 2–5% platform commission on marketplace sales, travel group coordination fees, and bulk purchase coordination fees can make the platform self-sustaining at growth phase.</div></div>
+  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Revenue offset strategy:</strong> The cooperative modules create multiple income streams: a 3–5% coordination fee on each bulk purchase order, a 2% platform fee on marketplace transactions (Paystack charges buyer, IBI keeps 2%), a ₦500–₦2,000 group creation fee for food sharing and Ajo groups, and travel group coordination fees. At 500 active group transactions per month, this generates ₦150,000–₦400,000/month — more than covering all infrastructure costs at scale phase.</div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1818,14 +1966,15 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
   <!-- PHASE 1 -->
   <div class="cli-section">Phase 1 — Public Website (Weeks 1–3)</div>
   <div class="checklist">
-    <div class="cli"><input type="checkbox"/><label>Homepage — hero, 3-region chapters accordion, events taxonomy, verify portal, news, video section, donate<span class="sub">index.html done — needs Next.js conversion with dynamic data</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Homepage — hero, 3-region chapters accordion, events taxonomy, verify portal, member benefits, community programs, membership categories, news, video section, donate<span class="sub">index.html done — needs Next.js conversion with dynamic data from Firestore</span></label></div>
     <div class="cli"><input type="checkbox"/><label>About page — organisation history, mission, vision, 43 chapters, leadership<span class="sub">SEO metadata, Open Graph, sitemap.xml</span></label></div>
     <div class="cli"><input type="checkbox"/><label>Events page — chapter General Meetings, Regional Conventions, National Conventions, Expos, Festivals, Awards</label></div>
     <div class="cli"><input type="checkbox"/><label>News &amp; Media — articles, press releases, photo gallery, videos, downloads</label></div>
-    <div class="cli"><input type="checkbox"/><label>Public Donate page — Paystack with 6 donation categories (Community, Youth, Education, Back2School, Cultural, Welfare)</label></div>
+    <div class="cli"><input type="checkbox"/><label>Public Donate page — enhanced with: anonymous donations (no login required), custom NGN amounts (any amount, no minimum), custom donation reasons and purposes, gift/memorial donations in honour of someone, donation wall (optional public display), recurring donation option, Paystack for 6 preset categories + custom<span class="sub">/donations Firestore collection handles all types including anonymous and custom</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Advertise With Us page — self-service ad booking for members AND non-members (no login required to advertise)<span class="sub">Ad types: banner, sidebar, featured listing, sponsored post · Placements: homepage, marketplace, events, news, mobile · Pay via Paystack · Admin approval before going live</span></label></div>
     <div class="cli"><input type="checkbox"/><label>Public Verification Portal — search by Membership ID, phone, email, QR scan<span class="sub">Connected to live Firestore /members collection</span></label></div>
     <div class="cli"><input type="checkbox"/><label>Contact page — form, WhatsApp link (+234 806 787 1203), office map, FAQ</label></div>
-    <div class="cli"><input type="checkbox"/><label>Coming Soon page — countdown timer, email notification signup (already built)</label></div>
+    <div class="cli"><input type="checkbox"/><label>7 Phase-specific Coming Soon pages — each with its own countdown timer, phase description, and behind-schedule apology logic<span class="sub">Files: coming-soon-phase1.html through coming-soon-phase7.html. Timers count to each phase target date. When expired: red negative counter + apology message + days behind + developer assurance message</span></label></div>
   </div>
 
   <!-- PHASE 2 -->
@@ -1876,23 +2025,38 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
   <!-- PHASE 5 -->
   <div class="cli-section">Phase 5 — Marketplace &amp; Business Directory (Weeks 13–16)</div>
   <div class="checklist">
-    <div class="cli"><input type="checkbox"/><label>Public marketplace — browse Igbo-owned businesses and products by category/chapter<span class="sub">Fashion, food, electronics, agriculture, services, artisans, machinery</span></label></div>
-    <div class="cli"><input type="checkbox"/><label>Member business listing — create/edit/delete listings, upload product images</label></div>
-    <div class="cli"><input type="checkbox"/><label>Vendor verification system — admin awards "Verified Igbo Business" badge</label></div>
-    <div class="cli"><input type="checkbox"/><label>Featured entrepreneur spotlight — admin can feature businesses on homepage</label></div>
-    <div class="cli"><input type="checkbox"/><label>Marketplace admin — approve/reject listings, manage categories, featured slots</label></div>
-    <div class="cli"><input type="checkbox"/><label>Job board — members post and apply for jobs within Igbo-owned companies</label></div>
-    <div class="cli"><input type="checkbox"/><label>Trade expo registration — register businesses and products for trade events</label></div>
+    <div class="cli"><input type="checkbox"/><label>Cloudinary integration — all marketplace, food sharing, and bulk purchase images routed through Cloudinary (not Firebase Storage)<span class="sub">Integrate at Phase 5 START before any product images are uploaded. Set up folder structure: ibi/marketplace/, ibi/food-sharing/, ibi/bulk-purchase/</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Image upload pipeline — client-side WebP compression (browser-image-compression) → server-side Cloudinary upload → 3 sizes stored (thumb 200px, preview 400px, full 800px)<span class="sub">Max 6 images per listing, max 800KB each after compression. Server API route: POST /api/images/upload</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Public marketplace — browse Igbo-owned businesses and products by category, chapter, and location<span class="sub">Categories: fashion, food, electronics, agriculture, services, artisans, machinery</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Member business listing — create/edit/delete listings with up to 6 images, pricing, location, category, delivery options</label></div>
+    <div class="cli"><input type="checkbox"/><label>Vendor verification system — admin awards "Verified Igbo Business" badge; unverified vendors can still list but badge not shown</label></div>
+    <div class="cli"><input type="checkbox"/><label>Marketplace orders system — buyer places order → Paystack payment → Paystack webhook creates /marketplace_orders doc → seller notified via WhatsApp + email</label></div>
+    <div class="cli"><input type="checkbox"/><label>Order tracking — buyer and seller can track status: paid → confirmed → shipped → delivered. Seller adds tracking note. Buyer confirms delivery.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Vendor review system — buyer can leave 1–5 star review + comment after delivery confirmed. Admin moderates before public display. Seller rating auto-updated on member profile.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Dispute resolution — buyer or seller flags order as disputed. Admin mediates. Refund issued via wallet credit if resolved in buyer's favour.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Featured entrepreneur spotlight — admin can pin businesses to homepage and marketplace homepage banner</label></div>
+    <div class="cli"><input type="checkbox"/><label>Marketplace admin — approve/reject listings, manage categories, moderate reviews, view order analytics, flag suspicious activity</label></div>
+    <div class="cli"><input type="checkbox"/><label>Job board — members post and apply for jobs within Igbo-owned companies. Members-only listings toggle.</label></div>
+    <div class="cli"><input type="checkbox"/><label>WhatsApp Business notifications via Termii — activate WhatsApp channel for marketplace order events (cheaper than SMS, higher open rate in Nigeria)</label></div>
   </div>
 
   <!-- PHASE 6 -->
   <div class="cli-section">Phase 6 — Cooperative &amp; Community Programs (Weeks 17–20)</div>
   <div class="checklist">
-    <div class="cli"><input type="checkbox"/><label>Food Sharing Groups — create groups, define items (rice, palm oil, garri, livestock etc.), Paystack payment, distribution tracking</label></div>
-    <div class="cli"><input type="checkbox"/><label>Bulk Purchase Groups — local &amp; international, MOQ management, slot payments, status tracking (open→shipped→delivered)</label></div>
-    <div class="cli"><input type="checkbox"/><label>Community Travel Groups — create trips, member sign-ups, cost splitting, departure/return tracking</label></div>
-    <div class="cli"><input type="checkbox"/><label>Ajo / Isusu Cooperative — digital rotating savings groups, monthly tracking, payout notification</label></div>
-    <div class="cli"><input type="checkbox"/><label>Community investment pools — SME funding circles, agricultural cooperatives</label></div>
+    <div class="cli"><input type="checkbox"/><label>Food Sharing Groups — create groups, define items with photos (Cloudinary), set per-slot price, Paystack payment, automatic slot tracking<span class="sub">Coordinator uploads item photos as proof of purchase. Members see photos before collection day.</span></label></div>
+    <div class="cli"><input type="checkbox"/><label>Food Sharing Schedule Management — /food_sharing_schedules collection: multiple collection points per group, coordinator marks items sourced + ready, distribution tracking per member</label></div>
+    <div class="cli"><input type="checkbox"/><label>Food Sharing 24-hour Reminder — Cloud Function sends WhatsApp + SMS to all paid members 24hrs before collection: date, time, location, items list</label></div>
+    <div class="cli"><input type="checkbox"/><label>Recurring Food Sharing Groups — monthly groups auto-regenerate next month's group when current one closes. Members from previous group get first-slot priority notification.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Supplier Directory — admin-managed /suppliers collection: verified supplier profiles with country, category, contact, MOQ, lead time, rating, completed order history</label></div>
+    <div class="cli"><input type="checkbox"/><label>Bulk Purchase Groups — local &amp; international, MOQ management, slot payments, /bulk_purchase_orders tracking (supplier invoice, shipping, customs, distribution)</label></div>
+    <div class="cli"><input type="checkbox"/><label>Bulk Purchase Escrow Model — 3-gate fund release: 50% on invoice approval, 40% on shipping proof, 10% on distribution confirmation. Admin sign-off at each gate.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Bulk Purchase Product Photos — coordinator uploads supplier catalogue photos (Cloudinary) before members commit. Members see exactly what they ordered.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Bulk Purchase Status Notifications — WhatsApp alerts at each status change: slots full → ordered → shipped (with tracking) → arrived → distribution scheduled</label></div>
+    <div class="cli"><input type="checkbox"/><label>Slot Price Calculator — transparent breakdown in listing: unit cost + shipping per unit + estimated customs duties + IBI 3% coordination fee = total slot price</label></div>
+    <div class="cli"><input type="checkbox"/><label>Community Travel Groups — create trips with Cloudinary-hosted itinerary PDF attachment, member sign-ups, cost splitting, departure/return tracking, WhatsApp reminders</label></div>
+    <div class="cli"><input type="checkbox"/><label>Ajo / Isusu Cooperative — digital rotating savings groups, Cloud Function monthly contribution reminders via WhatsApp, auto-payout to collector's wallet on month-end</label></div>
+    <div class="cli"><input type="checkbox"/><label>Missed Contribution Grace Period — Ajo/Isusu: 7-day grace period after due date → reminder → 14-day escalation to coordinator → admin alert. Missed contributions tracked in group record.</label></div>
+    <div class="cli"><input type="checkbox"/><label>Community investment pools — SME funding circles, agricultural cooperatives with seasonal schedules</label></div>
   </div>
 
   <!-- PHASE 7 -->
@@ -1932,24 +2096,393 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
   <div style="background:var(--dark);border-radius:14px;padding:28px;position:relative;overflow:hidden;">
     <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(201,144,26,0.04) 0,rgba(201,144,26,0.04) 1px,transparent 0,transparent 50%);background-size:16px 16px;"></div>
     <div style="position:relative;z-index:1;">
-      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--white);margin-bottom:6px;">Platform Summary</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px;">Estimated scope, timeline and launch cost for igbobuigbo.org.ng — the complete platform</div>
+      <div style="font-family:'Playfair Display',serif;font-size:20px;color:var(--white);margin-bottom:6px;">Platform Summary — v3.0</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px;">Expanded scope including mobile apps, IBI cards, escrow, ads platform, and 7 phase coming-soon pages</div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;">
-        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">28</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Weeks Full Build</div></div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">64</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Deliverables</div></div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">40+</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Weeks Full Build</div></div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">100+</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Total Deliverables</div></div>
         <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:#4ade80;">₦0</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Monthly Infra at Launch</div></div>
         <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:22px;color:var(--gold-l);">~₦6K</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">SMS + Domains/month</div></div>
         <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">43</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Active Chapters</div></div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">9</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Membership Categories</div></div>
+        <div style="background:rgba(255,255,255,0.06);border-radius:8px;padding:14px;text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:26px;color:var(--gold-l);">2</div><div style="font-size:11px;color:rgba(255,255,255,0.5);">Native Mobile Apps</div></div>
       </div>
       <div style="margin-top:20px;font-size:13px;color:rgba(255,255,255,0.5);line-height:1.8;">
-        <strong style="color:rgba(255,255,255,0.8);">Stack:</strong> Next.js 14 · Firebase (Spark→Blaze) · Paystack · Brevo · Termii · Vercel · Cloudflare<br/>
+        <strong style="color:rgba(255,255,255,0.8);">Full Stack:</strong> Next.js 14 · Firebase (Spark→Blaze) · Paystack · Brevo · Termii (SMS+WhatsApp) · Vercel · Cloudflare · Cloudinary · Expo (React Native) · Sudo Africa (BaaS Cards)<br/>
+        <strong style="color:rgba(255,255,255,0.8);">Revenue Streams:</strong> Membership dues · Marketplace 2% fee · Escrow 3% · Card issuance fees · Interchange · Ad platform · Bulk purchase coordination fee<br/>
         <strong style="color:rgba(255,255,255,0.8);">3 Regions:</strong> Igbo Speaking States (7) · Non-Igbo States + FCT (30) · Diaspora (6)<br/>
-        <strong style="color:rgba(255,255,255,0.8);">Domains:</strong> igbobuigbo.org.ng (primary) · igbobuigbo.com.ng (mirror redirect)<br/>
-        <strong style="color:rgba(255,255,255,0.8);">Contacts:</strong> info@igbobuigbo.org.ng · +234 806 787 1203 · WhatsApp: chat.whatsapp.com/DxruPES8fJP4V4zwMd6kPc
+        <strong style="color:rgba(255,255,255,0.8);">Domains:</strong> igbobuigbo.org.ng (primary) · igbobuigbo.com.ng (mirror) · Apps on Google Play + Apple App Store
       </div>
     </div>
   </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 17 — PLATFORM ESCROW SYSTEM
+══════════════════════════════════════════ -->
+<div class="section" id="s17">
+  <div class="section-header">
+    <div class="section-num dark">17</div>
+    <div class="section-info">
+      <h2>Platform Escrow System</h2>
+      <p>Trust infrastructure for bulk purchases, marketplace orders, food sharing, and travel groups — with IBI revenue generation</p>
+    </div>
+  </div>
+
+  <div class="ibox"><i class="fa fa-lock bi"></i><div>The escrow system is the <strong>trust backbone</strong> of all cooperative transactions. It holds funds safely after payment, releases them to coordinators/sellers in staged gates, and generates <strong>3% platform fee revenue on every escrowed transaction</strong>. No separate bank account is needed — Paystack collects and Firestore tracks the virtual escrow balance.</div></div>
+
+  <div class="cg">
+    <div class="ic-card"><h4><i class="fa fa-coins"></i>Revenue Generated</h4><p>3% of every escrowed transaction goes to IBI.<br/><strong>Example:</strong> 10 bulk purchase groups/month × avg ₦2M each = ₦20M escrowed × 3% = <strong>₦600,000/month</strong> escrow revenue alone. Plus marketplace orders + food sharing add more.</p></div>
+    <div class="ic-card"><h4><i class="fa fa-shield-halved"></i>3-Gate Release Model</h4><p><strong>Gate 1 (50%):</strong> Admin verifies supplier invoice<br/><strong>Gate 2 (40%):</strong> Coordinator submits shipping proof + tracking<br/><strong>Gate 3 (10%):</strong> All members confirm receipt<br/>Disputes freeze all remaining gates.</p></div>
+    <div class="ic-card"><h4><i class="fa fa-scale-balanced"></i>Dispute Resolution</h4><p>Either party flags dispute → admin mediates → funds frozen → investigation period (5 days) → resolution: full release / partial refund / full refund to paying members. Admin decision is final and logged.</p></div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Escrow gate release — src/app/api/escrow/release-gate/route.ts</span></div>
+    <div class="code-body"><code><span class="c-p">export async function</span> POST(req: Request) {
+  <span class="c-b">const</span> { escrowId, gateNum, adminUid, evidence } = <span class="c-p">await</span> req.json();
+
+  <span class="c-b">const</span> escrow = <span class="c-p">await</span> adminDb.collection(<span class="c-g">'escrow_transactions'</span>).doc(escrowId).get();
+  <span class="c-b">const</span> data = escrow.data();
+
+  <span class="c-gr">// Gate validation: must release in order (1 → 2 → 3)</span>
+  <span class="c-b">const</span> prevGate = data.gates.find((g: <span class="c-b">any</span>) => g.gateNum === gateNum - <span class="c-o">1</span>);
+  <span class="c-p">if</span> (gateNum > <span class="c-o">1</span> && !prevGate?.releasedAt) <span class="c-p">throw</span> <span class="c-b">new</span> Error(<span class="c-g">'Previous gate not released'</span>);
+
+  <span class="c-b">const</span> gate = data.gates.find((g: <span class="c-b">any</span>) => g.gateNum === gateNum);
+  <span class="c-b">const</span> releaseAmount = gate.amount;
+  <span class="c-b">const</span> platformFee = Math.round(data.totalCollected * <span class="c-o">0.03</span>); <span class="c-gr">// 3% fee</span>
+  <span class="c-b">const</span> netRelease = releaseAmount - (gateNum === <span class="c-o">1</span> ? platformFee : <span class="c-o">0</span>); <span class="c-gr">// Fee on gate 1</span>
+
+  <span class="c-gr">// 1. Credit coordinator's wallet (net of platform fee)</span>
+  <span class="c-p">await</span> adminDb.collection(<span class="c-g">'members'</span>).doc(data.coordinatorUid).update({
+    walletBalance: FieldValue.increment(netRelease)
+  });
+
+  <span class="c-gr">// 2. Credit IBI platform wallet (platform fee revenue)</span>
+  <span class="c-p">if</span> (gateNum === <span class="c-o">1</span>) {
+    <span class="c-p">await</span> adminDb.collection(<span class="c-g">'platform_revenue'</span>).add({
+      source: <span class="c-g">'escrow_fee'</span>, escrowId, amount: platformFee, createdAt: serverTimestamp()
+    });
+  }
+
+  <span class="c-gr">// 3. Update escrow document</span>
+  <span class="c-p">await</span> adminDb.collection(<span class="c-g">'escrow_transactions'</span>).doc(escrowId).update({
+    [`gates.${gateNum - 1}.releasedAt`]: serverTimestamp(),
+    [`gates.${gateNum - 1}.releasedBy`]: adminUid,
+    totalReleased: FieldValue.increment(releaseAmount),
+    balance: FieldValue.increment(-releaseAmount),
+    status: gateNum === <span class="c-o">3</span> ? <span class="c-g">'fully_released'</span> : <span class="c-g">'partial_released'</span>
+  });
+
+  <span class="c-gr">// 4. Notify coordinator via WhatsApp + Email</span>
+  sendNotification(coordinatorPhone, <span class="c-g">`IBI Escrow Gate ${gateNum} Released: ₦${netRelease.toLocaleString()} added to your wallet.`</span>);
+}</code></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Transaction Type</th><th>Escrow %</th><th>IBI Fee</th><th>Est. Monthly Volume</th><th>Monthly Revenue</th></tr></thead>
+      <tbody>
+        <tr><td>Bulk Purchases</td><td>100% of slot payments</td><td class="tcost">3%</td><td>~₦15M</td><td class="tok">~₦450,000</td></tr>
+        <tr><td>Food Sharing Groups</td><td>100% of contributions</td><td class="tcost">2%</td><td>~₦5M</td><td class="tok">~₦100,000</td></tr>
+        <tr><td>Marketplace Orders</td><td>100% held until delivery</td><td class="tcost">2%</td><td>~₦8M</td><td class="tok">~₦160,000</td></tr>
+        <tr><td>Travel Groups</td><td>100% until trip confirmed</td><td class="tcost">3%</td><td>~₦3M</td><td class="tok">~₦90,000</td></tr>
+        <tr style="border-top:2px solid rgba(155,28,28,0.1);"><td><strong>Total Escrow Revenue</strong></td><td>—</td><td>—</td><td>~₦31M escrowed</td><td class="tok"><strong>~₦800,000/month</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 18 — IBI DEBIT CARD ISSUANCE
+══════════════════════════════════════════ -->
+<div class="section" id="s18">
+  <div class="section-header">
+    <div class="section-num dark">18</div>
+    <div class="section-info">
+      <h2>IBI Debit Card Issuance &amp; Management</h2>
+      <p>Co-branded Verve &amp; Visa membership debit cards — issued via BaaS partner, managed in dashboard, generating card fee + interchange revenue</p>
+    </div>
+  </div>
+
+  <div class="pbox"><i class="fa fa-circle-info bi"></i><div>IBI cannot issue bank cards directly — a licensed <strong>Banking as a Service (BaaS)</strong> partner is required. In Nigeria, the best options are <strong>Sudo Africa</strong> (card-as-a-service API, Verve + Visa), <strong>Bloc</strong>, or <strong>Anchor</strong>. The partner handles CBN compliance, card scheme licensing, and physical card printing. IBI provides the design and member data via API.</div></div>
+
+  <div class="cg">
+    <div class="ic-card"><h4><i class="fa fa-building-columns"></i>BaaS Partner Setup</h4><p><strong>Recommended: Sudo Africa</strong> (sudoafrica.com)<br/>• Supports Verve + Visa card issuance<br/>• Virtual cards: instant API issuance<br/>• Physical cards: embossed + printed, 7–14 days<br/>• Webhook events for all transactions<br/>• Nigeria-compliant (CBN licensed partner)<br/>• Apply: business account + CAC docs</p></div>
+    <div class="ic-card"><h4><i class="fa fa-coins"></i>Revenue Per Card</h4><p><strong>Virtual Verve:</strong> IBI charges ₦1,500 · Partner cost ~₦500 · <em>Profit: ₦1,000</em><br/><strong>Virtual Visa:</strong> IBI charges ₦2,500 · Partner cost ~₦800 · <em>Profit: ₦1,700</em><br/><strong>Physical Verve:</strong> IBI charges ₦4,000 · Partner cost ~₦1,500 · <em>Profit: ₦2,500</em><br/><strong>Physical Visa:</strong> IBI charges ₦6,000 · Partner cost ~₦2,000 · <em>Profit: ₦4,000</em><br/>+ Interchange: ~₦30–100 per transaction</p></div>
+    <div class="ic-card"><h4><i class="fa fa-chart-line"></i>Revenue Projection</h4><p>At 5,000 active members, even 30% card adoption = 1,500 cards<br/>• 1,000 Virtual cards avg ₦1,350 profit = <strong>₦1.35M</strong><br/>• 500 Physical cards avg ₦3,250 profit = <strong>₦1.625M</strong><br/>• Total issuance: <strong>~₦2.975M one-time</strong><br/>• Monthly interchange (1,500 cards × 10 txns × ₦50 avg) = <strong>₦750,000/month</strong></p></div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Card issuance flow — src/app/api/cards/issue/route.ts</span></div>
+    <div class="code-body"><code><span class="c-gr">// STEP 1: Member pays card order fee via Paystack</span>
+<span class="c-gr">// Paystack webhook → create /card_orders doc, status: "paid"</span>
+
+<span class="c-gr">// STEP 2: Server calls Sudo Africa API to issue card</span>
+<span class="c-b">const</span> sudoRes = <span class="c-p">await</span> fetch(<span class="c-g">'https://api.sudo.africa/cards'</span>, {
+  method: <span class="c-g">'POST'</span>,
+  headers: {
+    <span class="c-g">'Authorization'</span>: <span class="c-g">`Bearer ${process.env.SUDO_API_KEY}`</span>,
+    <span class="c-g">'Content-Type'</span>: <span class="c-g">'application/json'</span>
+  },
+  body: JSON.stringify({
+    type:     cardNetwork === <span class="c-g">'verve'</span> ? <span class="c-g">'prepaid'</span> : <span class="c-g">'prepaid-visa'</span>,
+    currency: <span class="c-g">'NGN'</span>,
+    brand:    cardNetwork,                   <span class="c-gr">// "verve" | "visa"</span>
+    status:   <span class="c-g">'active'</span>,
+    spendingControls: {
+      channels:     [<span class="c-g">'atm'</span>, <span class="c-g">'pos'</span>, <span class="c-g">'web'</span>],
+      spendingLimits: [{ amount: <span class="c-o">500000</span>, interval: <span class="c-g">'daily'</span> }]
+    },
+    customerName: memberFullName,
+    customerId:   memberId,               <span class="c-gr">// e.g. "FCT/01/0001"</span>
+    metadata: { memberId, chapter, position }
+  })
+});
+<span class="c-b">const</span> card = <span class="c-p">await</span> sudoRes.json();
+
+<span class="c-gr">// STEP 3: Encrypt card PAN + CVV, store in Firestore</span>
+<span class="c-b">const</span> encryptedPAN = encrypt(card.pan, process.env.<span class="c-y">CARD_ENCRYPTION_KEY</span>);
+<span class="c-p">await</span> adminDb.collection(<span class="c-g">'card_orders'</span>).doc(cardOrderId).update({
+  'virtualCard.cardNumber': encryptedPAN,
+  'virtualCard.cvv':        encrypt(card.cvv, process.env.<span class="c-y">CARD_ENCRYPTION_KEY</span>),
+  'virtualCard.expiryMonth': card.expiryMonth,
+  'virtualCard.expiryYear':  card.expiryYear,
+  'virtualCard.isActive':    <span class="c-b">true</span>,
+  status: <span class="c-g">'issued'</span>, activatedAt: serverTimestamp()
+});
+
+<span class="c-gr">// STEP 4: Notify member</span>
+sendNotification(memberPhone,
+  <span class="c-g">`🎉 Your IBI ${cardNetwork.toUpperCase()} Virtual Card is ready!\nLog in to view your card details: igbobuigbo.org.ng/dashboard → My IBI Cards`</span>
+);
+
+<span class="c-gr">// STEP 5: Sudo Africa webhook → push card_transactions to Firestore + notify member per spend</span></code></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Feature</th><th>Virtual Card</th><th>Physical Card</th></tr></thead>
+      <tbody>
+        <tr><td>Activation time</td><td class="tok">Instant (API)</td><td class="twarn">7–14 business days</td></tr>
+        <tr><td>ATM withdrawals</td><td class="tna">Not applicable</td><td class="tok">Yes — nationwide</td></tr>
+        <tr><td>POS payments</td><td class="tna">Not applicable</td><td class="tok">Yes — tap or chip</td></tr>
+        <tr><td>Online payments</td><td class="tok">Yes — card details in dashboard</td><td class="tok">Yes</td></tr>
+        <tr><td>Freeze / unfreeze</td><td class="tok">Instant via dashboard</td><td class="tok">Instant via dashboard</td></tr>
+        <tr><td>Spending limits</td><td class="tok">Configurable by member</td><td class="tok">Configurable by member</td></tr>
+        <tr><td>Transaction alerts</td><td class="tok">WhatsApp + push notification</td><td class="tok">WhatsApp + push notification</td></tr>
+        <tr><td>Card design</td><td class="tok">Shows member photo + ID on dashboard</td><td class="tok">Embossed with name + IBI branding</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 19 — MOBILE APPS (ANDROID + iOS)
+══════════════════════════════════════════ -->
+<div class="section" id="s19">
+  <div class="section-header">
+    <div class="section-num dark">19</div>
+    <div class="section-info">
+      <h2>Mobile Apps — Android &amp; iOS with Expo</h2>
+      <p>Full-featured native mobile apps sharing the same Firebase + Paystack backend — all platform features accessible on phone</p>
+    </div>
+  </div>
+
+  <div class="gbox"><i class="fa fa-mobile-screen bi"></i><div><strong>Why Expo (React Native)?</strong> The web platform is already built in React (Next.js). Expo lets you write <strong>one codebase</strong> that compiles to both Android and iOS native apps, sharing all Firebase, Paystack, and Cloudinary logic. No separate backend needed — the apps call the same Firestore database and Next.js API routes.</div></div>
+
+  <div class="cg">
+    <div class="ic-card"><h4><i class="fa fa-brands fa-google-play"></i>Google Play Store</h4><p><strong>Setup:</strong> Google Play Console account — $25 one-time fee (~₦40,000)<br/><strong>App bundle:</strong> Expo EAS Build produces .aab<br/><strong>Review time:</strong> 3–7 days for initial, hours for updates<br/><strong>Distribution:</strong> Nigeria + global reach<br/><strong>FCM Push:</strong> Firebase Cloud Messaging (free)</p></div>
+    <div class="ic-card"><h4><i class="fa fa-brands fa-apple"></i>Apple App Store</h4><p><strong>Setup:</strong> Apple Developer Program — $99/year (~₦158,400)<br/><strong>App bundle:</strong> Expo EAS Build produces .ipa<br/><strong>Review time:</strong> 1–3 days (strict guidelines)<br/><strong>Distribution:</strong> Worldwide including Nigerian iPhones<br/><strong>APNs:</strong> Apple Push Notification service (free)</p></div>
+    <div class="ic-card"><h4><i class="fa fa-wrench"></i>Expo EAS Build</h4><p><strong>Free tier:</strong> 100 builds/month<br/><strong>OTA updates:</strong> Push JS updates without store review<br/><strong>Build time:</strong> ~15–25 mins per build<br/><strong>Cost:</strong> Free for launch · $29/month for teams<br/><strong>Advantage:</strong> Bug fixes deploy in minutes, not days</p></div>
+    <div class="ic-card"><h4><i class="fa fa-lock"></i>Mobile-Specific Features</h4><p><strong>Biometric auth:</strong> TouchID / FaceID via expo-local-authentication<br/><strong>Push notifications:</strong> Firebase Cloud Messaging<br/><strong>Camera:</strong> Passport photo capture, QR scan<br/><strong>Offline:</strong> AsyncStorage for cached member data<br/><strong>Deep links:</strong> ibi:// scheme for notifications → screens</p></div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">terminal</span><span class="code-file">Mobile app setup with Expo EAS</span></div>
+    <div class="code-body"><code><span class="c-gr"># Install Expo CLI and EAS CLI</span>
+npm install -g expo-cli eas-cli
+
+<span class="c-gr"># Create Expo project (shares Firebase config with Next.js)</span>
+npx create-expo-app igbobuigbo-app --template blank-typescript
+cd igbobuigbo-app
+
+<span class="c-gr"># Install all mobile-specific dependencies</span>
+npx expo install \
+  expo-local-authentication \   <span class="c-gr"># TouchID / FaceID</span>
+  expo-notifications \          <span class="c-gr"># Push notifications</span>
+  expo-camera \                 <span class="c-gr"># QR scanner + passport photo</span>
+  expo-image-picker \           <span class="c-gr"># Photo library access</span>
+  expo-secure-store \           <span class="c-gr"># Encrypted token storage (replaces localStorage)</span>
+  expo-linking \                <span class="c-gr"># Deep links (ibi://dashboard)</span>
+  @react-navigation/native \   <span class="c-gr"># Navigation</span>
+  @react-navigation/bottom-tabs \
+  firebase \                    <span class="c-gr"># Same Firebase SDK as web</span>
+  @react-native-async-storage/async-storage
+
+<span class="c-gr"># Configure EAS (builds for Play Store + App Store)</span>
+eas build:configure
+eas login
+
+<span class="c-gr"># Build for Android (produces .aab for Play Store)</span>
+eas build --platform android --profile production
+
+<span class="c-gr"># Build for iOS (produces .ipa for App Store)</span>
+eas build --platform ios --profile production
+
+<span class="c-gr"># Push OTA update (no store review needed for JS-only changes)</span>
+eas update --branch production --message "Fix food sharing slot count"</code></div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">json</span><span class="code-file">app.json — IBI mobile app config</span></div>
+    <div class="code-body"><code>{
+  <span class="c-g">"expo"</span>: {
+    <span class="c-g">"name"</span>: <span class="c-g">"Igbo Bu Igbo"</span>,
+    <span class="c-g">"slug"</span>: <span class="c-g">"igbobuigbo"</span>,
+    <span class="c-g">"version"</span>: <span class="c-g">"1.0.0"</span>,
+    <span class="c-g">"scheme"</span>: <span class="c-g">"ibi"</span>,         <span class="c-gr">// Deep link: ibi://dashboard/cards</span>
+    <span class="c-g">"android"</span>: {
+      <span class="c-g">"package"</span>: <span class="c-g">"ng.org.igbobuigbo.app"</span>,
+      <span class="c-g">"googleServicesFile"</span>: <span class="c-g">"./google-services.json"</span>  <span class="c-gr">// Firebase Android config</span>
+    },
+    <span class="c-g">"ios"</span>: {
+      <span class="c-g">"bundleIdentifier"</span>: <span class="c-g">"ng.org.igbobuigbo.app"</span>,
+      <span class="c-g">"googleServicesFile"</span>: <span class="c-g">"./GoogleService-Info.plist"</span>
+    },
+    <span class="c-g">"plugins"</span>: [
+      <span class="c-g">"expo-local-authentication"</span>,
+      <span class="c-g">"expo-notifications"</span>,
+      [<span class="c-g">"expo-camera"</span>, { <span class="c-g">"cameraPermission"</span>: <span class="c-g">"IBI needs camera to scan QR codes and capture your passport photo"</span> }]
+    ]
+  }
+}</code></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Mobile Feature</th><th>Technology</th><th>Cost</th></tr></thead>
+      <tbody>
+        <tr class="tr-free"><td>Android app build + publish</td><td>Expo EAS + Google Play Console</td><td class="tfree">$25 one-time (~₦40,000)</td></tr>
+        <tr><td>iOS app build + publish</td><td>Expo EAS + Apple Developer Program</td><td class="tcost">$99/year (~₦158,400)</td></tr>
+        <tr class="tr-free"><td>Push notifications (FCM + APNs)</td><td>Firebase Cloud Messaging</td><td class="tfree">Free unlimited</td></tr>
+        <tr class="tr-free"><td>OTA updates (JS changes)</td><td>Expo EAS Update</td><td class="tfree">Free (100 updates/month)</td></tr>
+        <tr class="tr-free"><td>Biometric authentication</td><td>expo-local-authentication</td><td class="tfree">Free</td></tr>
+        <tr class="tr-free"><td>Offline caching</td><td>AsyncStorage + Firestore offline persistence</td><td class="tfree">Free</td></tr>
+        <tr><td>App analytics</td><td>Firebase Analytics (already in Firebase)</td><td class="tfree">Free</td></tr>
+        <tr><td>Crash reporting</td><td>Sentry (free tier: 5,000 errors/month)</td><td class="tfree">Free at launch</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Mobile-first Nigerian market insight:</strong> Over 85% of Nigerian internet users primarily access the web via mobile phone. The app should load the member dashboard in under 3 seconds on a 3G connection. Use Firestore offline persistence so members in poor-coverage areas can view their ID card, wallet balance, and food sharing group details without a live connection. Sync happens automatically when connectivity returns.</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SECTION 20 — ADVERTISE WITH US PLATFORM
+══════════════════════════════════════════ -->
+<div class="section" id="s20">
+  <div class="section-header">
+    <div class="section-num dark">20</div>
+    <div class="section-info">
+      <h2>Advertise With Us — Mini Ad Platform</h2>
+      <p>Self-service advertising for members AND non-members — targeted to chapters, regions, or all Ndi Igbo across web and mobile apps</p>
+    </div>
+  </div>
+
+  <div class="ibox"><i class="fa fa-bullhorn bi"></i><div>The IBI platform reaches a highly targeted, verified audience of Igbo people across Nigeria and the diaspora. This makes it uniquely valuable for advertisers targeting this community — car dealers, fashion designers, food businesses, real estate agents, event promoters, and more. <strong>Non-members can advertise without creating an account.</strong></div></div>
+
+  <div class="cg">
+    <div class="ic-card"><h4><i class="fa fa-tags"></i>Ad Packages &amp; Rates</h4>
+      <p><strong>Starter:</strong> ₦5,000 · Homepage banner · 1 week<br/>
+      <strong>Standard:</strong> ₦15,000 · 3 pages · 2 weeks<br/>
+      <strong>Premium:</strong> ₦35,000 · All pages + app · 1 month<br/>
+      <strong>Featured Listing:</strong> ₦8,000 · Marketplace top slot · 2 weeks<br/>
+      <strong>Sponsored Post:</strong> ₦12,000 · News/blog feature · 1 post<br/>
+      <em>CPM option: ₦500 per 1,000 impressions (₦5,000 min)</em></p>
+    </div>
+    <div class="ic-card"><h4><i class="fa fa-crosshairs"></i>Targeting Options</h4>
+      <p><strong>By Region:</strong> Igbo Speaking States · Non-Igbo States · Diaspora<br/>
+      <strong>By Chapter:</strong> Any of 43 specific chapters<br/>
+      <strong>By Platform:</strong> Web · Mobile App · Both<br/>
+      <strong>By Page:</strong> Homepage · Dashboard · Marketplace · Events · News<br/>
+      <strong>By Member:</strong> All visitors · Members only · Anonymous visitors</p>
+    </div>
+    <div class="ic-card"><h4><i class="fa fa-chart-bar"></i>Revenue Projection</h4>
+      <p>At 50 active ad campaigns/month:<br/>
+      • Avg spend: ₦15,000/campaign<br/>
+      • Monthly revenue: <strong>₦750,000</strong><br/>
+      At 200 campaigns (scale):<br/>
+      • Monthly revenue: <strong>₦3,000,000+</strong><br/>
+      <em>No infrastructure cost — Firestore + Cloudinary cover it</em></p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">Ad serving — src/app/api/ads/serve/route.ts</span></div>
+    <div class="code-body"><code><span class="c-gr">// GET /api/ads/serve?page=homepage&region=non-igbo&memberUid=xxx</span>
+<span class="c-p">export async function</span> GET(req: Request) {
+  <span class="c-b">const</span> { page, region, memberUid } = Object.fromEntries(<span class="c-b">new</span> URL(req.url).searchParams);
+  <span class="c-b">const</span> today = <span class="c-g">`${new Date().toISOString().split('T')[0]}`</span>;
+
+  <span class="c-gr">// Fetch active campaigns matching this page + region</span>
+  <span class="c-b">const</span> q = query(collection(db, <span class="c-g">'ad_campaigns'</span>),
+    where(<span class="c-g">'status'</span>,    <span class="c-g">'=='</span>, <span class="c-g">'active'</span>),
+    where(<span class="c-g">'startDate'</span>, <span class="c-g">'<='</span>, today),
+    where(<span class="c-g">'endDate'</span>,   <span class="c-g">'>='</span>, today)
+  );
+  <span class="c-b">const</span> campaigns = (<span class="c-p">await</span> getDocs(q)).docs.map(d => d.data());
+
+  <span class="c-gr">// Filter by placement and region match</span>
+  <span class="c-b">const</span> eligible = campaigns.filter(c =>
+    (c.placement.includes(page) || c.placement.includes(<span class="c-g">'all'</span>)) &&
+    (c.targetRegion === <span class="c-g">'all'</span> || c.targetRegion === region) &&
+    c.spent < c.budget                         <span class="c-gr">// Still has budget</span>
+  );
+
+  <span class="c-gr">// Pick highest-priority ad (by CPM rate or flat package)</span>
+  <span class="c-b">const</span> winner = eligible.sort((a, b) => b.ratePerUnit - a.ratePerUnit)[<span class="c-o">0</span>];
+  <span class="c-p">if</span> (!winner) <span class="c-p">return</span> Response.json({ ad: <span class="c-p">null</span> });
+
+  <span class="c-gr">// Log impression (batched — write every 50 to reduce Firestore writes)</span>
+  logImpression(winner.campaignId, page, memberUid); <span class="c-gr">// queues in memory, flushes at 50</span>
+
+  <span class="c-gr">// Deduct CPM cost if applicable</span>
+  <span class="c-p">if</span> (winner.priceModel === <span class="c-g">'cpm'</span>) {
+    <span class="c-p">await</span> adminDb.collection(<span class="c-g">'ad_campaigns'</span>).doc(winner.id).update({
+      impressions: FieldValue.increment(<span class="c-o">1</span>),
+      spent: FieldValue.increment(winner.ratePerUnit / <span class="c-o">1000</span>)
+    });
+    <span class="c-gr">// Auto-pause if budget exhausted</span>
+    <span class="c-p">if</span> (winner.spent + winner.ratePerUnit/<span class="c-o">1000</span> >= winner.budget) {
+      <span class="c-p">await</span> adminDb.collection(<span class="c-g">'ad_campaigns'</span>).doc(winner.id).update({ status: <span class="c-g">'budget_exhausted'</span> });
+      sendNotification(winner.advertiserEmail, <span class="c-g">'Your IBI ad campaign has ended — budget exhausted. Log in to top up.'</span>);
+    }
+  }
+  <span class="c-p">return</span> Response.json({ ad: winner });
+}</code></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Ad Placement</th><th>Format</th><th>Dimensions</th><th>Flat Rate / week</th></tr></thead>
+      <tbody>
+        <tr><td>Homepage banner</td><td>Image + link</td><td>1200×200px</td><td class="tok">₦5,000</td></tr>
+        <tr><td>Marketplace sidebar</td><td>Image + text + link</td><td>300×250px</td><td class="tok">₦4,000</td></tr>
+        <tr><td>Dashboard banner</td><td>Image + CTA button</td><td>960×120px</td><td class="tok">₦8,000</td></tr>
+        <tr><td>Featured marketplace listing</td><td>Product card (top of grid)</td><td>Card format</td><td class="tok">₦4,000 per 2 weeks</td></tr>
+        <tr><td>News sponsored post</td><td>Article/editorial</td><td>Full page</td><td class="tok">₦12,000 per post</td></tr>
+        <tr><td>Mobile app interstitial</td><td>Full-screen on app open (1 per session)</td><td>375×667px</td><td class="tok">₦10,000</td></tr>
+        <tr><td>Events page banner</td><td>Image + event link</td><td>960×150px</td><td class="tok">₦6,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wbox"><i class="fa fa-triangle-exclamation bi"></i><div><strong>Ad content policy (admin must enforce):</strong> No political ads · No religious extremism · No fake product claims · No competitor org ads · No adult content · No gambling. All ads reviewed within 48hrs by admin before going live. Violating ads refunded at 50% (processing fee retained). Maintain brand integrity — IBI's audience trusts the platform.</div></div>
+
+  <div class="tipbox"><i class="fa fa-lightbulb bi"></i><div><strong>Revenue summary across all new systems:</strong><br/>
+  Escrow fees: ~₦800K/month · Card issuance (one-time): ~₦3M initial · Card interchange: ~₦750K/month · Ad platform: ~₦750K–3M/month · Marketplace 2% fee: ~₦160K/month · Membership dues: depends on size<br/>
+  <strong>Total potential at growth phase: ₦2.5M–5M+ per month in platform revenue — making IBI financially self-sustaining without dependence on donations.</strong></div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
