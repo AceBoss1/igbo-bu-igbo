@@ -505,6 +505,44 @@ footer{background:var(--dark);padding:56px 24px 24px;}
 
 @media(max-width:900px){.footer-top{grid-template-columns:1fr 1fr;}}
 @media(max-width:500px){.footer-top{grid-template-columns:1fr;}.section{padding:48px 16px;}.benefits-section,.programs-section,.ibi-cards-section,.mem-cats-section{padding:52px 16px;}}
+
+/* ── FLOATING BUTTONS ── */
+.btn-float-top{position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:var(--red);color:var(--white);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:9999;box-shadow:0 4px 16px rgba(155,28,28,0.4);transition:all 0.3s;opacity:0;transform:translateY(12px);font-size:16px;}
+.btn-float-top.visible{opacity:1;transform:translateY(0);}
+.btn-float-top:hover{background:var(--red-light);transform:translateY(-2px) !important;}
+.btn-float-home{position:fixed;bottom:78px;right:24px;width:46px;height:46px;border-radius:50%;background:var(--dark);color:var(--gold-light);border:1px solid rgba(201,144,26,0.35);display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:all 0.3s;text-decoration:none;font-size:16px;}
+.btn-float-home:hover{background:var(--red);color:var(--white);border-color:var(--red);transform:translateY(-2px);}
+/* ── DUAL PAYMENT ── */
+.payment-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;}
+.pm-opt{border:1.5px solid rgba(155,28,28,0.12);border-radius:10px;padding:14px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;background:var(--cream);}
+.pm-opt.active{border-color:var(--red);background:rgba(155,28,28,0.05);}
+.pm-opt:hover{border-color:rgba(155,28,28,0.3);}
+.pm-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.pm-name{font-size:13px;font-weight:600;color:var(--text-dark);}
+.pm-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.pm-sub a{color:var(--red);}
+@media(max-width:480px){.payment-methods{grid-template-columns:1fr;}}
+
+
+/* ── FLOATING ACTION BUTTONS ── */
+.fab-wrap{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:9999;}
+.fab{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,0,0,0.18);border:none;text-decoration:none;}
+.fab-top{background:var(--red);color:#fff;opacity:0;transform:translateY(8px);}
+.fab-top.show{opacity:1;transform:translateY(0);}
+.fab-top:hover{background:var(--red-light);transform:translateY(-2px) !important;}
+.fab-home{background:var(--dark);color:var(--gold-light);border:1px solid rgba(201,144,26,0.3);}
+.fab-home:hover{background:var(--red);color:#fff;border-color:var(--red);transform:translateY(-2px);}
+/* ── DUAL PAYMENT ── */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.pay-opt{border:1.5px solid rgba(155,28,28,0.12);border-radius:10px;padding:13px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;background:var(--cream);}
+.pay-opt.active{border-color:var(--red);background:rgba(155,28,28,0.05);}
+.pay-opt:hover{border-color:rgba(155,28,28,0.3);}
+.pay-opt-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.pay-opt-name{font-size:13px;font-weight:600;color:var(--text-dark);line-height:1.3;}
+.pay-opt-sub{font-size:11px;color:var(--text-muted);margin-top:2px;}
+.pay-opt-sub a{color:var(--red);}
+@media(max-width:480px){.pay-methods{grid-template-columns:1fr;}}
+
 </style>
 </head>
 <body>
@@ -529,7 +567,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
     </a>
     <div class="nav-links">
       <a href="about.html">About</a>
-      <a href="coming-soon.html">Membership</a>
+      <a href="membership.html">Membership</a>
       <a href="chapters.html">Chapters</a>
       <a href="events.html">Events</a>
       <a href="coming-soon4.html">Marketplace</a>
@@ -542,7 +580,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="about.html">About Us</a>
-    <a href="coming-soon.html">Membership</a>
+    <a href="membership.html">Membership</a>
     <a href="chapters.html">Chapters</a>
     <a href="events.html">Events</a>
     <a href="coming-soon4.html">Marketplace</a>
@@ -1147,7 +1185,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
             <div class="id-mini-header"><img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="id-mini-logo" onerror="this.style.opacity='0';"/><div class="id-mini-org">IGBO BU IGBO<br>Unity &amp; Cultural Preservation</div></div>
             <div class="id-mini-body">
               <div class="id-mini-photo"><img src="photoadams.jpg" alt="Emmanuel Adams" onerror="this.parentElement.innerHTML='&lt;i class=&quot;fa fa-user&quot; style=&quot;color:rgba(255,255,255,0.3);&quot;&gt;&lt;/i&gt;';"/></div>
-              <div class="id-mini-details"><div class="id-mini-name">Emmanuel Adams</div><div class="id-mini-id">FCT/01/0001</div><div class="id-mini-pos">Vice President — FCT Abuja</div></div>
+              <div class="id-mini-details"><div class="id-mini-name">Emmanuel Adams</div><div class="id-mini-id">FCT/7432910856</div><div class="id-mini-pos">Vice President — FCT Abuja</div></div>
             </div>
           </div>
           <a href="id-card.html" class="id-card-link"><i class="fa fa-id-card"></i> View &amp; Download Full ID Card</a>
@@ -1201,7 +1239,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
         <h4>Member Services</h4>
         <a href="coming-soon.html">Register / Join</a><a href="id-card.html">Verify Member</a>
         <a href="coming-soon2.html">Pay Dues</a><a href="id-card.html">Download ID Card</a>
-        <a href="coming-soon2.html">Member Dashboard</a><a href="coming-soon2.html">Member Wallet</a>
+        <a href="coming-soon2.html">Member Dashboard</a><a href="coming-soon2.html">IBI Wallet</a>
         <a href="coming-soon6.html">IBI Debit Cards</a><a href="coming-soon7.html">Mobile App</a>
       </div>
       <div class="footer-col">
