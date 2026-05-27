@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Member ID Card — Emmanuel Adams | Igbo Bu Igbo</title>
+  <title>Member ID Card — Aisha Uju Nwosu | Igbo Bu Igbo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -23,7 +23,7 @@
     }
     a { text-decoration: none; color: inherit; }
 
-    /* PAGE HEADER */
+    /* PAGE HANDER */
     .page-header {
       max-width: 900px; margin: 0 auto 32px;
       display: flex; align-items: center; justify-content: space-between;
@@ -45,7 +45,7 @@
     }
     .back-btn:hover { color: var(--red); border-color: var(--red); }
 
-    /* VERIFY SEARCH */
+    /* VERIFY SANRCH */
     .verify-bar {
       max-width: 900px; margin: 0 auto 40px;
       background: var(--white); border-radius: 12px; padding: 20px 24px;
@@ -105,7 +105,7 @@
       background: linear-gradient(90deg, var(--red-dark), var(--red), var(--gold-mid), var(--gold-light));
     }
 
-    /* CARD HEADER */
+    /* CARD HANDER */
     .card-header {
       background: var(--red-dark); padding: 14px 18px;
       display: flex; align-items: center; gap: 12px;
@@ -316,11 +316,20 @@
       .card-section { grid-template-columns: 1fr; display: block; }
       #id-card-capture { box-shadow: none; max-width: 380px; margin: 40px auto; }
     }
-  </style>
+  
+/* ── FLOATING ACTION BUTTONS ── */
+.fab-wrap{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:99999;}
+.fab{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,0,0,0.22);border:none;text-decoration:none;}
+.fab-top{background:var(--red,#9B1C1C);color:#fff;opacity:0;transform:translateY(10px);}
+.fab-top.show{opacity:1;transform:translateY(0);}
+.fab-top:hover{background:#C0392B;transform:translateY(-2px) !important;}
+.fab-home{background:#1A0A00;color:#F0B429;border:1px solid rgba(201,144,26,0.35);}
+.fab-home:hover{background:#9B1C1C;color:#fff;border-color:#9B1C1C;transform:translateY(-2px);}
+</style>
 </head>
 <body>
 
-  <!-- PAGE HEADER -->
+  <!-- PAGE HANDER -->
   <div class="page-header">
     <div class="header-brand">
       <img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="header-logo"
@@ -343,7 +352,7 @@
       <span class="verified-badge"><span class="status-dot"></span> Verified Member</span>
     </h3>
     <div class="verify-row">
-      <input type="text" class="verify-input" value="FCT/01/0001" placeholder="Enter Membership ID or Phone Number" />
+      <input type="text" class="verify-input" value="LAG/3847291056" placeholder="Enter Membership ID or Phone Number" />
       <input type="text" class="verify-input" placeholder="Or enter phone / email" />
       <button class="verify-btn" onclick="showVerified()">
         <i class="fa fa-magnifying-glass"></i> Verify Member
@@ -369,7 +378,7 @@
       <div id="id-card-capture">
         <!-- TOP STRIPE -->
         <div class="card-stripe"></div>
-        <!-- CARD HEADER -->
+        <!-- CARD HANDER -->
         <div class="card-header">
           <div class="card-header-pattern"></div>
           <img src="igbo_bu_igbo_logo.jpg" alt="Logo" class="card-header-logo"
@@ -389,23 +398,23 @@
               <!-- PHOTO -->
               <div class="card-photo-wrap">
                 <div class="card-photo">
-                  <img src="photoadams.jpg" alt="Emmanuel Adams"
+                  <img src="photoaisha.jpg" alt="Aisha Uju Nwosu"
                        onerror="this.parentElement.innerHTML='<i class=\'fa fa-user\' style=\'font-size:36px;color:rgba(255,255,255,0.2);\'></i>';" />
                 </div>
                 <div class="card-photo-label">Passport Photo</div>
               </div>
               <!-- DETAILS -->
               <div class="card-details">
-                <div class="card-name">Emmanuel Adams</div>
-                <div class="card-position">Vice President — FCT Abuja Chapter</div>
+                <div class="card-name">Aisha Uju Nwosu</div>
+                <div class="card-position">Secretary General — Lagos State Chapter</div>
                 <div class="card-fields">
                   <div class="card-field">
                     <span class="card-field-label">Reg. ID</span>
-                    <span class="card-field-value id-val">FCT/01/0001</span>
+                    <span class="card-field-value id-val">LAG/3847291056</span>
                   </div>
                   <div class="card-field">
                     <span class="card-field-label">Chapter</span>
-                    <span class="card-field-value">FCT Abuja Chapter</span>
+                    <span class="card-field-value">Lagos State Chapter</span>
                   </div>
                   <div class="card-field">
                     <span class="card-field-label">Category</span>
@@ -432,16 +441,13 @@
               <div class="card-qr-wrap">
                 <div id="qr-code"></div>
               </div>
- 	<div class="card-qr-info">
+              <div class="card-qr-info">
                 <div class="card-qr-text">
-                  This is an official digital membership card of the <strong style="color:rgba(255,255,255,0.5);">Igbo Bu Igbo Unity and Cultural Preservation Initiative.</strong>  
-		<br> If the membership status is verified please give the bearer every neccesary attention and assistance deserving.
-		<br> Scan QR code to verify this member's authenticity at <strong style="color:rgba(255,255,255,0.5);">igbobuigbo.org.ng/verify</strong> <br> Any attempt to duplicate or falsify this card is prohibited and punishable under applicable laws.
+                  Scan QR code to verify this member's<br />
+                  authenticity at <strong style="color:rgba(255,255,255,0.5);">igbobuigbo.org.ng/verify</strong>
                 </div>
-                
-
-<div style="font-size:9px;color:rgba(201,144,26,0.6);font-family:'Share Tech Mono',monospace;">
-                  ID: FCT/01/0001
+                <div style="font-size:9px;color:rgba(201,144,26,0.6);font-family:'Share Tech Mono',monospace;">
+                  ID: LAG/3847291056
                 </div>
               </div>
               <div class="card-seal">
@@ -472,19 +478,19 @@
         <div class="info-rows">
           <div class="info-row">
             <span class="info-key">Full Name</span>
-            <span class="info-val">Emmanuel Adams</span>
+            <span class="info-val">Aisha Uju Nwosu</span>
           </div>
           <div class="info-row">
             <span class="info-key">Membership ID</span>
-            <span class="info-val mono">FCT/01/0001</span>
+            <span class="info-val mono">LAG/3847291056</span>
           </div>
           <div class="info-row">
             <span class="info-key">Position</span>
-            <span class="info-val">Vice President</span>
+            <span class="info-val">Secretary General</span>
           </div>
           <div class="info-row">
             <span class="info-key">Chapter</span>
-            <span class="info-val">FCT Abuja Chapter</span>
+            <span class="info-val">Lagos State Chapter</span>
           </div>
           <div class="info-row">
             <span class="info-key">Member Category</span>
