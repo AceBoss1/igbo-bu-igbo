@@ -702,7 +702,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
 <div class="announce-bar">
   <i class="fa fa-bell"></i>
   National Convention — 14 June 2026, Abuja &nbsp;·&nbsp; <a href="events.html">Register Now</a>
-  &nbsp;|&nbsp; <a href="coming-soon.html">Advertise With Us</a> — from &#8358;5,000/week
+  &nbsp;|&nbsp; <a href="index.html#advertise">Advertise With Us</a> — from &#8358;5,000/week
 </div>
 <nav class="navbar">
   <div class="nav-inner">
@@ -712,12 +712,12 @@ footer{background:var(--dark);padding:56px 24px 24px;}
       <div class="nav-org-name"><strong>IGBO BU IGBO</strong><span>Unity &amp; Cultural Preservation</span></div>
     </a>
     <div class="nav-links"><a href="about.html">About</a><a href="membership.html">Membership</a><a href="chapters.html" class='nav-active'>Chapters</a><a href="events.html">Events</a><a href="coming-soon4.html">Marketplace</a><a href="news.html">News</a><a href="donate.html">Donate</a><a href="contact.html">Contact</a></div>
-    <a href="coming-soon.html" class="nav-cta desktop"><i class="fa fa-user-plus"></i> Join Now</a>
+    <a href="membership.html#join" class="nav-cta desktop"><i class="fa fa-user-plus"></i> Join Now</a>
     <button class="hamburger" onclick="toggleMenu()"><i class="fa fa-bars" id="ham-icon"></i></button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="about.html">About</a><a href="membership.html">Membership</a><a href="chapters.html">Chapters</a><a href="events.html">Events</a><a href="coming-soon4.html">Marketplace</a><a href="news.html">News</a><a href="donate.html">Donate</a><a href="contact.html">Contact</a>
-    <a href="coming-soon.html" style="color:var(--gold-light);font-weight:600;margin-top:8px;"><i class="fa fa-user-plus"></i> Join Now</a>
+    <a href="membership.html" style="color:var(--gold-light);font-weight:600;margin-top:8px;"><i class="fa fa-user-plus"></i> Join Now</a>
   </div>
 </nav>
 <section class="page-hero">
@@ -846,7 +846,7 @@ footer{background:var(--dark);padding:56px 24px 24px;}
     </div>
 
     <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:36px;">
-      <a href="coming-soon.html" class="btn-red"><i class="fa fa-user-plus"></i> Register &amp; Join Your Chapter</a>
+      <a href="membership.html#join" class="btn-red"><i class="fa fa-user-plus"></i> Register &amp; Join Your Chapter</a>
       <a href="coming-soon2.html" class="btn-red" style="background:var(--dark2);border:1px solid rgba(201,144,26,0.25);"><i class="fa fa-right-left"></i> Apply to Transfer Your Chapter / Region</a>
     </div>
   </div>
@@ -858,4 +858,15 @@ footer{background:var(--dark);padding:56px 24px 24px;}
 function toggleMenu(){const m=document.getElementById('mobile-menu'),i=document.getElementById('ham-icon');m.classList.toggle('open');i.className=m.classList.contains('open')?'fa fa-times':'fa fa-bars';}
 function toggleChr(n){const card=document.getElementById('chrCard'+n);const body=document.getElementById('chrBody'+n);const icon=document.getElementById('chrIcon'+n);const isOpen=card.classList.contains('chr-open');document.querySelectorAll('.ch-region-card').forEach(c=>c.classList.remove('chr-open'));document.querySelectorAll('.ch-region-body').forEach(b=>b.classList.remove('chr-open'));[1,2,3].forEach(i=>{const ic=document.getElementById('chrIcon'+i);if(ic)ic.style.transform='';});if(!isOpen){card.classList.add('chr-open');body.classList.add('chr-open');icon.style.transform='rotate(180deg)';setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),50);}}
 function toggleCont(id){const cont=document.getElementById('cont'+id);const body=document.getElementById('contBody'+id);const icon=document.getElementById('contIcon'+id);const isOpen=cont.classList.contains('cont-open');cont.classList.toggle('cont-open');if(isOpen){body.style.maxHeight='0';icon.style.transform='';}else{body.style.maxHeight=body.scrollHeight+'px';icon.style.transform='rotate(180deg)';}}
-</script></body></html>
+</script><div class="fab-wrap">
+  <a class="fab fab-home" href="index.html" title="Back to Homepage"><i class="fa fa-house"></i></a>
+  <button class="fab fab-top" id="fabTop" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+</div><script>
+(function(){
+  var b=document.getElementById('fabTop');
+  if(!b)return;
+  window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>300);});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body></html>
