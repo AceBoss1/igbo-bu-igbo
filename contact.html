@@ -851,4 +851,18 @@ function toggleFaq(el){const ans=el.nextElementSibling;const icon=el.querySelect
 </footer>
 <script>
 
-</script></body></html>
+</script>
+<script>
+
+</script><div class="fab-wrap">
+  <a class="fab fab-home" href="index.html" title="Back to Homepage"><i class="fa fa-house"></i></a>
+  <button class="fab fab-top" id="fabTop" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+</div><script>
+(function(){
+  var b=document.getElementById('fabTop');
+  if(!b)return;
+  window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>300);});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body></html>
