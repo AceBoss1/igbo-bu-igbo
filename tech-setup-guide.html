@@ -714,7 +714,7 @@ npm install nanoid slugify uuid</code></div>
     <div class="code-header"><span class="code-lang">typescript</span><span class="code-file">All Firestore Collections — igbobuigbo platform</span></div>
     <div class="code-body"><code><span class="c-gr">// ── /members/{uid} ─────────────────────────────────────────────</span>
 {
-  memberId:     <span class="c-g">"FCT/01/0001"</span>,        <span class="c-gr">// Format: REGION-CODE/ZONE/NUMBER</span>
+  memberId:     <span class="c-g">"FCT/7432910856"</span>,        <span class="c-gr">// Format: REGION-CODE/ZONE/NUMBER</span>
   uid:          <span class="c-g">"firebase_auth_uid"</span>,
   fullName:     <span class="c-g">"Emmanuel Adams"</span>,
   email:        <span class="c-g">"e.adams@email.com"</span>,
@@ -754,7 +754,7 @@ npm install nanoid slugify uuid</code></div>
 {
   reference:   <span class="c-g">"IBI_1234567890"</span>,
   userId:      <span class="c-g">"firebase_auth_uid"</span>,
-  memberId:    <span class="c-g">"FCT/01/0001"</span>,
+  memberId:    <span class="c-g">"FCT/7432910856"</span>,
   amount:      <span class="c-o">15000</span>,               <span class="c-gr">// Naira</span>
   amountKobo:  <span class="c-o">1500000</span>,            <span class="c-gr">// Paystack works in kobo</span>
   type:        <span class="c-g">"registration"</span>,      <span class="c-gr">// registration|dues|donation|event|levy|wallet|marketplace|food|bulk|travel</span>
@@ -777,7 +777,7 @@ npm install nanoid slugify uuid</code></div>
 <span class="c-gr">// ── /marketplace/{itemId} ──────────────────────────────────────</span>
 {
   sellerId:    <span class="c-g">"firebase_auth_uid"</span>,
-  memberId:    <span class="c-g">"FCT/01/0001"</span>,
+  memberId:    <span class="c-g">"FCT/7432910856"</span>,
   title:       <span class="c-g">"Handwoven Akwete Cloth"</span>,
   description: <span class="c-g">"Authentic Igbo Akwete weaving..."</span>,
   category:    <span class="c-g">"fashion"</span>,           <span class="c-gr">// fashion|food|electronics|services|agriculture|machinery|artisans</span>
@@ -802,7 +802,7 @@ npm install nanoid slugify uuid</code></div>
   totalCost:    <span class="c-o">850000</span>,
   perMember:    <span class="c-o">42500</span>,               <span class="c-gr">// Auto-calculated</span>
   maxMembers:   <span class="c-o">20</span>,
-  members:      [<span class="c-g">"FCT/01/0001"</span>, <span class="c-g">"FCT/02/0003"</span>],
+  members:      [<span class="c-g">"FCT/7432910856"</span>, <span class="c-g">"FCT/02/0003"</span>],
   status:       <span class="c-g">"open"</span>,              <span class="c-gr">// open | full | closed | distributed</span>
   deadline:     <span class="c-g">"2026-06-20"</span>,
   createdAt:    <span class="c-p">Timestamp</span>
@@ -819,7 +819,7 @@ npm install nanoid slugify uuid</code></div>
   takenSlots:   <span class="c-o">12</span>,
   members:      [{ uid: <span class="c-g">"..."</span>, slots: <span class="c-o">2</span>, paid: <span class="c-b">true</span> }],
   estimatedDelivery: <span class="c-g">"2026-09-01"</span>,
-  coordinator:  <span class="c-g">"FCT/01/0001"</span>,
+  coordinator:  <span class="c-g">"FCT/7432910856"</span>,
   status:       <span class="c-g">"open"</span>,              <span class="c-gr">// open | closed | ordered | shipped | delivered</span>
   createdAt:    <span class="c-p">Timestamp</span>
 }
@@ -835,7 +835,7 @@ npm install nanoid slugify uuid</code></div>
   maxMembers:   <span class="c-o">15</span>,
   members:      [{ uid: <span class="c-g">"..."</span>, paid: <span class="c-b">true</span> }],
   costPerPerson:<span class="c-o">45000</span>,
-  coordinator:  <span class="c-g">"FCT/01/0001"</span>,
+  coordinator:  <span class="c-g">"FCT/7432910856"</span>,
   status:       <span class="c-g">"open"</span>,              <span class="c-gr">// open | full | confirmed | completed</span>
   createdAt:    <span class="c-p">Timestamp</span>
 }
@@ -864,7 +864,7 @@ npm install nanoid slugify uuid</code></div>
   openAt:  <span class="c-p">Timestamp</span>, closeAt: <span class="c-p">Timestamp</span>,
   candidates: [{ memberId: <span class="c-g">"..."</span>, name: <span class="c-g">"..."</span>, manifesto: <span class="c-g">"..."</span> }],
   totalVotes: <span class="c-o">2341</span>,
-  results:    { <span class="c-g">"FCT/01/0001"</span>: <span class="c-o">1450</span> }
+  results:    { <span class="c-g">"FCT/7432910856"</span>: <span class="c-o">1450</span> }
 }
 
 <span class="c-gr">// ── /votes/{uid_electionId} ── prevents double-voting ──────────</span>
@@ -872,7 +872,7 @@ npm install nanoid slugify uuid</code></div>
 
 <span class="c-gr">// ── /grants/{grantId} ──────────────────────────────────────────</span>
 {
-  memberId:  <span class="c-g">"FCT/01/0001"</span>,
+  memberId:  <span class="c-g">"FCT/7432910856"</span>,
   grantType: <span class="c-g">"scholarship"</span>,           <span class="c-gr">// scholarship | business | welfare | emergency</span>
   amount:    <span class="c-o">200000</span>,
   purpose:   <span class="c-g">"University tuition 2026/2027..."</span>,
@@ -906,13 +906,13 @@ npm install nanoid slugify uuid</code></div>
   venue:   <span class="c-g">"Three Star Hotel, Osisioma, Aba"</span>,
   date:    <span class="c-g">"2026-06-07"</span>, time: <span class="c-g">"13:00"</span>,
   ticketPrice: <span class="c-o">0</span>,                  <span class="c-gr">// 0 = free | > 0 = paid (Paystack)</span>
-  registrations: [<span class="c-g">"FCT/01/0001"</span>],
+  registrations: [<span class="c-g">"FCT/7432910856"</span>],
   status:  <span class="c-g">"upcoming"</span>
 }
 
 <span class="c-gr">// ── /job_board/{jobId} ─────────────────────────────────────────</span>
 {
-  postedBy:    <span class="c-g">"FCT/01/0001"</span>,
+  postedBy:    <span class="c-g">"FCT/7432910856"</span>,
   title:       <span class="c-g">"Software Engineer — Lagos"</span>,
   company:     <span class="c-g">"Igbo-owned Tech Startup"</span>,
   type:        <span class="c-g">"full-time"</span>,
@@ -956,7 +956,7 @@ npm install nanoid slugify uuid</code></div>
 <span class="c-gr">// Created when a buyer initiates purchase of a marketplace listing</span>
 {
   buyerUid:        <span class="c-g">"firebase_auth_uid"</span>,
-  buyerMemberId:   <span class="c-g">"FCT/01/0001"</span>,
+  buyerMemberId:   <span class="c-g">"FCT/7432910856"</span>,
   sellerUid:       <span class="c-g">"firebase_auth_uid_2"</span>,
   sellerMemberId:  <span class="c-g">"ABI/01/0044"</span>,
   listingId:       <span class="c-g">"marketplace_item_id"</span>,
@@ -996,7 +996,7 @@ npm install nanoid slugify uuid</code></div>
   collectionDate:<span class="c-g">"2026-06-22"</span>,
   collectionTime:<span class="c-g">"10:00"</span>,
   collectionPoints: [
-    { name: <span class="c-g">"IBI FCT HQ, Wuse Zone 3"</span>,   coordinator: <span class="c-g">"FCT/01/0001"</span>, capacity: <span class="c-o">15</span> },
+    { name: <span class="c-g">"IBI FCT HQ, Wuse Zone 3"</span>,   coordinator: <span class="c-g">"FCT/7432910856"</span>, capacity: <span class="c-o">15</span> },
     { name: <span class="c-g">"Garki Area 11 Hub"</span>,           coordinator: <span class="c-g">"FCT/03/0012"</span>, capacity: <span class="c-o">10</span> }
   ],
   totalMembersConfirmed: <span class="c-o">18</span>,
@@ -1028,7 +1028,7 @@ npm install nanoid slugify uuid</code></div>
   actualDuties:      <span class="c-p">null</span>,
   distributionDate:  <span class="c-p">null</span>,
   memberAllocations: [
-    { memberId: <span class="c-g">"FCT/01/0001"</span>, slots: <span class="c-o">2</span>, collected: <span class="c-b">false</span>, collectedAt: <span class="c-p">null</span> }
+    { memberId: <span class="c-g">"FCT/7432910856"</span>, slots: <span class="c-o">2</span>, collected: <span class="c-b">false</span>, collectedAt: <span class="c-p">null</span> }
   ],
   fundsReleased:  <span class="c-b">false</span>,             <span class="c-gr">// Admin releases escrow to coordinator only after delivery confirmed</span>
   status:         <span class="c-g">"ordered"</span>,          <span class="c-gr">// ordered | shipped | in_customs | arrived | distributed | disputed</span>
@@ -1051,7 +1051,7 @@ npm install nanoid slugify uuid</code></div>
   paymentTerms:  <span class="c-g">"50% deposit, 50% before shipping"</span>,
   rating:        <span class="c-o">4.3</span>,                 <span class="c-gr">// Avg rating from completed IBI bulk orders</span>
   completedOrders: <span class="c-o">3</span>,
-  verifiedBy:    <span class="c-g">"FCT/01/0001"</span>,       <span class="c-gr">// Admin who approved this supplier</span>
+  verifiedBy:    <span class="c-g">"FCT/7432910856"</span>,       <span class="c-gr">// Admin who approved this supplier</span>
   notes:         <span class="c-g">"Reliable. Always provide tracking. Request 30% extra units as buffer."</span>,
   isActive:      <span class="c-b">true</span>,
   createdAt:     <span class="c-p">Timestamp</span>
@@ -1073,7 +1073,7 @@ npm install nanoid slugify uuid</code></div>
   totalReleased:  <span class="c-o">2125000</span>,
   balance:        <span class="c-o">2125000</span>,            <span class="c-gr">// Still held</span>
   coordinatorUid: <span class="c-g">"firebase_auth_uid"</span>,
-  coordinatorMemberId: <span class="c-g">"FCT/01/0001"</span>,
+  coordinatorMemberId: <span class="c-g">"FCT/7432910856"</span>,
   status:         <span class="c-g">"partial_released"</span>,  <span class="c-gr">// holding | partial_released | fully_released | refunded | disputed</span>
   disputeReason:  <span class="c-p">null</span>,
   createdAt:      <span class="c-p">Timestamp</span>
@@ -1082,7 +1082,7 @@ npm install nanoid slugify uuid</code></div>
 <span class="c-gr">// ── /card_orders/{cardOrderId} ─────────────────────────────────</span>
 <span class="c-gr">// IBI Verve / Visa co-branded debit card orders</span>
 {
-  memberId:        <span class="c-g">"FCT/01/0001"</span>,
+  memberId:        <span class="c-g">"FCT/7432910856"</span>,
   memberUid:       <span class="c-g">"firebase_auth_uid"</span>,
   cardNetwork:     <span class="c-g">"verve"</span>,           <span class="c-gr">// verve | visa</span>
   deliveryType:    <span class="c-g">"physical"</span>,         <span class="c-gr">// virtual | physical</span>
@@ -1368,7 +1368,7 @@ npm install nanoid slugify uuid</code></div>
 }
 
 <span class="c-gr">// Example SMS messages</span>
-sendSMS(phone, <span class="c-g">`IBI: Membership FCT/01/0001 activated. Download your ID card at igbobuigbo.org.ng/dashboard`</span>);
+sendSMS(phone, <span class="c-g">`IBI: Membership FCT/7432910856 activated. Download your ID card at igbobuigbo.org.ng/dashboard`</span>);
 sendSMS(phone, <span class="c-g">`IBI: ₦5,000 payment confirmed. Ref: IBI_12345. Annual dues renewed. igbobuigbo.org.ng`</span>);
 sendSMS(phone, <span class="c-g">`IBI: Your food sharing slot (June 2026) is confirmed. Collection: June 25, FCT HQ.`</span>);</code></div>
   </div>
@@ -1418,7 +1418,7 @@ sendSMS(phone, <span class="c-g">`IBI: Your food sharing slot (June 2026) is con
 }</code></div>
   </div>
 
-  <div class="gbox"><i class="fa fa-circle-check bi"></i><div>The ID card (already built in <span class="ic">id-card.html</span>) shows: passport photo, full name, membership ID (e.g. FCT/01/0001), position, chapter, region, expiry date, QR code, and organisation seal. Download as PNG or PDF, or print directly.</div></div>
+  <div class="gbox"><i class="fa fa-circle-check bi"></i><div>The ID card (already built in <span class="ic">id-card.html</span>) shows: passport photo, full name, membership ID (e.g. FCT/7432910856), position, chapter, region, expiry date, QR code, and organisation seal. Download as PNG or PDF, or print directly.</div></div>
 </div>
 
 <!-- ══════════════════════════════════════════
@@ -1585,7 +1585,7 @@ sendSMS(sellerPhone, <span class="c-g">`IBI Marketplace: New order for "${listin
 <span class="c-gr">// ── MEMBER joins group (open status) ───────────────────────────</span>
 <span class="c-gr">// Paystack payment triggers webhook → mark member as paid in group</span>
 <span class="c-p">await</span> adminDb.collection(<span class="c-g">'food_sharing_groups'</span>).doc(groupId).update({
-  members: FieldValue.arrayUnion(<span class="c-g">"FCT/01/0001"</span>),
+  members: FieldValue.arrayUnion(<span class="c-g">"FCT/7432910856"</span>),
   takenSlots: FieldValue.increment(<span class="c-o">1</span>)
 });
 <span class="c-gr">// If takenSlots === maxSlots → auto-set status: "full", notify coordinator</span>
@@ -1606,7 +1606,7 @@ sendSMS(sellerPhone, <span class="c-g">`IBI Marketplace: New order for "${listin
 
 <span class="c-gr">// ── COLLECTION DAY: coordinator marks each member collected ────</span>
 <span class="c-p">await</span> adminDb.collection(<span class="c-g">'food_sharing_schedules'</span>).doc(scheduleId).update({
-  memberAllocations: FieldValue.arrayUnion({ memberId: <span class="c-g">"FCT/01/0001"</span>, collected: <span class="c-b">true</span>, collectedAt: serverTimestamp() })
+  memberAllocations: FieldValue.arrayUnion({ memberId: <span class="c-g">"FCT/7432910856"</span>, collected: <span class="c-b">true</span>, collectedAt: serverTimestamp() })
 });
 <span class="c-gr">// When all members collected → set group status: "distributed"</span>
 
@@ -2235,7 +2235,7 @@ CNAME   www     cname.vercel-dns.com     ☁ Proxied
       spendingLimits: [{ amount: <span class="c-o">500000</span>, interval: <span class="c-g">'daily'</span> }]
     },
     customerName: memberFullName,
-    customerId:   memberId,               <span class="c-gr">// e.g. "FCT/01/0001"</span>
+    customerId:   memberId,               <span class="c-gr">// e.g. "FCT/7432910856"</span>
     metadata: { memberId, chapter, position }
   })
 });
@@ -2507,7 +2507,7 @@ eas update --branch production --message "Fix food sharing slot count"</code></d
       <div style="font-size:13px;color:var(--tm);">Adams Consults</div>
       <div style="display:flex;gap:14px;margin-top:10px;flex-wrap:wrap;">
         <a href="https://www.adams.com.ng" style="font-size:13px;color:var(--blue);display:flex;align-items:center;gap:5px;"><i class="fa fa-globe"></i> www.adams.com.ng</a>
-        <span style="font-size:13px;color:var(--tm);display:flex;align-items:center;gap:5px;"><i class="fa fa-id-badge" style="color:var(--red);"></i> Membership ID: FCT/01/0001</span>
+        <span style="font-size:13px;color:var(--tm);display:flex;align-items:center;gap:5px;"><i class="fa fa-id-badge" style="color:var(--red);"></i> Membership ID: FCT/7432910856</span>
         <span style="font-size:13px;color:var(--tm);display:flex;align-items:center;gap:5px;"><i class="fa fa-location-dot" style="color:var(--red);"></i> FCT Abuja Chapter</span>
       </div>
     </div>

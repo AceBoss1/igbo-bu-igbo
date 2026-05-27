@@ -797,6 +797,21 @@ footer{background:var(--dark);padding:56px 24px 24px;}
             <input type="text" class="form-input" placeholder="e.g. In honour of Chief Okafor Emeka"/>
           </div>
 
+          
+          <!-- DUAL PAYMENT SELECTOR -->
+          <div class="form-label" style="margin-bottom:8px;">Payment Method</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;" id="donPayMethods">
+            <div onclick="donSelPay(this,'paystack')"
+                 style="border:1.5px solid var(--red);background:rgba(155,28,28,0.05);border-radius:10px;padding:13px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(155,28,28,0.1);color:var(--red);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;"><i class="fa fa-credit-card"></i></div>
+              <div><div style="font-size:13px;font-weight:600;color:var(--text-dark);">Paystack</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Card &nbsp;&middot;&nbsp; Transfer &nbsp;&middot;&nbsp; USSD</div></div>
+            </div>
+            <div onclick="donSelPay(this,'wallet')"
+                 style="border:1.5px solid rgba(155,28,28,0.12);background:var(--cream);border-radius:10px;padding:13px 12px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;">
+              <div style="width:36px;height:36px;border-radius:8px;background:rgba(201,144,26,0.1);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;"><i class="fa fa-wallet"></i></div>
+              <div><div style="font-size:13px;font-weight:600;color:var(--text-dark);">IBI Wallet</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Instant &nbsp;&middot;&nbsp; No gateway fees</div></div>
+            </div>
+          </div>
           <div style="background:rgba(155,28,28,0.04);border:1px solid rgba(155,28,28,0.1);border-radius:8px;padding:12px 14px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:13px;color:var(--text-mid);font-weight:600;">Donation Amount:</span>
             <span style="font-family:'Playfair Display',serif;font-size:22px;color:var(--red);font-weight:700;" id="amtDisplay">&#8358;5,000</span>
@@ -836,6 +851,17 @@ footer{background:var(--dark);padding:56px 24px 24px;}
 <script>
 function toggleMenu(){const m=document.getElementById('mobile-menu'),i=document.getElementById('ham-icon');m.classList.toggle('open');i.className=m.classList.contains('open')?'fa fa-times':'fa fa-bars';}
 let selectedAmt=5000;
+function donSelPay(el,method){
+  var opts=document.querySelectorAll('#donPayMethods > div');
+  opts.forEach(function(o){
+    o.style.borderColor = o===el ? 'var(--red)' : 'rgba(155,28,28,0.12)';
+    o.style.background  = o===el ? 'rgba(155,28,28,0.05)' : 'var(--cream)';
+  });
+  var btn=document.getElementById('donateCTA');
+  if(btn) btn.innerHTML = method==='wallet'
+    ? '<i class="fa fa-wallet"></i> Donate with IBI Wallet'
+    : '<i class="fa fa-heart"></i> Donate Now — Powered by Paystack';
+}
 function selectAmt(btn,amt){document.querySelectorAll('.amount-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedAmt=parseInt(amt);document.getElementById('amtDisplay').textContent='₦'+parseInt(amt).toLocaleString();document.getElementById('customAmt').value='';}
 document.getElementById('customAmt').addEventListener('input',function(){if(this.value){document.querySelectorAll('.amount-opt').forEach(b=>b.classList.remove('active'));document.getElementById('amtDisplay').textContent='₦'+parseInt(this.value||0).toLocaleString();}});
 let isAnon=false;
@@ -876,4 +902,15 @@ function toggleAnon(el){isAnon=!isAnon;document.getElementById('anonSwitch').cla
 </footer>
 <script>
 
-</script></body></html>
+</script><div class="fab-wrap">
+  <a class="fab fab-home" href="index.html" title="Back to Homepage"><i class="fa fa-house"></i></a>
+  <button class="fab fab-top" id="fabTop" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+</div><script>
+(function(){
+  var b=document.getElementById('fabTop');
+  if(!b)return;
+  window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>300);});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
+</body></html>
