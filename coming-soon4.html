@@ -121,7 +121,16 @@
     .cs-footer a:hover{color:var(--gold-l);}
 
     @media(max-width:480px){.notify-row{flex-direction:column;}.count-num{font-size:26px;}.count-box{min-width:58px;padding:11px 13px;}.coming-features{grid-template-columns:1fr 1fr;}}
-  </style>
+  
+/* ── FLOATING ACTION BUTTONS ── */
+.fab-wrap{position:fixed;right:22px;bottom:22px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:99999;}
+.fab{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;transition:all 0.25s;box-shadow:0 4px 16px rgba(0,0,0,0.22);border:none;text-decoration:none;}
+.fab-top{background:var(--red,#9B1C1C);color:#fff;opacity:0;transform:translateY(10px);}
+.fab-top.show{opacity:1;transform:translateY(0);}
+.fab-top:hover{background:#C0392B;transform:translateY(-2px) !important;}
+.fab-home{background:#1A0A00;color:#F0B429;border:1px solid rgba(201,144,26,0.35);}
+.fab-home:hover{background:#9B1C1C;color:#fff;border-color:#9B1C1C;transform:translateY(-2px);}
+</style>
 </head>
 <body>
   <div class="bg-layer"></div>
@@ -135,7 +144,7 @@
     <!-- LOGO -->
     <div class="logo-wrap">
       <div class="logo-ring">
-        <img src="logo.png" alt="Igbo Bu Igbo" onerror="this.src='logo.png';"/>
+        <img src="igbo_bu_igbo_logo.jpg" alt="Igbo Bu Igbo" onerror="this.src='logo.png';"/>
       </div>
       <div class="org-name">IGBO BU IGBO</div>
       <div class="org-sub">Unity &amp; Cultural Preservation Initiative</div>
@@ -313,5 +322,16 @@
     document.getElementById('notify-email').value = '';
   }
   </script>
+<div class="fab-wrap">
+  <a class="fab fab-home" href="index.html" title="Back to Homepage"><i class="fa fa-house"></i></a>
+  <button class="fab fab-top" id="fabTop" title="Back to top"><i class="fa fa-chevron-up"></i></button>
+</div><script>
+(function(){
+  var b=document.getElementById('fabTop');
+  if(!b)return;
+  window.addEventListener('scroll',function(){b.classList.toggle('show',window.scrollY>300);});
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+})();
+</script>
 </body>
 </html>

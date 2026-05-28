@@ -818,9 +818,6 @@ footer{background:var(--dark);padding:56px 24px 24px;}
 <script>
 function toggleMenu(){const m=document.getElementById('mobile-menu'),i=document.getElementById('ham-icon');m.classList.toggle('open');i.className=m.classList.contains('open')?'fa fa-times':'fa fa-bars';}
 function filterEvt(btn,type){document.querySelectorAll('.ef-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.full-event-card').forEach(c=>{c.style.display=(type==='all'||c.dataset.type===type)?'grid':'none';});}
-</script>
-<script>
-
 </script><div class="fab-wrap">
   <a class="fab fab-home" href="index.html" title="Back to Homepage"><i class="fa fa-house"></i></a>
   <button class="fab fab-top" id="fabTop" title="Back to top"><i class="fa fa-chevron-up"></i></button>
